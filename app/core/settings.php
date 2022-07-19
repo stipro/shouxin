@@ -68,9 +68,9 @@ define('UPLOADED'   , ASSETS.'uploads/');
 // Set para conexión local o de desarrollo
 define('LDB_ENGINE' , 'mysql');
 define('LDB_HOST'   , 'localhost');
-define('LDB_NAME'   , '__LOCAL_DB__');
-define('LDB_USER'   , 'root');
-define('LDB_PASS'   , '');
+define('LDB_NAME'   , 'corpm4en_shouxin');
+define('LDB_USER'   , 'corpm4en');
+define('LDB_PASS'   , '#$ALDgfs165');
 define('LDB_CHARSET', 'utf8');
 
 // El controlador por defecto / el método por defecto / y el controlador de errores por defecto

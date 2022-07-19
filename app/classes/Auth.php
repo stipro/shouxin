@@ -4,7 +4,7 @@
  */ 
 class Auth
 {
-  private $var    = 'user_session';
+  private $var    = 'user_session_shouxin';
   private $logged = false;
   private $token  = null;
   private $id     = null;

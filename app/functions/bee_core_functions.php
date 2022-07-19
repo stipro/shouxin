@@ -3,8 +3,20 @@
 //////////////////////////////////////////////////
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception AS EmailException;
+use PHPMailer\PHPMailer\Exception as EmailException;
+// Api Microsoft Auth
+use myPHPnotes\Microsoft\Auth;
+use myPHPnotes\Microsoft\Handlers\Session;
+use myPHPnotes\Microsoft\Models\User;
 //////////////////////////////////////////////////
+
+
+function apiLoginMicrosoft($tenant, $client_id, $client_secret, $callback, $scopes)
+{
+	$microsoft = new Auth($tenant, $client_id, $client_secret, $callback, $scopes);
+	header("location: " . $microsoft->getAuthUrl());
+}
+
 
 /**
  * Convierte el elemento en un objecto
@@ -12,8 +24,9 @@ use PHPMailer\PHPMailer\Exception AS EmailException;
  * @param [type] $array
  * @return void
  */
-function to_object($array) {
-  return json_decode(json_encode($array));
+function to_object($array)
+{
+	return json_decode(json_encode($array));
 }
 
 /**
@@ -21,8 +34,9 @@ function to_object($array) {
  *
  * @return string
  */
-function get_sitename() {
-  return SITE_NAME;
+function get_sitename()
+{
+	return SITE_NAME;
 }
 
 /**
@@ -30,7 +44,8 @@ function get_sitename() {
  *
  * @return string
  */
-function get_version() {
+function get_version()
+{
 	return SITE_VERSION;
 }
 
@@ -59,8 +74,9 @@ function get_bee_version()
  *
  * @return string
  */
-function get_siteemail() {
-  return 'jslocal@localhost.com';
+function get_siteemail()
+{
+	return 'jslocal@localhost.com';
 }
 
 /**
@@ -68,8 +84,9 @@ function get_siteemail() {
  *
  * @return string
  */
-function now() {
-  return date('Y-m-d H:i:s');
+function now()
+{
+	return date('Y-m-d H:i:s');
 }
 
 /**
@@ -79,20 +96,21 @@ function now() {
  * @param boolean $die
  * @return void
  */
-function json_output($json, $die = true) {
-  header('Access-Control-Allow-Origin: *');
-  header('Content-type: application/json;charset=utf-8');
+function json_output($json, $die = true)
+{
+	header('Access-Control-Allow-Origin: *');
+	header('Content-type: application/json;charset=utf-8');
 
-  if(is_array($json)){
-    $json = json_encode($json);
-  }
+	if (is_array($json)) {
+		$json = json_encode($json);
+	}
 
-  echo $json;
-  if($die) {
-    die;
-  }
-  
-  return true;
+	echo $json;
+	if ($die) {
+		die;
+	}
+
+	return true;
 }
 
 /**
@@ -103,8 +121,9 @@ function json_output($json, $die = true) {
  * @param string $msg
  * @return void
  */
-function json_build($status = 200 , $data = null , $msg = '', $error_code = null) {
-  /*
+function json_build($status = 200, $data = null, $msg = '', $error_code = null)
+{
+	/*
   1 xx : Informational
   2 xx : Success
   3 xx : Redirection
@@ -112,51 +131,51 @@ function json_build($status = 200 , $data = null , $msg = '', $error_code = null
   5 xx : Server Error
   */
 
-  if(empty($msg) || $msg == '') {
-    switch ($status) {
-      case 200:
-        $msg = 'OK';
-        break;
-      case 201:
-        $msg = 'Created';
-        break;
-      case 400:
-        $msg = 'Invalid request';
-        break;
-      case 403:
-        $msg = 'Access denied';
-        break;
-      case 404:
-        $msg = 'Not found';
-        break;
-      case 500:
-        $msg = 'Internal Server Error';
-        break;
-      case 550:
-        $msg = 'Permission denied';
-        break;
-      default:
-        break;
-    }
-  }
+	if (empty($msg) || $msg == '') {
+		switch ($status) {
+			case 200:
+				$msg = 'OK';
+				break;
+			case 201:
+				$msg = 'Created';
+				break;
+			case 400:
+				$msg = 'Invalid request';
+				break;
+			case 403:
+				$msg = 'Access denied';
+				break;
+			case 404:
+				$msg = 'Not found';
+				break;
+			case 500:
+				$msg = 'Internal Server Error';
+				break;
+			case 550:
+				$msg = 'Permission denied';
+				break;
+			default:
+				break;
+		}
+	}
 
-  $json =
-  [
-    'status' => $status,
-    'error'  => false,
-    'msg'    => $msg,
-    'data'   => $data
-  ];
+	$json =
+		[
+			'status' => $status,
+			'error'  => false,
+			'msg'    => $msg,
+			'data'   => $data
+		];
 
-  if (in_array($status, [400,403,404,405,500])){
-    $json['error'] = true;
-  }
+	if (in_array($status, [400, 403, 404, 405, 500])) {
+		$json['error'] = true;
+	}
 
-  if ($error_code !== null) {
-    $json['error'] = $error_code;
-  }
+	if ($error_code !== null) {
+		$json['error'] = $error_code;
+	}
 
-  return json_encode($json);
+	return json_encode($json);
 }
 
 /**
@@ -166,14 +185,15 @@ function json_build($status = 200 , $data = null , $msg = '', $error_code = null
  * @param array $data
  * @return void
  */
-function get_module($view, $data = []) {
-  $file_to_include = MODULES.$view.'Module.php';
+function get_module($view, $data = [])
+{
+	$file_to_include = MODULES . $view . 'Module.php';
 	$output = '';
-	
+
 	// Por si queremos trabajar con objeto
 	$d = to_object($data);
-	
-	if(!is_file($file_to_include)) {
+
+	if (!is_file($file_to_include)) {
 		return false;
 	}
 
@@ -191,8 +211,9 @@ function get_module($view, $data = []) {
  * @param string $symbol
  * @return void
  */
-function money($amount, $symbol = '$') {
-  return $symbol.number_format($amount, 2, '.', ',');
+function money($amount, $symbol = '$')
+{
+	return $symbol . number_format($amount, 2, '.', ',');
 }
 
 /**
@@ -201,29 +222,31 @@ function money($amount, $symbol = '$') {
  * @param mixed $option
  * @return void
  */
-function get_option($option) {
-  return optionModel::search($option);
+function get_option($option)
+{
+	return optionModel::search($option);
 }
 
 /**
  * Generar un link dinámico con parametros get y token
  * 
  */
-function buildURL($url , $params = [] , $redirection = true, $csrf = true) {
-	
+function buildURL($url, $params = [], $redirection = true, $csrf = true)
+{
+
 	// Check if theres a ?
 	$query     = parse_url($url, PHP_URL_QUERY);
-	$_params[] = 'hook='.strtolower(SITE_NAME);
+	$_params[] = 'hook=' . strtolower(SITE_NAME);
 	$_params[] = 'action=doing-task';
 
 	// Si requiere token csrf
 	if ($csrf) {
-		$_params[] = '_t='.CSRF_TOKEN;
+		$_params[] = '_t=' . CSRF_TOKEN;
 	}
-	
+
 	// Si requiere redirección
-	if($redirection){
-		$_params[] = 'redirect_to='.urlencode(CUR_PAGE);
+	if ($redirection) {
+		$_params[] = 'redirect_to=' . urlencode(CUR_PAGE);
 	}
 
 	// Si no es un array regresa la url original
@@ -235,7 +258,7 @@ function buildURL($url , $params = [] , $redirection = true, $csrf = true) {
 	foreach ($params as $key => $value) {
 		$_params[] = sprintf('%s=%s', urlencode($key), urlencode($value));
 	}
-	
+
 	$url .= strpos($url, '?') ? '&' : '?';
 	$url .= implode('&', $_params);
 	return $url;
@@ -249,29 +272,30 @@ function buildURL($url , $params = [] , $redirection = true, $csrf = true) {
  * @param boolean $output
  * @return mixed
  */
-function logger($message , $type = 'debug' , $output = false) {
-  $types = ['debug','import','info','success','warning','error'];
+function logger($message, $type = 'debug', $output = false)
+{
+	$types = ['debug', 'import', 'info', 'success', 'warning', 'error'];
 
-  if(!in_array($type , $types)){
-    $type = 'debug';
-  }
+	if (!in_array($type, $types)) {
+		$type = 'debug';
+	}
 
-  $now_time = date("d-m-Y H:i:s");
+	$now_time = date("d-m-Y H:i:s");
 
-  $message = "[".strtoupper($type)."] $now_time - $message";
+	$message = "[" . strtoupper($type) . "] $now_time - $message";
 
-  if(!$fh = fopen(LOGS."bee_log.log", 'a')) { 
-    error_log(sprintf('Can not open this file on %s', LOGS.'bee_log.log'));
-    return false;
-  }
+	if (!$fh = fopen(LOGS . "bee_log.log", 'a')) {
+		error_log(sprintf('Can not open this file on %s', LOGS . 'bee_log.log'));
+		return false;
+	}
 
-  fwrite($fh, "$message\n");
+	fwrite($fh, "$message\n");
 	fclose($fh);
-	if($output){
+	if ($output) {
 		print "$message\n";
 	}
 
-  return true;
+	return true;
 }
 
 /**
@@ -280,8 +304,9 @@ function logger($message , $type = 'debug' , $output = false) {
  * @param mixed $var
  * @return string
  */
-function json_encode_utf8($var) {
-  return json_encode($var, JSON_UNESCAPED_UNICODE);
+function json_encode_utf8($var)
+{
+	return json_encode($var, JSON_UNESCAPED_UNICODE);
 }
 
 /**
@@ -291,10 +316,11 @@ m Y,
 d m Y,
 mY,
 d M, Y time
-**/
-function format_date($date_string, $type = 'd M, Y') {
-  setlocale(LC_ALL, "es_MX.UTF-8", "es_MX", "esp");
-  
+ **/
+function format_date($date_string, $type = 'd M, Y')
+{
+	setlocale(LC_ALL, "es_MX.UTF-8", "es_MX", "esp");
+
 	$diasemana = strftime("%A", strtotime($date_string));
 	$diames    = strftime("%d", strtotime($date_string));
 	$dia       = strftime("%e", strtotime($date_string));
@@ -324,19 +350,19 @@ function format_date($date_string, $type = 'd M, Y') {
 			return $date['dia'] . ' ' . $date['mes_corto'] . ' ' . $date['año'];
 			break;
 		case 'mY':
-			return ucfirst($date['mes_corto']).', '.$date['año'];
+			return ucfirst($date['mes_corto']) . ', ' . $date['año'];
 			break;
 		case 'MY':
-			return ucfirst($date['mes']).', '.$date['año'];
+			return ucfirst($date['mes']) . ', ' . $date['año'];
 			break;
 		case 'd M, Y time':
-			return $date['dia'].' de '.$date['mes'].', '.$date['año'].' a las '.date('H:i A', strtotime($date_string));
+			return $date['dia'] . ' de ' . $date['mes'] . ', ' . $date['año'] . ' a las ' . date('H:i A', strtotime($date_string));
 			break;
 		case 'time':
-			return $date['tiempo'].' '.date('A', strtotime($date_string));
+			return $date['tiempo'] . ' ' . date('A', strtotime($date_string));
 			break;
 		case 'date time':
-			return $date['dia'].'/'.$date['mes_corto'].'/'.$date['año'].' '.$date['tiempo'].' '.date('A', strtotime($date_string));
+			return $date['dia'] . '/' . $date['mes_corto'] . '/' . $date['año'] . ' ' . $date['tiempo'] . ' ' . date('A', strtotime($date_string));
 			break;
 		case 'short': //01/Nov/2019
 			return sprintf('%s/%s/%s', $date['dia_mes'], ucfirst($date['mes_corto']), $date['año']);
@@ -354,17 +380,18 @@ function format_date($date_string, $type = 'd M, Y') {
  * @param boolean $cleanhtml
  * @return void
  */
-function clean($str, $cleanhtml = false) {
-  $str = @trim(@rtrim($str));
-  
+function clean($str, $cleanhtml = false)
+{
+	$str = @trim(@rtrim($str));
+
 	// if (get_magic_quotes_gpc()) {
 	// 	$str = stripslashes($str);
 	// }
 
 	if ($cleanhtml === true) {
 		return htmlspecialchars($str);
-  }
-  
+	}
+
 	return filter_var($str, FILTER_SANITIZE_STRING);
 }
 
@@ -374,21 +401,22 @@ function clean($str, $cleanhtml = false) {
  * @param array $files
  * @return void
  */
-function arrenge_posted_files($files) {
-	if(empty($files)) {
+function arrenge_posted_files($files)
+{
+	if (empty($files)) {
 		return false;
 	}
-	
+
 	foreach ($files['error'] as $err) {
-		if(intval($err) === 4){
+		if (intval($err) === 4) {
 			return false;
 		}
 	}
-	
+
 	$file_ary   = array();
 	$file_count = (is_array($files)) ? count($files['name']) : 1;
 	$file_keys  = array_keys($files);
-	
+
 	for ($i = 0; $i < $file_count; $i++) {
 		foreach ($file_keys as $key) {
 			$file_ary[$i][$key] = $files[$key][$i];
@@ -405,21 +433,22 @@ function arrenge_posted_files($files) {
  * @param string $type
  * @return void
  */
-function random_password($length = 8, $type = 'default') {
+function random_password($length = 8, $type = 'default')
+{
 	$alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-  
-  if ($type === 'numeric') {
+
+	if ($type === 'numeric') {
 		$alphabet = '1234567890';
 	}
-  
-  $pass = array(); //remember to declare $pass as an array
+
+	$pass = array(); //remember to declare $pass as an array
 	$alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
-  
-  for ($i = 0; $i < $length; $i++) {
+
+	for ($i = 0; $i < $length; $i++) {
 		$n = rand(0, $alphaLength);
 		$pass[] = $alphabet[$n];
-  }
-  
+	}
+
 	return str_shuffle(implode($pass)); //turn the array into a string
 }
 
@@ -430,12 +459,13 @@ function random_password($length = 8, $type = 'default') {
  * @param integer $lng
  * @return void
  */
-function add_ellipsis($string , $lng = 100) {
-	if(!is_integer($lng)) {
+function add_ellipsis($string, $lng = 100)
+{
+	if (!is_integer($lng)) {
 		$lng = 100;
 	}
 
-  $output = strlen($string) > $lng ? mb_substr($string, 0, $lng, 'UTF-8').'...' : $string;
+	$output = strlen($string) > $lng ? mb_substr($string, 0, $lng, 'UTF-8') . '...' : $string;
 	return $output;
 }
 
@@ -444,7 +474,8 @@ function add_ellipsis($string , $lng = 100) {
  *
  * @return void
  */
-function get_user_ip() {
+function get_user_ip()
+{
 	$ipaddress = '';
 	if (getenv('HTTP_CLIENT_IP'))
 		$ipaddress = getenv('HTTP_CLIENT_IP');
@@ -468,15 +499,15 @@ function get_user_ip() {
  *
  * @return void
  */
-function get_user_os() {
-	if (isset( $_SERVER ) ) {
+function get_user_os()
+{
+	if (isset($_SERVER)) {
 		$agent = $_SERVER['HTTP_USER_AGENT'];
 	} else {
 		global $HTTP_SERVER_VARS;
-		if ( isset( $HTTP_SERVER_VARS ) ) {
+		if (isset($HTTP_SERVER_VARS)) {
 			$agent = $HTTP_SERVER_VARS['HTTP_USER_AGENT'];
-		}
-		else {
+		} else {
 			global $HTTP_USER_AGENT;
 			$agent = $HTTP_USER_AGENT;
 		}
@@ -563,15 +594,15 @@ function get_user_os() {
 	$ros[] = array('libwww-perl', 'Unix');
 	$ros[] = array('UP.Browser', 'Windows CE');
 	$ros[] = array('NetAnts', 'Windows');
-	$file = count ( $ros );
+	$file = count($ros);
 	$os = '';
-	for ( $n=0 ; $n < $file ; $n++ ){
-		if ( @preg_match('/'.$ros[$n][0].'/i' , $agent, $name)){
-			$os = @$ros[$n][1].' '.@$name[2];
+	for ($n = 0; $n < $file; $n++) {
+		if (@preg_match('/' . $ros[$n][0] . '/i', $agent, $name)) {
+			$os = @$ros[$n][1] . ' ' . @$name[2];
 			break;
 		}
 	}
-	return trim ( $os );
+	return trim($os);
 }
 
 /**
@@ -579,7 +610,8 @@ function get_user_os() {
  *
  * @return void
  */
-function get_user_browser() {
+function get_user_browser()
+{
 	$user_agent = (isset($_SERVER) ? $_SERVER['HTTP_USER_AGENT'] : NULL);
 
 	$browser        = "Unknown Browser";
@@ -611,20 +643,21 @@ function get_user_browser() {
  *
  * @return string
  */
-function insert_inputs() {
+function insert_inputs()
+{
 	$output = '';
 
-	if(isset($_POST['redirect_to'])){
+	if (isset($_POST['redirect_to'])) {
 		$location = $_POST['redirect_to'];
-	} else if(isset($_GET['redirect_to'])){
+	} else if (isset($_GET['redirect_to'])) {
 		$location = $_GET['redirect_to'];
 	} else {
 		$location = CUR_PAGE;
 	}
 
-	$output .= '<input type="hidden" name="redirect_to" value="'.$location.'">';
-	$output .= '<input type="hidden" name="timecheck" value="'.time().'">';
-	$output .= '<input type="hidden" name="csrf" value="'.CSRF_TOKEN.'">';
+	$output .= '<input type="hidden" name="redirect_to" value="' . $location . '">';
+	$output .= '<input type="hidden" name="timecheck" value="' . time() . '">';
+	$output .= '<input type="hidden" name="csrf" value="' . CSRF_TOKEN . '">';
 	$output .= '<input type="hidden" name="hook" value="jserp_hook">';
 	$output .= '<input type="hidden" name="action" value="post">';
 	return $output;
@@ -637,17 +670,18 @@ function insert_inputs() {
  * @param integer $span
  * @return string
  */
-function generate_filename($size = 12, $span = 3) {
-	if(!is_integer($size)){
+function generate_filename($size = 12, $span = 3)
+{
+	if (!is_integer($size)) {
 		$size = 6;
 	}
-	
+
 	$name = '';
-	for ($i=0; $i < $span; $i++) { 
-		$name .= random_password($size).'-';
+	for ($i = 0; $i < $span; $i++) {
+		$name .= random_password($size) . '-';
 	}
 
-	$name = rtrim($name , '-');
+	$name = rtrim($name, '-');
 	return strtolower($name);
 }
 
@@ -658,7 +692,8 @@ function generate_filename($size = 12, $span = 3) {
  * @param integer $precision
  * @return string
  */
-function filesize_formatter($size , $precision = 1) {
+function filesize_formatter($size, $precision = 1)
+{
 	$units = array('B', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
 	$step = 1024;
 	$i = 0;
@@ -675,7 +710,8 @@ function filesize_formatter($size , $precision = 1) {
  * @param string $url
  * @return string
  */
-function fix_url($url) {
+function fix_url($url)
+{
 	return str_replace('\\', '/', $url);
 }
 
@@ -685,34 +721,34 @@ function fix_url($url) {
  * @param string $v
  * @return mixed
  */
-function get_session($v = null) {
-  if($v === null){
-    return $_SESSION;
-  }
+function get_session($v = null)
+{
+	if ($v === null) {
+		return $_SESSION;
+	}
 
-  /** If it's an array of data must be dot separated */
-  if(strpos($v , ".") !== false) {
-    $array = explode('.',$v);
-    $lvls = count($array);
+	/** If it's an array of data must be dot separated */
+	if (strpos($v, ".") !== false) {
+		$array = explode('.', $v);
+		$lvls = count($array);
 
-    for ($i=0; $i < $lvls; $i++) { 
-      if(!isset($_SESSION[$array[$i]])){
-        return false;
-      }
-    }
+		for ($i = 0; $i < $lvls; $i++) {
+			if (!isset($_SESSION[$array[$i]])) {
+				return false;
+			}
+		}
+	}
 
-  }
+	if (!isset($_SESSION[$v])) {
+		return false;
+	}
 
-  if(!isset($_SESSION[$v])){
-    return false;
-  }
+	if (empty($_SESSION[$v])) {
+		unset($_SESSION[$v]);
+		return false;
+	}
 
-  if(empty($_SESSION[$v])){
-    unset($_SESSION[$v]);
-    return false;
-  }
-
-  return $_SESSION[$v];
+	return $_SESSION[$v];
 }
 
 /**
@@ -722,9 +758,10 @@ function get_session($v = null) {
  * @param mixed $v
  * @return bool
  */
-function set_session($k, $v) {
-  $_SESSION[$k] = $v;
-  return true;
+function set_session($k, $v)
+{
+	$_SESSION[$k] = $v;
+	return true;
 }
 
 /**
@@ -740,11 +777,12 @@ function set_session($k, $v) {
  * @param array $attachments
  * @return void
  */
-function send_email($from, $to, $subject, $body, $alt = null, $bcc = null, $reply_to = null, $attachments = []) {
+function send_email($from, $to, $subject, $body, $alt = null, $bcc = null, $reply_to = null, $attachments = [])
+{
 	$mail     = new PHPMailer(true);
 	$mail->isSMTP();
 	$template = 'emailTemplate';
-	
+
 	try {
 		$mail->CharSet = 'UTF-8';
 		// Remitente
@@ -780,7 +818,6 @@ function send_email($from, $to, $subject, $body, $alt = null, $bcc = null, $repl
 
 		$mail->send();
 		return true;
-
 	} catch (EmailException $e) {
 		throw new Exception($e->getMessage());
 	}
@@ -792,14 +829,15 @@ function send_email($from, $to, $subject, $body, $alt = null, $bcc = null, $repl
  * @param mixed $data
  * @return void
  */
-function debug($data) {
-  echo '<pre>';
-  if(is_array($data) || is_object($data)) {
-    print_r($data);
-  } else {
-    echo $data;
-  }
-  echo '</pre>';
+function debug($data)
+{
+	echo '<pre>';
+	if (is_array($data) || is_object($data)) {
+		print_r($data);
+	} else {
+		echo $data;
+	}
+	echo '</pre>';
 }
 
 /**
@@ -808,7 +846,8 @@ function debug($data) {
  * @param integer $length
  * @return string
  */
-function generate_token($length = 32) {
+function generate_token($length = 32)
+{
 	$token = null;
 	if (function_exists('bin2hex')) {
 		$token = bin2hex(random_bytes($length)); // ASDFUHASIO32Jasdasdjf349mfjads9mfas4asdf
@@ -826,29 +865,30 @@ function generate_token($length = 32) {
  * @param array $posted_data
  * @return void
  */
-function check_posted_data($required_params = [] , $posted_data = []) {
+function check_posted_data($required_params = [], $posted_data = [])
+{
 
-  if(empty($posted_data)) {
-    return false;
-  }
+	if (empty($posted_data)) {
+		return false;
+	}
 
-  // Keys necesarios en toda petición
-  $defaults = ['hook','action'];
-  $required_params = array_merge($required_params,$defaults);
-  $required = count($required_params);
-  $found = 0;
+	// Keys necesarios en toda petición
+	$defaults = ['hook', 'action'];
+	$required_params = array_merge($required_params, $defaults);
+	$required = count($required_params);
+	$found = 0;
 
-  foreach ($posted_data as $k => $v) {
-    if(in_array($k , $required_params)) {
-      $found++;
-    }
-  }
+	foreach ($posted_data as $k => $v) {
+		if (in_array($k, $required_params)) {
+			$found++;
+		}
+	}
 
-  if($found !== $required) {
-    return false;
-  }
+	if ($found !== $required) {
+		return false;
+	}
 
-  return true;
+	return true;
 }
 
 /**
@@ -858,29 +898,30 @@ function check_posted_data($required_params = [] , $posted_data = []) {
  * @param array $get_data
  * @return void
  */
-function check_get_data($required_params = [] , $get_data = []) {
+function check_get_data($required_params = [], $get_data = [])
+{
 
-  if(empty($get_data)) {
-    return false;
-  }
+	if (empty($get_data)) {
+		return false;
+	}
 
-  // Keys necesarios en toda petición
-  $defaults = ['hook','action'];
-  $required_params = array_merge($required_params, $defaults);
-  $required = count($required_params);
-  $found = 0;
+	// Keys necesarios en toda petición
+	$defaults = ['hook', 'action'];
+	$required_params = array_merge($required_params, $defaults);
+	$required = count($required_params);
+	$found = 0;
 
-  foreach ($get_data as $k => $v) {
-    if(in_array($k , $required_params)) {
-      $found++;
-    }
-  }
+	foreach ($get_data as $k => $v) {
+		if (in_array($k, $required_params)) {
+			$found++;
+		}
+	}
 
-  if($found !== $required) {
-    return false;
-  }
+	if ($found !== $required) {
+		return false;
+	}
 
-  return true;
+	return true;
 }
 
 /**
@@ -891,11 +932,12 @@ function check_get_data($required_params = [] , $get_data = []) {
  * @param string $icon
  * @return void
  */
-function more_info($str , $color = 'text-info' , $icon = 'fas fa-exclamation-circle') {
-  $str = clean($str);
-  $output = '';
-  $output .= '<span class="'.$color.'" '.tooltip($str).'><i class="'.$icon.'"></i></span>';
-  return $output;
+function more_info($str, $color = 'text-info', $icon = 'fas fa-exclamation-circle')
+{
+	$str = clean($str);
+	$output = '';
+	$output .= '<span class="' . $color . '" ' . tooltip($str) . '><i class="' . $icon . '"></i></span>';
+	return $output;
 }
 
 /**
@@ -904,8 +946,9 @@ function more_info($str , $color = 'text-info' , $icon = 'fas fa-exclamation-cir
  * @param string $string
  * @return void
  */
-function placeholder($string = 'Lorem ipsum') {
-  return sprintf('placeholder="%s"', $string);
+function placeholder($string = 'Lorem ipsum')
+{
+	return sprintf('placeholder="%s"', $string);
 }
 
 /**
@@ -914,12 +957,13 @@ function placeholder($string = 'Lorem ipsum') {
  * @param string $title
  * @return void
  */
-function tooltip($title = null) {
-	if($title == null){
+function tooltip($title = null)
+{
+	if ($title == null) {
 		return false;
 	}
 
-	return 'data-toggle="tooltip" title="'.$title.'"';
+	return 'data-toggle="tooltip" title="' . $title . '"';
 }
 
 /**
@@ -929,41 +973,42 @@ function tooltip($title = null) {
  * @param string $active
  * @return void
  */
-function create_menu($links, $slug_active = 'home') {
-  $output = '';
-  $output .= '<ul class="nav flex-column">';
-  foreach ($links as $link) {
-    if ($slug_active === $link['slug']) {
-      $output .= 
-      sprintf(
-        '<li class="nav-item">
+function create_menu($links, $slug_active = 'home')
+{
+	$output = '';
+	$output .= '<ul class="nav flex-column">';
+	foreach ($links as $link) {
+		if ($slug_active === $link['slug']) {
+			$output .=
+				sprintf(
+					'<li class="nav-item">
         <a class="nav-link active" href="%s">
           <span data-feather="%s"></span>
           %s
         </a>
         </li>',
-        $link['url'],
-        $link['icon'],
-        $link['title']
-      );
-    } else {
-      $output .= 
-      sprintf(
-        '<li class="nav-item">
+					$link['url'],
+					$link['icon'],
+					$link['title']
+				);
+		} else {
+			$output .=
+				sprintf(
+					'<li class="nav-item">
         <a class="nav-link" href="%s">
           <span data-feather="%s"></span>
           %s
         </a>
         </li>',
-        $link['url'],
-        $link['icon'],
-        $link['title']
-      );
-    }
-  }
-  $output .= '</ul>';
+					$link['url'],
+					$link['icon'],
+					$link['title']
+				);
+		}
+	}
+	$output .= '</ul>';
 
-  return $output;
+	return $output;
 }
 
 /**
@@ -971,16 +1016,17 @@ function create_menu($links, $slug_active = 'home') {
  *
  * @return void
  */
-function get_logo() {
+function get_logo()
+{
 	$default_logo_name = 'logo';
 	$default_logo_size = '500';
 	$default_logo_ext  = 'png';
 	$logo              = sprintf('%s_%s.%s', $default_logo_name, $default_logo_size, $default_logo_ext); // logo_500.png
-	if (!is_file(IMAGES_PATH.$logo)) {
+	if (!is_file(IMAGES_PATH . $logo)) {
 		return false;
 	}
 
-	return IMAGES.$logo;
+	return IMAGES . $logo;
 }
 
 /**
@@ -990,7 +1036,8 @@ function get_logo() {
  * @param string $key
  * @return mixed
  */
-function get_user($key = null) {
+function get_user($key = null)
+{
 	if (!isset($_SESSION['user_session'])) return false;
 
 	$session = $_SESSION['user_session']; // información de la sesión del usuario actual, regresará siempre falso si no hay dicha sesión
@@ -1024,20 +1071,21 @@ function is_demo()
  * de así solicitarlo
  *
  */
-function check_if_demo($flash = true, $redirect = true) {
-  $demo = is_demo();
+function check_if_demo($flash = true, $redirect = true)
+{
+	$demo = is_demo();
 
-  if ($demo == false) return false;
+	if ($demo == false) return false;
 
-  if ($flash == true) {
-    Flasher::new(sprintf('No disponible en la versión de demostración de %s.', get_sitename()), 'danger');
-  }
+	if ($flash == true) {
+		Flasher::new(sprintf('No disponible en la versión de demostración de %s.', get_sitename()), 'danger');
+	}
 
-  if ($redirect == true) {
-    Redirect::back();
-  }
+	if ($redirect == true) {
+		Redirect::back();
+	}
 
-  return true;
+	return true;
 }
 
 /**
@@ -1047,16 +1095,17 @@ function check_if_demo($flash = true, $redirect = true) {
  * @param string $comment
  * @return bool
  */
-function register_styles($stylesheets , $comment = null) {
-  global $Bee_Styles;
+function register_styles($stylesheets, $comment = null)
+{
+	global $Bee_Styles;
 
-  $Bee_Styles[] = 
-  [
-    'comment' => (!empty($comment) ? $comment : null),
-    'files'   => $stylesheets
-  ];
+	$Bee_Styles[] =
+		[
+			'comment' => (!empty($comment) ? $comment : null),
+			'files'   => $stylesheets
+		];
 
-  return true;
+	return true;
 }
 
 /**
@@ -1066,16 +1115,17 @@ function register_styles($stylesheets , $comment = null) {
  * @param string $comment
  * @return bool
  */
-function register_scripts($scripts , $comment = null) {
-  global $Bee_Scripts;
+function register_scripts($scripts, $comment = null)
+{
+	global $Bee_Scripts;
 
-  $Bee_Scripts[] = 
-  [
-    'comment' => (!empty($comment) ? $comment : null),
-    'files'   => $scripts
-  ];
+	$Bee_Scripts[] =
+		[
+			'comment' => (!empty($comment) ? $comment : null),
+			'files'   => $scripts
+		];
 
-  return true;
+	return true;
 }
 
 /**
@@ -1084,27 +1134,28 @@ function register_scripts($scripts , $comment = null) {
  *
  * @return string
  */
-function load_styles() {
-  global $Bee_Styles;
-  $output = '';
+function load_styles()
+{
+	global $Bee_Styles;
+	$output = '';
 
-  if(empty($Bee_Styles)){
-    return $output;
-  }
+	if (empty($Bee_Styles)) {
+		return $output;
+	}
 
 	// Iterar sobre cada elemento registrado
-  foreach (json_decode(json_encode($Bee_Styles)) as $css) {
-    if($css->comment){
-      $output .= '<!-- '.$css->comment.' -->'."\n";
-    }
+	foreach (json_decode(json_encode($Bee_Styles)) as $css) {
+		if ($css->comment) {
+			$output .= '<!-- ' . $css->comment . ' -->' . "\n";
+		}
 
 		// Iterar sobre cada path de archivo registrado
-    foreach ($css->files as $f) {
-      $output .= "\t".'<link rel="stylesheet" href="'.$f.'" >'."\n";
-    }
-  }
+		foreach ($css->files as $f) {
+			$output .= "\t" . '<link rel="stylesheet" href="' . $f . '" >' . "\n";
+		}
+	}
 
-  return $output;
+	return $output;
 }
 
 /**
@@ -1113,27 +1164,28 @@ function load_styles() {
  *
  * @return string
  */
-function load_scripts() {
-  global $Bee_Scripts;
-  $output = '';
+function load_scripts()
+{
+	global $Bee_Scripts;
+	$output = '';
 
-  if(empty($Bee_Scripts)){
-    return $output;
-  }
+	if (empty($Bee_Scripts)) {
+		return $output;
+	}
 
 	// Itera sobre todos los elementos registrados
-  foreach (json_decode(json_encode($Bee_Scripts)) as $js) {
-    if($js->comment){
-      $output .= '<!-- '.$js->comment.' -->'."\n";
-    }
+	foreach (json_decode(json_encode($Bee_Scripts)) as $js) {
+		if ($js->comment) {
+			$output .= '<!-- ' . $js->comment . ' -->' . "\n";
+		}
 
 		// Itera sobre todos los paths registrados
-    foreach ($js->files as $f) {
-      $output .= '<script src="'.$f.'" type="text/javascript"></script>'."\n";
-    }
-  }
+		foreach ($js->files as $f) {
+			$output .= '<script src="' . $f . '" type="text/javascript"></script>' . "\n";
+		}
+	}
 
-  return $output;
+	return $output;
 }
 
 /**
@@ -1145,12 +1197,13 @@ function load_scripts() {
  * @param mixed $value
  * @return bool
  */
-function register_to_bee_obj($key, $value) {
+function register_to_bee_obj($key, $value)
+{
 	global $Bee_Object;
 
-  $Bee_Scripts[$key] = clean($value);
+	$Bee_Scripts[$key] = clean($value);
 
-  return true;
+	return true;
 }
 
 /**
@@ -1159,26 +1212,27 @@ function register_to_bee_obj($key, $value) {
  *
  * @return string
  */
-function load_bee_obj() {
+function load_bee_obj()
+{
 	global $Bee_Object;
 	$output = '';
 
-  if(empty($Bee_Object)){
-    return $output;
-  }
+	if (empty($Bee_Object)) {
+		return $output;
+	}
 
 	$output .= '<script>';
-	$output .= 'var Bee = {'."\n";
+	$output .= 'var Bee = {' . "\n";
 
 	// Iterar sobre todos los elementos registrados
-  foreach ($Bee_Object as $k => $v) {
-		$output .= sprintf('%s: "%s",'."\n", $k, $v);
+	foreach ($Bee_Object as $k => $v) {
+		$output .= sprintf('%s: "%s",' . "\n", $k, $v);
 	}
 
 	$output .= '};';
 	$output .= '</script>';
 
-  return $output;
+	return $output;
 }
 
 /**
@@ -1186,28 +1240,29 @@ function load_bee_obj() {
  *
  * @return bool
  */
-function bee_obj_default_config() {
+function bee_obj_default_config()
+{
 	global $Bee_Object;
 
 	$Bee_Object =
-	[
-		'sitename'     => get_sitename(),
-		'version'      => get_version(),
-		'bee_name'     => get_bee_name(),
-		'bee_version'  => get_bee_version(),
-		'csrf'         => CSRF_TOKEN,
-		'url'          => URL,
-		'cur_page'     => CUR_PAGE,
-		'is_local'     => IS_LOCAL,
-		'is_demo'      => IS_DEMO,
-		'basepath'     => BASEPATH,
-		'sandbox'      => SANDBOX,
-		'port'         => PORT,
-		'request_uri'  => REQUEST_URI,
-		'assets'       => ASSETS,
-		'images'       => IMAGES,
-		'uploaded'     => UPLOADED
-	];
+		[
+			'sitename'     => get_sitename(),
+			'version'      => get_version(),
+			'bee_name'     => get_bee_name(),
+			'bee_version'  => get_bee_version(),
+			'csrf'         => CSRF_TOKEN,
+			'url'          => URL,
+			'cur_page'     => CUR_PAGE,
+			'is_local'     => IS_LOCAL,
+			'is_demo'      => IS_DEMO,
+			'basepath'     => BASEPATH,
+			'sandbox'      => SANDBOX,
+			'port'         => PORT,
+			'request_uri'  => REQUEST_URI,
+			'assets'       => ASSETS,
+			'images'       => IMAGES,
+			'uploaded'     => UPLOADED
+		];
 
 	return true;
 }
@@ -1217,8 +1272,9 @@ function bee_obj_default_config() {
  *
  * @return bool
  */
-function use_summernote() {
-	register_styles(['https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css'] , 'Summernote');
-	register_scripts(['https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js'] , 'Summernote');
+function use_summernote()
+{
+	register_styles(['https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css'], 'Summernote');
+	register_scripts(['https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js'], 'Summernote');
 	return true;
 }

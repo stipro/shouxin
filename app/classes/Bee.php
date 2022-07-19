@@ -24,7 +24,7 @@ class Bee {
   private $version      = '1.1.2';         // versión actual del framework y no del sistema en desarrollo, la versión del sistema deberá ser actualizada directamente en bee_config.php
   private $lng          = 'es';
   private $uri          = [];
-  private $use_composer = false;
+  private $use_composer = true;
 
   // La función principal que se ejecuta al instanciar nuestra clase
   function __construct() {
