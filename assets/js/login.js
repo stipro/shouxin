@@ -46,6 +46,10 @@ function loginFireBase_gmail(e) {
             if (res.status === 200) {
                 console.log(res);
                 toastr.success(res.msg, 'Bien!');
+                setTimeout(() => {
+                    window.location.href = "http://localhost/shouxin/home/flas";
+                }, 2000)
+                
                 /* setTimeout(() => {
                     window.open('http://localhost/shouxin/home/flash', '_self');
                 }, 2000) */
