@@ -12,8 +12,8 @@ class homeController extends Controller {
       'title' => 'Home',
       'bg'    => 'dark'
     ];
-
-    View::render('bee', $data);
+    Redirect::to('login');
+    /* View::render('bee', $data); */
   }
 
   function test()
