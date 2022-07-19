@@ -358,6 +358,11 @@
         <li> Adicionalmente declaro a la fecha:
       </ol>
     </div>
+    <div class="card-footer clearfix">
+      <a href="./home/flash" class="btn btn-danger float-start">Regresar</a>
+      <a href="#" class="btn btn-success float-end">Registrar</a>
+      <!-- <a href="logout" class="btn btn-danger float-end confirmar">Cerrar sesión</a> -->
+    </div>
   </div>
 </div>
 

@@ -6,10 +6,6 @@
   <base href="<?php echo BASEPATH; ?>">
 
   <meta charset="UTF-8">
-  <?php if ($d->title == 'Login') : ?>
-    <meta name="google-signin-client_id" content="963222250164-d6kmckaqbia3nqpijf10eo3a5sfs36l7.apps.googleusercontent.com">
-  <?php else : ?>
-  <?php endif; ?>
 
   <title><?php echo isset($d->title) ? $d->title . ' - ' . get_sitename() : 'Bienvenido - ' . get_sitename(); ?></title>
 

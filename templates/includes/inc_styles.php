@@ -4,7 +4,7 @@
 
 <!-- Todo plugin debe ir debajo de está línea -->
 <!-- Toastr css -->
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
 <!-- Waitme css -->
 <link rel="stylesheet" href="<?php echo PLUGINS.'waitme/waitMe.min.css'; ?>">
@@ -47,6 +47,8 @@
 
 <!-- Estilos registrados manualmente -->
 <?php echo load_styles(); ?>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 
 <!-- Estilos personalizados deben ir en main.css o abajo de esta línea -->
 <link rel="stylesheet" href="<?php echo CSS.'main.css?v='.get_version(); ?>">
