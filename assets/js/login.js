@@ -1,3 +1,4 @@
+/* import { GoogleAuthProvider } from "firebase/auth"; */
 var config = {
     apiKey: "AIzaSyBav5zU96k_v5xz4o-eiqgeHTUePP3r5Q8",
     authDomain: "shouxin-loginsocialmedia.firebaseapp.com",
