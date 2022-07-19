@@ -13,7 +13,7 @@ class loginController extends Controller {
   {
     $data =
     [
-      'title'   => 'Ingresar a tu cuenta',
+      'title'   => 'Login',
       'padding' => '0px'
     ];
 

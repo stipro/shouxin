@@ -9,14 +9,12 @@
       <ol type="I" start="1">
         <li>Que los datos y demás información consignada en el presente documento son verdaderos y actuales, obligándome frente a MSP S.A. a presentarla anualmente, con los datos actualizados a la fecha de presentación, en concordnacia con la Resolución SBS N° 789-2018. Asimismo, autorizo a la empresa la verificación de la presente información.
       </ol>
-
-      <div class="text-success">
-        <hr>
-        <h3>DATOS PERSONALES</h3>
-        <hr>
-      </div>
-
       <div class="row">
+        <div class="text-success">
+          <hr>
+          <h3>DATOS PERSONALES</h3>
+          <hr>
+        </div>
         <div class="col-12 col-sm-3">
           <div class="form-group">
             <label for="insertIpt-number-income" class="control-label">Apellido Paterno<span class="text-danger">*</span></label>
