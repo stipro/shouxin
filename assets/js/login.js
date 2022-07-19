@@ -47,7 +47,7 @@ function loginFireBase_gmail(e) {
                 console.log(res);
                 toastr.success(res.msg, 'Bien!');
                 setTimeout(() => {
-                    window.location.href = "http://localhost/shouxin/home/flas";
+                    window.location.href = "./home/flash";
                 }, 2000)
                 
                 /* setTimeout(() => {
@@ -97,7 +97,7 @@ function loginFireBase_hotmail(e) {
                 console.log(res);
                 toastr.success(res.msg, 'Bien!');
                 setTimeout(() => {
-                    window.open('http://localhost/shouxin/home/flash', '_self');
+                    window.location.href = "./home/flash";
                 }, 2000)
             } else {
                 toastr.error(res.msg, '¡Upss!');
