@@ -1,10 +1,10 @@
 <?php require_once INCLUDES . 'inc_header.php'; ?>
 
 <div class="container">
-  <div class="row justify-content-md-center">
+  <div class="row justify-content-center">
     <div class="col-6 text-center offset-xl-3">
-      <a href="<?php echo URL; ?>"><img src="<?php echo IMAGES . 'shouxin-rm.png' ?>" alt="stipro framework" class="img-fluid" style="width: 200px;"></a>
-      <h2 class="mt-5 mb-3"><span class="text-warning">Shouxin</span></h2>
+      <a href="<?php echo URL; ?>"><img src="<?php echo IMAGES . 'shouxin-rm.png' ?>" alt="stipro framework" class="img-fluid" style="width: 5rem;"></a>
+      <h2 class="mt-3 mb-3"><span class="text-warning">Shouxin</span></h2>
       <!-- contenido -->
       <!-- ends -->
 
@@ -16,15 +16,15 @@
     </div>
     <div class="col-12">
       <div class="card">
-        <div class="card-header">La información de capacitación y estudios realizados, será utilizada para los fines de recategorización, reestructuración y ascensos de puestos. </div>
+        <div class="card-header"><p class="text-justify fs-6 fw-light lh-sm">La información de capacitación y estudios realizados, será utilizada para los fines de recategorización, reestructuración y ascensos de puestos.</p></div>
         <div class="card-body">
           <div class="overflow-scroll" style="height: 25rem;">
             <code>
               <h2 style="text-align: center;"><strong>Términos y Condiciones de Uso</strong></h2>
               <h5 style="text-align: center;"><strong>CAPITULO IV CONOCIMIENTO DE DIRECTORES, TRABAJADORES</strong></h5>
               <p><strong>Artículo 17.- Conocimiento de directores y trabajadores</strong></p>
-              <p>17.1 El sujeto obligado debe implementar una política de debida diligencia en el conocimiento de sus trabajadores y directores, en el caso de que cuente con dicho órgano de gobierno. Esta política debe formar parte del programa de reclutamiento y selección del personal de nuevo ingreso, permanente y temporal, con el fin de asegurar su integridad.</p>
-              <p>El propósito de la debida diligencia en el conocimiento de los directores y trabajadores es que el sujeto obligado esté en la capacidad de establecer sus perfiles, para lo cual debe requerir una declaración jurada, que incluya al menos la siguiente información:</p>
+              <p class="text-justify">17.1 El sujeto obligado debe implementar una política de debida diligencia en el conocimiento de sus trabajadores y directores, en el caso de que cuente con dicho órgano de gobierno. Esta política debe formar parte del programa de reclutamiento y selección del personal de nuevo ingreso, permanente y temporal, con el fin de asegurar su integridad.</p>
+              <p class="text-justify">El propósito de la debida diligencia en el conocimiento de los directores y trabajadores es que el sujeto obligado esté en la capacidad de establecer sus perfiles, para lo cual debe requerir una declaración jurada, que incluya al menos la siguiente información:</p>
 
               a) Nombres y apellidos completos<br>
               b) Tipo y número del documento de identidad (incluyendo una copia).<br>
@@ -36,7 +36,7 @@
               i) Antecedentes laborales: experiencia laboral en los últimos dos (2) años, previos a la contratación: (i) Nombre de la empresa, entidad o persona natural con la que trabajó o prestó servicios. (ii) Cargo desempeñado. (iii) fecha de inicio (mes/año). (iv) Fecha de conclusión (mes/año).<br>
               j) Antecedentes patrimoniales (información patrimonial y de otros ingresos que genere fuera del sujeto obligado).<br><br>
 
-              <p>17.3 La información mínima a que se refiere el párrafo que antecede, forma parte de la documentación personal de cada uno de los trabajadores y directores, de contar con dicho órgano de gobierno, que debe conservar el sujeto obligado, en medio físico o electrónico. Los trabajadores y directores están obligados a comunicar al sujeto obligado, cualquier cambio en la información proporcionada, en un plazo que no exceda de quince (15) días de producido el cambio.</p>
+              <p class="text-justify">17.3 La información mínima a que se refiere el párrafo que antecede, forma parte de la documentación personal de cada uno de los trabajadores y directores, de contar con dicho órgano de gobierno, que debe conservar el sujeto obligado, en medio físico o electrónico. Los trabajadores y directores están obligados a comunicar al sujeto obligado, cualquier cambio en la información proporcionada, en un plazo que no exceda de quince (15) días de producido el cambio.</p>
 
               <h5 style="text-align: center;"><strong>LINEAMIENTOS PARA LA IMPLEMENTACIÓN Y FUNCIONAMIENTO DEL MODELO DE PREVENCIÓN</strong></h5>
               <h6 style="text-align: center;"><strong>Resolución de Superintendencia Nº 00006-2021-SMV/01</strong></h6>
@@ -44,12 +44,12 @@
 
               <p style="text-align: left;"><strong>VII. DEBIDA DILIGENCIA (DUE DILIGENCE) POR PARTE DE LA PERSONA JURÍDICA</strong></p>
 
-              <p>
+              <p class="text-justify">
                 Las buenas prácticas señalan que en la implementación del modelo de prevención, la persona jurídica debe realizar una debida diligencia (Due Diligence) sobre sus clientes, proveedores, colaboradores, contratistas, agentes, intermediarios, demás socios comerciales y partes interesadas, así como a las empresas socias en consorcios, empresas con las que realizará alguna reorganización societaria, entendida ésta en todas sus modalidades, tales como fusiones y adquisiciones[69], y a sus sucursales y filiales, entre otros. Se espera, además, que la debida diligencia se realice no sólo antes de la relación contractual, sino en todas las oportunidades que resulten necesarias, por ejemplo, cuando surja un evento o noticia que comprometa a tales personas. Asimismo, la debida diligencia debe hacerse también en el caso de que la persona jurídica pretenda desarrollar nuevas actividades u operaciones, o introducir al mercado nuevos productos o servicios, o hacer uso de nuevas tecnologías y/o corresponsalías transfronterizas, entre otros. Con esto se busca que la persona jurídica cuente con herramientas y conocimientos indispensables para el desarrollo de sus operaciones. (…)
               </p>
 
               <p>ü Para conocer a los colaboradores que se incorporan a la persona jurídica:</p>
-              <p>
+              <p class="text-justify">
                 Obtener conocimiento respecto de su información financiera (si figuran en centrales de riesgo crediticio, registro de deudores alimentarios, etc.), su reputación, si tuviera antecedentes o investigaciones en curso por delitos dolosos que pudieran afectar su imagen y acarrear una eventual responsabilidad.
               </p>
               <p>Por el presente documento declaro bajo juramento lo siguiente:</p>

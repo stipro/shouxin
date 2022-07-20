@@ -2,7 +2,7 @@
 
 <div class="container py-3">
   <div class="py-5 text-center">
-    <a href="<?php echo URL; ?>"><img src="<?php echo IMAGES . 'shouxin-rm.png' ?>" alt="Bee framework" class="img-fluid" style="width: 200px;"></a>
+    <a href="<?php echo URL; ?>"><img src="<?php echo IMAGES . 'shouxin-rm.png' ?>" alt="Bee framework" class="img-fluid" style="width: 5rem;"></a>
     <h2>Ingresa a tu cuenta</h2>
     <!-- <p class="lead">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam, ullam.</p> -->
   </div>

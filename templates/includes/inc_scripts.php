@@ -20,6 +20,8 @@
     <script src="<?php echo JS . 'login.js'; ?>"></script>
 <?php elseif ($d->title == 'Flash') : ?>
     <script src="<?php echo JS . 'logout.js'; ?>"></script>
+<?php elseif ($d->title == 'colaborador') : ?>
+    <script src="<?php echo JS . 'colaborador.js'; ?>"></script>
 <?php else : ?>
 <?php endif; ?>
 <!-- Lightbox js -->

@@ -21,7 +21,7 @@ class colaboradorController extends Controller {
   {
     $data = 
     [
-      'title' => 'Reemplazar título',
+      'title' => 'Registro de colaborador',
       'msg'   => 'Bienvenido al controlador de "colaborador", se ha creado con éxito si ves este mensaje.',
       'padding' => '0px'
     ];

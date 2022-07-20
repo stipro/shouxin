@@ -1,0 +1,1 @@
+const ipt_colaborador_dni_api = document.getElementById('insert-ipt-colaboradorDni');

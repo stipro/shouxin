@@ -1,361 +1,473 @@
 <?php require_once INCLUDES . 'inc_header.php'; ?>
 <div class="container">
-  <div class="card">
+  <div class="card mt-4">
     <div class="card-header d-flex justify-content-between">
       <h3 class="card-title">Colaborador</h3>
     </div>
     <div class="card-body">
-      <h5>Por el presente documento declaro bajo juramento lo siguiente:</h5>
+      <h5 class="text-justify">Por el presente documento declaro bajo juramento lo siguiente:</h5><br>
       <ol type="I" start="1">
-        <li>Que los datos y demás información consignada en el presente documento son verdaderos y actuales, obligándome frente a MSP S.A. a presentarla anualmente, con los datos actualizados a la fecha de presentación, en concordnacia con la Resolución SBS N° 789-2018. Asimismo, autorizo a la empresa la verificación de la presente información.
+        <li class="text-justify">Que los datos y demás información consignada en el presente documento son verdaderos y actuales, obligándome frente a MSP S.A. a presentarla anualmente, con los datos actualizados a la fecha de presentación, en concordnacia con la Resolución SBS N° 789-2018. Asimismo, autorizo a la empresa la verificación de la presente información.
       </ol>
-      <div class="row">
-        <div class="text-success">
-          <hr>
-          <h3>DATOS PERSONALES</h3>
-          <hr>
-        </div>
-        <div class="col-12 col-sm-3">
-          <div class="form-group">
-            <label for="insertIpt-number-income" class="control-label">Apellido Paterno<span class="text-danger">*</span></label>
-            <div class="input-group input-group-sm">
-              <input type="text" name="number-income" id="insertIpt-number-income" class="form-control form-control-sm disabled" value="">
+      <div class="row m-3">
+
+        <div class="row border m-2">
+          <div class="text-primary mt-2">
+            <h5>Datos Personales</h5>
+          </div>
+          <div class="col-12 col-sm-4 mb-3">
+            <label for="insertIpt-lastNameFather-collaborator" class="control-label form-control-sm">Apellido Paterno<span class="text-danger">*</span></label>
+            <input type="text" name="lastNameFather-collaborator" id="insertIpt-lastNameFather-collaborator" class="form-control form-control-sm disabled" placeholder="Apellido Paterno" value="">
+            <div id="lastNameFather-collaborator-Help" class="form-text"></div>
+          </div>
+
+          <div class="col-12 col-sm-4 mb-3">
+            <div class="form-group">
+              <label for="insertIpt-lastNameMother-collaborator" class="control-label form-control-sm">Apellido Materno<span class="text-danger">*</span></label>
+              <div class="input-group input-group-sm">
+                <input type="text" name="lastNameMother-collaborator" id="insertIpt-lastNameMother-collaborator" class="form-control form-control-sm disabled" placeholder="Apellido Materno" value="">
+              </div>
+              <div id="lastNameMother-collaborator-help" class="form-text"></div>
             </div>
           </div>
-        </div>
-        <div class="col-12 col-sm-3">
-          <div class="form-group">
-            <label for="insertIpt-number-income" class="control-label">Apellido Materno<span class="text-danger">*</span></label>
-            <div class="input-group input-group-sm">
-              <input type="text" name="number-income" id="insertIpt-number-income" class="form-control form-control-sm disabled" value="">
+
+          <div class="col-7 col-sm-4 mb-3">
+            <div class="form-group">
+              <label for="insertIpt-name-collaborator" class="control-label form-control-sm">Nombres<span class="text-danger">*</span></label>
+              <div class="input-group input-group-sm">
+                <input type="text" name="name-collaborator" id="insertIpt-name-collaborator" class="form-control form-control-sm disabled" placeholder="Nombres" value="">
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-12 col-sm-3">
-          <div class="form-group">
-            <label for="insertIpt-number-income" class="control-label">Nombres<span class="text-danger">*</span></label>
-            <div class="input-group input-group-sm">
-              <input type="text" name="number-income" id="insertIpt-number-income" class="form-control form-control-sm disabled" value="">
+
+          <div class="col-5 col-sm-4 mb-3">
+            <div class="form-group">
+              <label for="insertIpt-nationality-collaborator" class="control-label form-control-sm">Nacionalidad<span class="text-danger">*</span></label>
+              <div class="input-group input-group-sm">
+                <select id="insertIpt-nationality-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                  <option value=""></option>
+                  <?php if (empty(get_all_nacionalidades())) : ?>
+                    <option value="--0--">--No se obtuvo informacion--</option>
+                  <?php else : ?>
+                    <?php foreach (get_all_nacionalidades() as $cl) : ?>
+                      <?php echo sprintf('<option value="%s" data-id="%s">%s</option>', $cl[0], $cl[1], $cl[2]); ?>
+                    <?php endforeach; ?>
+                  <?php endif; ?>
+                </select>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-12 col-sm-3">
-          <div class="form-group">
-            <label for="insertIpt-number-income" class="control-label">Nacionalidad<span class="text-danger">*</span></label>
-            <div class="input-group input-group-sm">
-              <select id="insertIpt-product-income" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
-                <option value="Peruano">Peruano</option>
-                <option value="Venezonalo">Venezonalo</option>
-              </select>
+
+          <div class="col-6 col-sm-4 mb-3">
+            <div class="form-group">
+              <label for="insertIpt-statusMarital-collaborator" class="control-label form-control-sm">Estado Civil <span class="text-danger">*<br></span></label>
+              <div class="input-group input-group-sm">
+                <select id="insertIpt-statusMarital-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                  <option value="CASADO">CASADO</option>
+                  <option value="CONVIVIENTE">CONVIVIENTE</option>
+                  <option value="DIVORCIADO">DIVORCIADO</option>
+                  <option value="SOLTERO">SOLTERO</option>
+                  <option value="VIUDO">VIUDO</option>
+                </select>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-12 col-sm-3">
-          <div class="form-group">
-            <label for="insertIpt-number-income" class="control-label">Estado Civil<span class="text-danger">*</span></label>
-            <div class="input-group input-group-sm">
-              <select id="insertIpt-product-income" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
-                <option value="CASADO">CASADO</option>
-                <option value="CONVIVIENTE">CONVIVIENTE</option>
-                <option value="DIVORCIADO">DIVORCIADO</option>
-                <option value="SOLTERO">SOLTERO</option>
-                <option value="VIUDO">VIUDO</option>
-              </select>
+
+          <div class="col-6 col-sm-4 mb-3">
+            <div class="form-group">
+              <label for="insertIpt-birthdate-collaborator" class="control-label form-control-sm">Fecha de Nacimiento<span class="text-danger">*</span></label>
+              <div class="input-group input-group-sm">
+                <input type="date" name="birthdate-collaborator" id="insertIpt-birthdate-collaborator" class="form-control form-control-sm disabled" value="">
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-12 col-sm-3">
-          <div class="form-group">
-            <label for="insertIpt-number-income" class="control-label">Fecha de Nacimiento<span class="text-danger">*</span></label>
-            <div class="input-group input-group-sm">
-              <input type="date" name="number-income" id="insertIpt-number-income" class="form-control form-control-sm disabled" value="">
+
+          <div class="col-6 col-sm-4 mb-3">
+            <div class="form-group">
+              <label for="insertIpt-documentIdentity-collaborator" class="control-label form-control-sm">Doc. de Indentificación<span class="text-danger">*</span></label>
+              <div class="input-group input-group-sm">
+                <select id="insertIpt-documentIdentity-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                  <option value="DOC. NACIONAL DE IDENTIDAD">DOC. NACIONAL DE IDENTIDAD</option>
+                  <option value="REG. UNICO DE CONTRIBUYENTES">REG. UNICO DE CONTRIBUYENTES</option>
+                  <option value="CARNE DE EXTRANJERIA">CARNE DE EXTRANJERIA</option>
+                  <option value="PASAPORTE">PASAPORTE</option>
+                  <option value="PARTIDA DE NACIMIENTO">PARTIDA DE NACIMIENTO</option>
+                </select>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-12 col-sm-3">
-          <div class="form-group">
-            <label for="insertIpt-number-income" class="control-label">Doc. de Indentificación<span class="text-danger">*</span></label>
-            <div class="input-group input-group-sm">
-              <select id="insertIpt-product-income" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
-                <option value="DOC. NACIONAL DE IDENTIDAD">DOC. NACIONAL DE IDENTIDAD</option>
-                <option value="REG. UNICO DE CONTRIBUYENTES">REG. UNICO DE CONTRIBUYENTES</option>
-                <option value="CARNE DE EXTRANJERIA">CARNE DE EXTRANJERIA</option>
-                <option value="PASAPORTE">PASAPORTE</option>
-                <option value="PARTIDA DE NACIMIENTO">PARTIDA DE NACIMIENTO</option>
-              </select>
+
+          <div class="col-6 col-sm-4 mb-3">
+            <div class="form-group">
+              <label for="insertIpt-documentNumber-collaborator" class="control-label form-control-sm">Numero de Indentificación<span class="text-danger">*</span></label>
+              <div class="input-group input-group-sm">
+                <input type="text" name="documentNumber-collaborator" id="insertIpt-documentNumber-collaborator" class="form-control form-control-sm disabled" value="">
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-12 col-sm-3">
-          <div class="form-group">
-            <label for="insertIpt-number-income" class="control-label">Numero de Indentificación<span class="text-danger">*</span></label>
-            <div class="input-group input-group-sm">
-              <input type="text" name="number-income" id="insertIpt-number-income" class="form-control form-control-sm disabled" value="">
+
+          <div class="col-12 col-sm-4 mb-3">
+            <div class="form-group">
+              <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Profesión, Arte u Oficio<span class="text-danger">*</span></label>
+              <div class="input-group input-group-sm">
+                <input type="text" name="number-collaborator" id="insertIpt-number-collaborator" class="form-control form-control-sm disabled" value="">
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-12 col-sm-3">
-          <div class="form-group">
-            <label for="insertIpt-number-income" class="control-label">Profesión, Arte u Oficio<span class="text-danger">*</span></label>
-            <div class="input-group input-group-sm">
-              <input type="text" name="number-income" id="insertIpt-number-income" class="form-control form-control-sm disabled" value="">
+
+          <div class="col-12 col-sm-4 mb-3">
+            <div class="form-group">
+              <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Cond. del inmueble en el que vive<span class="text-danger">*</span></label>
+              <div class="input-group input-group-sm">
+                <select id="insertIpt-product-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                  <option value="Casa Propia">Casa Propia</option>
+                  <option value="De los Padres">De los Padres</option>
+                  <option value="De la sociedad conyugal">De la sociedad conyugal</option>
+                  <option value="De los convivientes">De los convivientes</option>
+                  <option value="Alquilada">Alquilada</option>
+                  <option value="Cedida en uso">Cedida en uso</option>
+                  <option value="Otro">Otro</option>
+                </select>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-12 col-sm-3">
-          <div class="form-group">
-            <label for="insertIpt-number-income" class="control-label">Cond. del inmueble en el que vive<span class="text-danger">*</span></label>
-            <div class="input-group input-group-sm">
-              <select id="insertIpt-product-income" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
-                <option value="Casa Propia">Casa Propia</option>
-                <option value="De los Padres">De los Padres</option>
-                <option value="De la sociedad conyugal">De la sociedad conyugal</option>
-                <option value="De los convivientes">De los convivientes</option>
-                <option value="Alquilada">Alquilada</option>
-                <option value="Cedida en uso">Cedida en uso</option>
-                <option value="Otro">Otro</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-sm-3">
-          <div class="form-group">
-            <label for="insertIpt-number-income" class="control-label">Ocupación/ Cargo en la Empresa<span class="text-danger">*</span></label>
-            <div class="input-group input-group-sm">
-              <input type="text" name="number-income" id="insertIpt-number-income" class="form-control form-control-sm disabled" value="">
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-sm-3">
-          <div class=" form-group">
-            <label for="insertIpt-number-income" class="control-label">Condición del inmueble en el que vive<span class="text-danger">*</span></label>
-            <div class="input-group input-group-sm">
-              <select id="insertIpt-product-income" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
-                <option value="Casa Propia">Casa Propia</option>
-                <option value="De los Padres">De los Padres</option>
-                <option value="De la sociedad conyugal">De la sociedad conyugal</option>
-                <option value="De los convivientes">De los convivientes</option>
-                <option value="Alquilada">Alquilada</option>
-                <option value="Cedida en uso">Cedida en uso</option>
-                <option value="Otro">Otro</option>
-              </select>
+          <div class="col-12 col-sm-4 mb-3">
+            <div class="form-group">
+              <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Ocupación/ Cargo en la Empresa<span class="text-danger">*</span></label>
+              <div class="input-group input-group-sm">
+                <input type="text" name="number-collaborator" id="insertIpt-number-collaborator" class="form-control form-control-sm disabled" value="">
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="text-primary">
-          <hr>
-          <h5>Lugar de nacimiento</h5>
+        <div class="row border m-2">
+          <div class="text-primary mt-2">
+            <h5>Lugar de nacimiento</h5>
+          </div>
+          <div class="col-12 col-sm-12 mb-3">
+            <div class="form-group">
+              <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Pais<span class="text-danger">*</span></label>
+              <div class="input-group input-group-sm">
+                <select id="insertIpt-product-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                  <option value="-">-</option>
+                  <?php if (empty(get_all_paises())) : ?>
+                    <option value="--0--">--No se obtuvo informacion--</option>
+                  <?php else : ?>
+                    <?php foreach (get_all_paises() as $cl) : ?>
+                      <?php echo sprintf('<option value="%s" data-id="%s">%s</option>', $cl[0], $cl[1], $cl[2]); ?>
+                    <?php endforeach; ?>
+                  <?php endif; ?>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-4 mb-3">
+            <div class="form-group">
+              <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Departamento<span class="text-danger">*</span></label>
+              <div class="input-group input-group-sm">
+                <select id="insertIpt-product-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                  <option value="-">-</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-4 mb-3">
+            <div class="form-group">
+              <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Provincia<span class="text-danger">*</span></label>
+              <div class="input-group input-group-sm">
+                <select id="insertIpt-product-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                  <option value="-">-</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-4 mb-3">
+            <div class="form-group">
+              <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Distrito<span class="text-danger">*</span></label>
+              <div class="input-group input-group-sm">
+                <select id="insertIpt-product-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                  <option value="-">-</option>
+                </select>
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="row border m-2">
+          <div class="text-primary mt-2">
+            <h5>Dirección Domiciliaria Actual</h5>
+          </div>
+          <div class="col-12 col-sm-5 mb-3">
+            <div class="form-group">
+              <div class="input-group input-group-sm">
+                <select id="insertIpt-product-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                  <option value="-">-</option>
+                  <option value="Avenida">Avenida</option>
+                  <option value="Jiron">Jiron</option>
+                  <option value="Calle">Calle</option>
+                  <option value="Alameda">Alameda</option>
+                  <option value="Malecon">Malecon</option>
+                  <option value="Ovalo">Ovalo</option>
+                  <option value="Parque">Parque</option>
+                  <option value="Plaza">Plaza</option>
+                  <option value="Carretera">Carretera</option>
+                  <option value="Bloque">Bloque</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-7 mb-3">
+            <div class="form-group">
+              <div class="input-group input-group-sm">
+                <input type="text" name="number-collaborator" id="insertIpt-number-collaborator" class="form-control form-control-sm disabled" value="">
+              </div>
+            </div>
+          </div>
 
-        <div class="col-12 col-sm-3">
-          <div class="form-group">
-            <label for="insertIpt-number-income" class="control-label">Departamento de Nac.<span class="text-danger">*</span></label>
-            <div class="input-group input-group-sm">
-              <input type="text" name="number-income" id="insertIpt-number-income" class="form-control form-control-sm disabled" value="">
+          <div class="col-12 col-sm-5 mb-3">
+            <div class="form-group">
+              <div class="input-group input-group-sm">
+                <select id="insertIpt-product-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                  <option value="-">-</option>
+                  <option value="Urb. - Urbanización">Urb. - Urbanización</option>
+                  <option value="P.J. - Pueblo Joven">P.J. - Pueblo Joven</option>
+                  <option value="U.v. - Unidad Vecinal">U.v. - Unidad Vecinal</option>
+                  <option value="C.H. Conjunto Habitaciónal">C.H. Conjunto Habitaciónal</option>
+                  <option value="A.H Asentamiento Humano">A.H Asentamiento Humano</option>
+                  <option value="COO. Cooperativa">COO. Cooperativa</option>
+                  <option value="Res. Residencial">Res. Residencial</option>
+                  <option value="Z.I. Zona Industrial">Z.I. Zona Industrial</option>
+                  <option value="GRU. Grupo">GRU. Grupo</option>
+                  <option value="CAS. Caserio">CAS. Caserio</option>
+                  <option value="FND. FUNDO">FND. FUNDO</option>
+                  <option value="P.T Pueblo tradiciónal">FND. Pueblo tradiciónal</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-7 mb-3">
+            <div class="form-group">
+              <div class="input-group input-group-sm">
+                <input type="text" name="number-collaborator" id="insertIpt-number-collaborator" class="form-control form-control-sm disabled" value="">
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-4 mb-3">
+            <div class="form-group">
+              <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Departamento<span class="text-danger">*</span></label>
+              <div class="input-group input-group-sm">
+                <select id="insertIpt-product-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                  <option value="-">-</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-4 mb-3">
+            <div class="form-group">
+              <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Provincia<span class="text-danger">*</span></label>
+              <div class="input-group input-group-sm">
+                <select id="insertIpt-product-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                  <option value="-">-</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-4 mb-3">
+            <div class="form-group">
+              <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Distrito<span class="text-danger">*</span></label>
+              <div class="input-group input-group-sm">
+                <select id="insertIpt-product-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                  <option value="-">-</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="col-12 col-sm-3">
-          <div class="form-group">
-            <label for="insertIpt-number-income" class="control-label">Provincia de Nac.<span class="text-danger">*</span></label>
-            <div class="input-group input-group-sm">
-              <input type="text" name="number-income" id="insertIpt-number-income" class="form-control form-control-sm disabled" value="">
+
+        <div class="row border m-2">
+          <div class="text-primary mt-2">
+            <h5>Cónyuge o Coviviente</h5>
+          </div>
+          <div class="col-12 col-sm-6 mb-3">
+            <div class="form-group">
+              <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Doc. de Indentificación<span class="text-danger">*</span></label>
+              <div class="input-group input-group-sm">
+                <select id="insertIpt-product-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                  <option value="DOC. NACIONAL DE IDENTIDAD">DOC. NACIONAL DE IDENTIDAD</option>
+                  <option value="REG. UNICO DE CONTRIBUYENTES">REG. UNICO DE CONTRIBUYENTES</option>
+                  <option value="CARNE DE EXTRANJERIA">CARNE DE EXTRANJERIA</option>
+                  <option value="PASAPORTE">PASAPORTE</option>
+                  <option value="PARTIDA DE NACIMIENTO">PARTIDA DE NACIMIENTO</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-6 mb-3">
+            <div class="form-group">
+              <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Numero de Indentificación<span class="text-danger">*</span></label>
+              <div class="input-group input-group-sm">
+                <input type="text" name="number-collaborator" id="insertIpt-number-collaborator" class="form-control form-control-sm disabled" value="">
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="col-12 col-sm-3">
-          <div class="form-group">
-            <label for="insertIpt-number-income" class="control-label">Distrito de Nac.<span class="text-danger">*</span></label>
-            <div class="input-group input-group-sm">
-              <input type="text" name="number-income" id="insertIpt-number-income" class="form-control form-control-sm disabled" value="">
+        <div class="row border m-2">
+          <div class="text-primary mt-2">
+            <h5>Dependientes</h5>
+          </div>
+          <div class="col-12 col-sm-3 mb-3">
+            <div class="form-group">
+              <div class="input-group input-group-sm">
+                <input type="number" name="number-collaborator" id="insertIpt-number-collaborator" class="form-control form-control-sm disabled" value="">
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="text-primary">
-          <hr>
-          <h5>Dirección Domiciliaria Actual</h5>
-        </div>
-
-        <div class="text-primary">
-          <hr>
-          <h5>Cónyuge o Coviviente</h5>
-        </div>
-
-        <div class="col-12 col-sm-3">
-          <div class="form-group">
-            <label for="insertIpt-number-income" class="control-label">Doc. de Indentificación<span class="text-danger">*</span></label>
-            <div class="input-group input-group-sm">
-              <select id="insertIpt-product-income" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
-                <option value="DOC. NACIONAL DE IDENTIDAD">DOC. NACIONAL DE IDENTIDAD</option>
-                <option value="REG. UNICO DE CONTRIBUYENTES">REG. UNICO DE CONTRIBUYENTES</option>
-                <option value="CARNE DE EXTRANJERIA">CARNE DE EXTRANJERIA</option>
-                <option value="PASAPORTE">PASAPORTE</option>
-                <option value="PARTIDA DE NACIMIENTO">PARTIDA DE NACIMIENTO</option>
-              </select>
+        <div class="row border m-2">
+          <div class="text-primary mt-2">
+            <h5>Registro Sunat</h5>
+          </div>
+          <div class="col-12 col-sm-6 mb-3">
+            <div class="form-group">
+              <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Tipo de registro<span class="text-danger">*</span></label>
+              <div class="input-group input-group-sm">
+                <select id="insertIpt-product-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                  <option value="R.U.C.">R.U.C.</option>
+                  <option value="R.U.S.">R.U.S.</option>
+                </select>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="col-12 col-sm-3">
-          <div class="form-group">
-            <label for="insertIpt-number-income" class="control-label">Numero de Indentificación<span class="text-danger">*</span></label>
-            <div class="input-group input-group-sm">
-              <input type="text" name="number-income" id="insertIpt-number-income" class="form-control form-control-sm disabled" value="">
+          <div class="col-12 col-sm-6 mb-3">
+            <div class="form-group">
+              <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Numero de registro<span class="text-danger">*</span></label>
+              <div class="input-group input-group-sm">
+                <input type="text" name="number-collaborator" id="insertIpt-number-collaborator" class="form-control form-control-sm" value="">
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="text-primary">
-          <hr>
-          <h5>Registro Sunat</h5>
-        </div>
-
-        <div class="col-12 col-sm-6">
-          <div class="form-group">
-            <label for="insertIpt-number-income" class="control-label">Tipo de registro<span class="text-danger">*</span></label>
-            <div class="input-group input-group-sm">
-              <select id="insertIpt-product-income" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
-                <option value="R.U.C.">R.U.C.</option>
-                <option value="R.U.S.">R.U.S.</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12 col-sm-6">
-          <div class="form-group">
-            <label for="insertIpt-number-income" class="control-label">Numero de registro<span class="text-danger">*</span></label>
-            <div class="input-group input-group-sm">
-              <input type="text" name="number-income" id="insertIpt-number-income" class="form-control form-control-sm" value="">
-            </div>
-          </div>
-        </div>
-
-        <div class="col-12">
-          <div class="form-group">
-            <label for="insertIpt-number-income" class="control-label">INFORMACION COMPLEMENTARIA<span class="text-danger">*</span></label>
-            <div class="input-group input-group-sm">
-              <textarea class="form-control form-control-sm" rows="4" cols="50" name="comment" form="usrform">Enter text here...    
+          <div class="col-12 col-sm-6 mb-3">
+            <div class="form-group">
+              <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Información complementaria<span class="text-danger">*</span></label>
+              <div class="input-group input-group-sm">
+                <textarea class="form-control form-control-sm" rows="4" cols="50" name="comment" form="usrform">Enter text here...    
                       </textarea>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="text-success">
-          <hr>
-          <h3>ESTUDIOS REALIZADOS</h3>
-          <hr>
-        </div>
-        <!-- Section: Timeline -->
-        <section class="">
+        <div class="row border m-2">
+          <div class="text-primary mt-2 mb-2">
+            <h5>Éstudios Rrealizádos</h5>
+          </div>
+          <!-- Section: Timeline -->
+          <section class="">
+            <ul class="timeline">
+              <li class="timeline-item mb-5">
+                <h5 class="fw-bold">[Nivel de estudio]</h5>
+                <p class="text-muted mb-2 fw-bold">[Centro educativo]</p>
+                <p class="text-muted mb-2 fw-bold">[F. Inicio - F. Conclusión]</p>
+              </li>
 
-          <ul class="timeline">
-            <li class="timeline-item mb-5">
-              <h5 class="fw-bold">[Nivel de estudio]</h5>
-              <p class="text-muted mb-2 fw-bold">[Centro educativo]</p>
-              <p class="text-muted mb-2 fw-bold">[F. Inicio - F. Conclusión]</p>
-            </li>
-
-            <li class="timeline-item mb-5">
-              <h5 class="fw-bold">First customer</h5>
-              <p class="text-muted mb-2 fw-bold">19 March 2020</p>
-              <p class="text-muted">
-                Quisque ornare dui nibh, sagittis egestas nisi luctus nec. Sed
-                aliquet laoreet sapien, eget pulvinar lectus maximus vel.
-                Phasellus suscipit porta mattis.
-              </p>
-            </li>
-
-          </ul>
-        </section>
-        <!-- Section: Timeline -->
-        <div class="text-success">
-          <hr>
-          <h3>EXPERIENCIA LABORAL</h3>
-          <hr>
+              <li class="timeline-item mb-5">
+                <h5 class="fw-bold">First customer</h5>
+                <p class="text-muted mb-2 fw-bold">19 March 2020</p>
+                <p class="text-muted">
+                  Quisque ornare dui nibh, sagittis egestas nisi luctus nec. Sed
+                  aliquet laoreet sapien, eget pulvinar lectus maximus vel.
+                  Phasellus suscipit porta mattis.
+                </p>
+              </li>
+            </ul>
+          </section>
+          <!-- Section: Timeline -->
         </div>
 
-        <!-- Section: Timeline -->
-        <section class="">
+        <div class="row border m-2">
+          <div class="text-primary mt-2 mb-2">
+            <h5>Experiencia laboral</h5>
+          </div>
+          <!-- Section: Timeline -->
+          <section class="">
+            <ul class="timeline">
+              <li class="timeline-item mb-5">
+                <h5 class="fw-bold">[Cargo]</h5>
+                <p class="text-muted mb-2 fw-bold">[Empresa]</p>
+                <p class="text-muted mb-2 fw-bold">[F. Inicio - F. Conclusión]</p>
+              </li>
 
-          <ul class="timeline">
-            <li class="timeline-item mb-5">
-              <h5 class="fw-bold">[Cargo]</h5>
-              <p class="text-muted mb-2 fw-bold">[Empresa]</p>
-              <p class="text-muted mb-2 fw-bold">[F. Inicio - F. Conclusión]</p>
-            </li>
-
-            <li class="timeline-item mb-5">
-              <h5 class="fw-bold">First customer</h5>
-              <p class="text-muted mb-2 fw-bold">19 March 2020</p>
-              <p class="text-muted">
-                Quisque ornare dui nibh, sagittis egestas nisi luctus nec. Sed
-                aliquet laoreet sapien, eget pulvinar lectus maximus vel.
-                Phasellus suscipit porta mattis.
-              </p>
-            </li>
-
-          </ul>
-        </section>
-        <!-- Section: Timeline -->
-
-        <div class="text-success">
-          <hr>
-          <h3>CAPACITACIÓN</h3>
-          <hr>
+              <li class="timeline-item mb-5">
+                <h5 class="fw-bold">First customer</h5>
+                <p class="text-muted mb-2 fw-bold">19 March 2020</p>
+                <p class="text-muted">
+                  Quisque ornare dui nibh, sagittis egestas nisi luctus nec. Sed
+                  aliquet laoreet sapien, eget pulvinar lectus maximus vel.
+                  Phasellus suscipit porta mattis.
+                </p>
+              </li>
+            </ul>
+          </section>
+          <!-- Section: Timeline -->
         </div>
 
-        <!-- Section: Timeline -->
-        <section class="">
-          <ul class="timeline">
+        <div class="row border m-2">
+          <div class="text-primary mt-2 mb-2">
+            <h3>CAPACITACIÓN</h3>
+          </div>
+          <!-- Section: Timeline -->
+          <section class="">
+            <ul class="timeline">
+              <li class="timeline-item mb-5">
+                <h5 class="fw-bold">[Curso o Evento]</h5>
+                <p class="text-muted mb-2 fw-bold">[institución o organizad@]</p>
+                <p class="text-muted mb-2 fw-bold">[F. Curso o Evento]</p>
+              </li>
 
-            <li class="timeline-item mb-5">
-              <h5 class="fw-bold">[Curso o Evento]</h5>
-              <p class="text-muted mb-2 fw-bold">[institución o organizad@]</p>
-              <p class="text-muted mb-2 fw-bold">[F. Curso o Evento]</p>
-            </li>
+              <li class="timeline-item mb-5">
+                <h5 class="fw-bold">First customer</h5>
+                <p class="text-muted mb-2 fw-bold">19 March 2020</p>
+                <p class="text-muted">
+                  Quisque ornare dui nibh, sagittis egestas nisi luctus nec. Sed
+                  aliquet laoreet sapien, eget pulvinar lectus maximus vel.
+                  Phasellus suscipit porta mattis.
+                </p>
+              </li>
+            </ul>
+          </section>
+          <!-- Section: Timeline -->
+        </div>
 
-            <li class="timeline-item mb-5">
-              <h5 class="fw-bold">First customer</h5>
-              <p class="text-muted mb-2 fw-bold">19 March 2020</p>
-              <p class="text-muted">
-                Quisque ornare dui nibh, sagittis egestas nisi luctus nec. Sed
-                aliquet laoreet sapien, eget pulvinar lectus maximus vel.
-                Phasellus suscipit porta mattis.
-              </p>
-            </li>
-
-          </ul>
-        </section>
-        <!-- Section: Timeline -->
-        <div class="text-success">
-          <hr>
-          <h3>INFORMACIÓN PATRIMONIAL</h3>
-          <hr>
+        <div class="row border m-2">
+          <div class="text-primary mt-2 mb-2">
+            <h5>INFORMACIÓN PATRIMONIAL</h5>
+          </div>
         </div>
       </div>
       <ol type="I" start="2">
-        <li> No tener deudas vencidas mayores a ciento veinte (120) días ni créditos castigados.
+        <li class="text-justify"> No tener deudas vencidas mayores a ciento veinte (120) días ni créditos castigados.
       </ol>
 
       <ol type="I" start="3">
-        <li> No registrar información en el Registro de Deudores Aliementarios Morosos (REDAM), ni en el Registro de Deudores de Reparaciones Civiles (REDERECI).
+        <li class="text-justify"> No registrar información en el Registro de Deudores Aliementarios Morosos (REDAM), ni en el Registro de Deudores de Reparaciones Civiles (REDERECI).
       </ol>
 
       <ol type="I" start="4">
-        <li> No tener antecedentes policiales, penales ni judiciales.
+        <li class="text-justify"> No tener antecedentes policiales, penales ni judiciales.
       </ol>
 
       <ol type="I" start="5">
-        <li> Que, a la firma del presente documento he recibido la versión impresa del Código de Ética y Conducta de MSP. Asimismo, declaro conocer que dicho Código de Conducta es de obligatorio cumplimiento y que si trasgredo sus disposiciones seré pasaible de sanción por parte de MSP S.A.
+        <li class="text-justify"> Que, a la firma del presente documento he recibido la versión impresa del Código de Ética y Conducta de MSP. Asimismo, declaro conocer que dicho Código de Conducta es de obligatorio cumplimiento y que si trasgredo sus disposiciones seré pasaible de sanción por parte de MSP S.A.
       </ol>
 
       <ol type="I" start="5">
-        <li> Adicionalmente declaro a la fecha:
+        <li class="text-justify"> Adicionalmente declaro a la fecha: <?php echo date('d-m-Y');?>
       </ol>
     </div>
     <div class="card-footer clearfix">
