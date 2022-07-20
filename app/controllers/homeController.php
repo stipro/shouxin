@@ -1,18 +1,25 @@
-<?php 
+<?php
 
-class homeController extends Controller {
+class homeController extends Controller
+{
   function __construct()
   {
+    // Validación de sesión de usuario, descomentar si requerida
+    if (!Auth::validate()) {
+      Flasher::new('Debes iniciar sesión primero.', 'danger');
+      Redirect::to('login');
+    }
   }
 
   function index()
   {
     $data =
-    [
-      'title' => 'Home',
-      'bg'    => 'dark'
-    ];
-    Redirect::to('login');
+      [
+        'title' => 'Home',
+        /* 'bg'    => 'dark', */
+        'padding' => '0px'
+      ];
+    View::render('flash', $data);
     /* View::render('bee', $data); */
   }
 
@@ -20,7 +27,7 @@ class homeController extends Controller {
   {
     echo 'Probando nuestra base de datos<br><br><br>';
     echo '<pre>';
-    
+
     try {
 
       // SELECT
@@ -31,21 +38,21 @@ class homeController extends Controller {
       // INSERT
       $sql = 'INSERT INTO tests (name, email, created_at) VALUES (:name, :email, :created_at)';
       $registro =
-      [
-        'name'       => 'Juanito',
-        'email'      => 'juanito@gmail.com',
-        'created_at' => now()
-      ];
+        [
+          'name'       => 'Juanito',
+          'email'      => 'juanito@gmail.com',
+          'created_at' => now()
+        ];
       //$id = Db::query($sql, $registro);
       //print_r($id);
 
       // UPDATE
       $sql = 'UPDATE tests SET name=:name WHERE id=:id';
-      $registro_actualizado = 
-      [
-        'name' => 'Ricardo Algo',
-        'id'   => 3
-      ];
+      $registro_actualizado =
+        [
+          'name' => 'Ricardo Algo',
+          'id'   => 3
+        ];
       //print_r(Db::query($sql, $registro_actualizado));
 
       // DELETE
@@ -57,7 +64,7 @@ class homeController extends Controller {
       //print_r(Db::query($sql));
 
     } catch (Exception $e) {
-      echo 'Hubo un error: '.$e->getMessage();
+      echo 'Hubo un error: ' . $e->getMessage();
     }
 
     echo '</pre>';
