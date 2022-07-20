@@ -12,16 +12,20 @@ $('#insertIpt-conditionProperty-collaborator').select2({
     theme: 'bootstrap-5'
 });
 $('#insertSlt-countryBirth-collaborator').select2({
-    theme: 'bootstrap-5'
+    theme: 'bootstrap-5',
+    placeholder: $(this).data('placeholder'),
 });
 $('#insertSlt-departmentBirth-collaborator').select2({
-    theme: 'bootstrap-5'
+    theme: 'bootstrap-5',
+    placeholder: $(this).data('placeholder'),
 });
 $('#insertSlt-provinceBirth-collaborator').select2({
-    theme: 'bootstrap-5'
+    theme: 'bootstrap-5',
+    placeholder: $(this).data('placeholder'),
 });
 $('#insertSlt-districtBirth-collaborator').select2({
-    theme: 'bootstrap-5'
+    theme: 'bootstrap-5',
+    placeholder: $(this).data('placeholder'),
 });
 
 var settings = {

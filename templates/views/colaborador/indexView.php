@@ -5,9 +5,9 @@
       <h3 class="card-title">Colaborador</h3>
     </div>
     <div class="card-body">
-      <h5 class="text-justify">Por el presente documento declaro bajo juramento lo siguiente:</h5><br>
+      <h5 class="text-justify fs-6 lh-sm">Por el presente documento declaro bajo juramento lo siguiente:</h5><br>
       <ol type="I" start="1">
-        <li class="text-justify">Que los datos y demás información consignada en el presente documento son verdaderos y actuales, obligándome frente a MSP S.A. a presentarla anualmente, con los datos actualizados a la fecha de presentación, en concordnacia con la Resolución SBS N° 789-2018. Asimismo, autorizo a la empresa la verificación de la presente información.
+        <li class="text-justify fs-6 fw-light lh-sm">Que los datos y demás información consignada en el presente documento son verdaderos y actuales, obligándome frente a MSP S.A. a presentarla anualmente, con los datos actualizados a la fecha de presentación, en concordnacia con la Resolución SBS N° 789-2018. Asimismo, autorizo a la empresa la verificación de la presente información.
       </ol>
       <div class="row m-3">
 
@@ -44,7 +44,7 @@
             <div class="form-group">
               <label for="insertIpt-nationality-collaborator" class="control-label form-control-sm">Nacionalidad<span class="text-danger">*</span></label>
               <div class="input-group input-group-sm">
-                <select id="insertIpt-nationality-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                <select id="insertIpt-nationality-collaborator" class="form-select form-select-sm" data-placeholder="Seleccióne Nacionalidad">
                   <option value=""></option>
                   <?php if (empty(get_all_nacionalidades())) : ?>
                     <option value="--0--">--No se obtuvo informacion--</option>
@@ -152,8 +152,8 @@
             <div class="form-group">
               <label for="insertSlt-countryBirth-collaborator" class="control-label form-control-sm">Pais<span class="text-danger">*</span></label>
               <div class="input-group input-group-sm">
-                <select id="insertSlt-countryBirth-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
-                  <option value="-">-</option>
+                <select id="insertSlt-countryBirth-collaborator" class="form-select form-select-sm" data-placeholder="Seleccióne Pais">
+                <option value=""></option>
                   <?php if (empty(get_all_paises())) : ?>
                     <option value="--0--">--No se obtuvo informacion--</option>
                   <?php else : ?>
@@ -169,8 +169,8 @@
             <div class="form-group">
               <label for="insertSlt-departmentBirth-collaborator" class="control-label form-control-sm">Departamento<span class="text-danger">*</span></label>
               <div class="input-group input-group-sm">
-                <select id="insertSlt-departmentBirth-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
-                  <option value="-">-</option>
+                <select id="insertSlt-departmentBirth-collaborator" class="form-select form-select-sm" data-placeholder="Seleccióne Pais">
+                  <option value=""></option>
                 </select>
               </div>
             </div>
@@ -179,8 +179,8 @@
             <div class="form-group">
               <label for="insertSlt-provinceBirth-collaborator" class="control-label form-control-sm">Provincia<span class="text-danger">*</span></label>
               <div class="input-group input-group-sm">
-                <select id="insertSlt-provinceBirth-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
-                  <option value="-">-</option>
+                <select id="insertSlt-provinceBirth-collaborator" class="form-select form-select-sm" data-placeholder="Seleccióne Departamento">
+                  <option value=""></option>
                 </select>
               </div>
             </div>
@@ -189,8 +189,8 @@
             <div class="form-group">
               <label for="insertSlt-districtBirth-collaborator" class="control-label form-control-sm">Distrito<span class="text-danger">*</span></label>
               <div class="input-group input-group-sm">
-                <select id="insertSlt-districtBirth-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
-                  <option value="-">-</option>
+                <select id="insertSlt-districtBirth-collaborator" class="form-select form-select-sm" data-placeholder="Seleccióne Distrito">
+                  <<option value=""></option>
                 </select>
               </div>
             </div>
@@ -422,7 +422,7 @@
 
         <div class="row border m-2">
           <div class="text-primary mt-2 mb-2">
-            <h3>CAPACITACIÓN</h3>
+            <h5>CAPACITACIÓN</h5>
           </div>
           <!-- Section: Timeline -->
           <section class="">
@@ -453,25 +453,6 @@
           </div>
         </div>
       </div>
-      <ol type="I" start="2">
-        <li class="text-justify"> No tener deudas vencidas mayores a ciento veinte (120) días ni créditos castigados.
-      </ol>
-
-      <ol type="I" start="3">
-        <li class="text-justify"> No registrar información en el Registro de Deudores Aliementarios Morosos (REDAM), ni en el Registro de Deudores de Reparaciones Civiles (REDERECI).
-      </ol>
-
-      <ol type="I" start="4">
-        <li class="text-justify"> No tener antecedentes policiales, penales ni judiciales.
-      </ol>
-
-      <ol type="I" start="5">
-        <li class="text-justify"> Que, a la firma del presente documento he recibido la versión impresa del Código de Ética y Conducta de MSP. Asimismo, declaro conocer que dicho Código de Conducta es de obligatorio cumplimiento y que si trasgredo sus disposiciones seré pasaible de sanción por parte de MSP S.A.
-      </ol>
-
-      <ol type="I" start="5">
-        <li class="text-justify"> Adicionalmente declaro a la fecha: <?php echo date('d-m-Y');?>
-      </ol>
     </div>
     <div class="card-footer clearfix">
       <a href="./home/flash" class="btn btn-danger float-start">Regresar</a>
