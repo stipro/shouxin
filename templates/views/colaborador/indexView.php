@@ -93,7 +93,9 @@
                   <option value="PASAPORTE">PASAPORTE</option>
                   <option value="PARTIDA DE NACIMIENTO">PARTIDA DE NACIMIENTO</option>
                 </select>
+                <input type="file" class="form-control" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03" aria-label="Upload">
               </div>
+              <div id="documentIdentity-collaborator-Help" class="form-text">Adjunte su documento</div>
             </div>
           </div>
 
@@ -108,18 +110,19 @@
 
           <div class="col-12 col-sm-4 mb-3">
             <div class="form-group">
-              <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Profesión, Arte u Oficio<span class="text-danger">*</span></label>
+              <label for="insertIpt-profession-collaborator" class="control-label form-control-sm">Profesión, Arte u Oficio<span class="text-danger">*</span></label>
               <div class="input-group input-group-sm">
-                <input type="text" name="number-collaborator" id="insertIpt-number-collaborator" class="form-control form-control-sm disabled" value="">
+                <input type="text" name="profession-collaborator" id="insertIpt-profession-collaborator" class="form-control form-control-sm disabled" value="">
               </div>
+              <div id="profession-collaborator-Help" class="form-text">N° Colegio Profesional (si aplica)</div>
             </div>
           </div>
 
           <div class="col-12 col-sm-4 mb-3">
             <div class="form-group">
-              <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Cond. del inmueble en el que vive<span class="text-danger">*</span></label>
+              <label for="insertIpt-conditionProperty-collaborator" class="control-label form-control-sm">Cond. del inmueble en el que vive<span class="text-danger">*</span></label>
               <div class="input-group input-group-sm">
-                <select id="insertIpt-product-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                <select id="insertIpt-conditionProperty-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
                   <option value="Casa Propia">Casa Propia</option>
                   <option value="De los Padres">De los Padres</option>
                   <option value="De la sociedad conyugal">De la sociedad conyugal</option>
@@ -147,9 +150,9 @@
           </div>
           <div class="col-12 col-sm-12 mb-3">
             <div class="form-group">
-              <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Pais<span class="text-danger">*</span></label>
+              <label for="insertSlt-countryBirth-collaborator" class="control-label form-control-sm">Pais<span class="text-danger">*</span></label>
               <div class="input-group input-group-sm">
-                <select id="insertIpt-product-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                <select id="insertSlt-countryBirth-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
                   <option value="-">-</option>
                   <?php if (empty(get_all_paises())) : ?>
                     <option value="--0--">--No se obtuvo informacion--</option>
@@ -164,9 +167,9 @@
           </div>
           <div class="col-12 col-sm-4 mb-3">
             <div class="form-group">
-              <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Departamento<span class="text-danger">*</span></label>
+              <label for="insertSlt-departmentBirth-collaborator" class="control-label form-control-sm">Departamento<span class="text-danger">*</span></label>
               <div class="input-group input-group-sm">
-                <select id="insertIpt-product-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                <select id="insertSlt-departmentBirth-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
                   <option value="-">-</option>
                 </select>
               </div>
@@ -174,9 +177,9 @@
           </div>
           <div class="col-12 col-sm-4 mb-3">
             <div class="form-group">
-              <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Provincia<span class="text-danger">*</span></label>
+              <label for="insertSlt-provinceBirth-collaborator" class="control-label form-control-sm">Provincia<span class="text-danger">*</span></label>
               <div class="input-group input-group-sm">
-                <select id="insertIpt-product-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                <select id="insertSlt-provinceBirth-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
                   <option value="-">-</option>
                 </select>
               </div>
@@ -184,9 +187,9 @@
           </div>
           <div class="col-12 col-sm-4 mb-3">
             <div class="form-group">
-              <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Distrito<span class="text-danger">*</span></label>
+              <label for="insertSlt-districtBirth-collaborator" class="control-label form-control-sm">Distrito<span class="text-danger">*</span></label>
               <div class="input-group input-group-sm">
-                <select id="insertIpt-product-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                <select id="insertSlt-districtBirth-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
                   <option value="-">-</option>
                 </select>
               </div>

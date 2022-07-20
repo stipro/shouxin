@@ -10,6 +10,11 @@
 <!-- toastr js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
+<!-- Select2 js -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 <!-- waitme js -->
 <script src="<?php echo PLUGINS . 'waitme/waitMe.min.js'; ?>"></script>
 
@@ -20,7 +25,7 @@
     <script src="<?php echo JS . 'login.js'; ?>"></script>
 <?php elseif ($d->title == 'Flash') : ?>
     <script src="<?php echo JS . 'logout.js'; ?>"></script>
-<?php elseif ($d->title == 'colaborador') : ?>
+<?php elseif ($d->nameModule == 'colaborador') : ?>
     <script src="<?php echo JS . 'colaborador.js'; ?>"></script>
 <?php else : ?>
 <?php endif; ?>

@@ -22,6 +22,7 @@ class colaboradorController extends Controller {
     $data = 
     [
       'title' => 'Registro de colaborador',
+      'nameModule' => 'colaborador',
       'msg'   => 'Bienvenido al controlador de "colaborador", se ha creado con éxito si ves este mensaje.',
       'padding' => '0px'
     ];

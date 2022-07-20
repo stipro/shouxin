@@ -196,7 +196,7 @@ class ajaxController extends Controller
   }
   function getLogin_microsoft()
   {
-    
+
     $tenant = "common";
     $client_id = "3b5a69e5-d9fb-443e-b5e7-926401d3a4e0";
     $client_secret = "Pwl8Q~gq4H~W103V3wPg_jot3jao1eG5c7yMUcig";
@@ -206,5 +206,84 @@ class ajaxController extends Controller
       'Files.Read.All'
     ];
     apiLoginMicrosoft($tenant, $client_id, $client_secret, $callback, $scopes);
+  }
+
+  function getDepartamentos()
+  {
+
+
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => 'http://ms.digemid.minsa.gob.pe:8480/msopmcovid/parametro/departamentos',
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'POST',
+      CURLOPT_POSTFIELDS => '{"filtro":{"codigo":null,"codigoDos":null}}',
+      CURLOPT_HTTPHEADER => array(
+        'Content-Type: application/json'
+      ),
+    ));
+
+    $response = curl_exec($curl);
+    curl_close($curl);
+    $rptJson = json_decode($response);
+    json_output(json_build(200, $rptJson, 'Se obtuvo Departamentos'));
+  }
+
+  function getProvincias()
+  {
+    $codigoDepartamento = clean($_POST['state']);
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => 'http://ms.digemid.minsa.gob.pe:8480/msopmcovid/parametro/provincias',
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'POST',
+      CURLOPT_POSTFIELDS => '{"filtro":{"codigo":"' . $codigoDepartamento . '","codigoDos":null}}',
+      CURLOPT_HTTPHEADER => array(
+        'Content-Type: application/json'
+      ),
+    ));
+
+    $response = curl_exec($curl);
+    curl_close($curl);
+    $rptJson = json_decode($response);
+    json_output(json_build(200, $rptJson, 'Se obtuvo Provincias'));
+  }
+
+  function getDistrito()
+  {
+    $codigoDistrito = clean($_POST['district']);
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => 'http://ms.digemid.minsa.gob.pe:8480/msopmcovid/parametro/provincias',
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'POST',
+      CURLOPT_POSTFIELDS => '{"filtro":{"codigo":"' . $codigoDistrito . '","codigoDos":null}}',
+      CURLOPT_HTTPHEADER => array(
+        'Content-Type: application/json'
+      ),
+    ));
+
+    $response = curl_exec($curl);
+    curl_close($curl);
+    $rptJson = json_decode($response);
+    json_output(json_build(200, $rptJson, 'Se obtuvo Provincias'));
   }
 }
