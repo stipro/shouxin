@@ -56,48 +56,46 @@ class loginController extends Controller
     Auth::login($user['id'], $user);
     Redirect::to('home/flash');
   }
-}
 
-function loginGmail()
-{
-  $correo = clean($_POST['email']);
-  $user =
-    [
-      'id'       => 123,
-      'name'     => 'Bee Default',
-      'email'    => 'hellow@joystick.com.mx',
-      'avatar'   => 'myavatar.jpg',
-      'tel'      => '11223344',
-      'color'    => '#112233',
-      'user'     => 'bee',
-      'password' => '$2y$10$R18ASm3k90ln7SkPPa7kLObcRCYl7SvIPCPtnKMawDhOT6wPXVxTS'
-    ];
+  function loginGmail()
+  {
+    $correo = clean($_POST['email']);
+    $user =
+      [
+        'id'       => 123,
+        'name'     => 'Bee Default',
+        'email'    => 'hellow@joystick.com.mx',
+        'avatar'   => 'myavatar.jpg',
+        'tel'      => '11223344',
+        'color'    => '#112233',
+        'user'     => 'bee',
+        'password' => '$2y$10$R18ASm3k90ln7SkPPa7kLObcRCYl7SvIPCPtnKMawDhOT6wPXVxTS'
+      ];
 
-  if (!$colaborador = colaboradoresModel::colaborador_permitido($correo)) {
-    Flasher::new('Las credenciales no son correctas.', 'danger');
-    Redirect::back();
+    if (!$colaborador = colaboradoresModel::colaborador_permitido($correo)) {
+      Flasher::new('Las credenciales no son correctas.', 'danger');
+      Redirect::back();
+    }
+    // Loggear al usuario
+    Auth::login($user['id'], $user);
+    Redirect::to('home/flash');
   }
-  // Loggear al usuario
-  Auth::login($user['id'], $user);
-  Redirect::to('home/flash');
-}
 
-function login_hotmail()
-{
-  $user =
-    [
-      'id'       => 123,
-      'name'     => 'Bee Default',
-      'email'    => 'hellow@joystick.com.mx',
-      'avatar'   => 'myavatar.jpg',
-      'tel'      => '11223344',
-      'color'    => '#112233',
-      'user'     => 'bee',
-      'password' => '$2y$10$R18ASm3k90ln7SkPPa7kLObcRCYl7SvIPCPtnKMawDhOT6wPXVxTS'
-    ];
-  // Loggear al usuario
-  Auth::login($user['id'], $user);
-  Redirect::to('home/flash');
+  function login_hotmail()
+  {
+    $user =
+      [
+        'id'       => 123,
+        'name'     => 'Bee Default',
+        'email'    => 'hellow@joystick.com.mx',
+        'avatar'   => 'myavatar.jpg',
+        'tel'      => '11223344',
+        'color'    => '#112233',
+        'user'     => 'bee',
+        'password' => '$2y$10$R18ASm3k90ln7SkPPa7kLObcRCYl7SvIPCPtnKMawDhOT6wPXVxTS'
+      ];
+    // Loggear al usuario
+    Auth::login($user['id'], $user);
+    Redirect::to('home/flash');
+  }
 }
-?>
-<script></script>
