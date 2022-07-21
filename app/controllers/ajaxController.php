@@ -208,7 +208,7 @@ class ajaxController extends Controller
     apiLoginMicrosoft($tenant, $client_id, $client_secret, $callback, $scopes);
   }
 
-  function getDepartamentos()
+  function getDepartamentos_digemid()
   {
 
 
@@ -225,6 +225,31 @@ class ajaxController extends Controller
       CURLOPT_CUSTOMREQUEST => 'POST',
       CURLOPT_POSTFIELDS => '{"filtro":{"codigo":null,"codigoDos":null}}',
       CURLOPT_HTTPHEADER => array(
+        'Content-Type: application/json'
+      ),
+    ));
+
+    $response = curl_exec($curl);
+    curl_close($curl);
+    $rptJson = json_decode($response);
+    json_output(json_build(200, $rptJson, 'Se obtuvo Departamentos'));
+  }
+
+  function getDepartamentos_reniec()
+  {
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => 'https://portaladminusuarios.reniec.gob.pe/duplicado/servicios/getDepartamentosNacim.do',
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'POST',
+      CURLOPT_HTTPHEADER => array(
+        'Cookie: SameSite=None',
         'Content-Type: application/json'
       ),
     ));
@@ -261,6 +286,33 @@ class ajaxController extends Controller
     json_output(json_build(200, $rptJson, 'Se obtuvo Provincias'));
   }
 
+  function getProvincias_reniec()
+  {
+    $codigoDepartamento = clean($_POST['department']);
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => 'https://portaladminusuarios.reniec.gob.pe/duplicado/servicios/getProvinciasNacim.do',
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'POST',
+      CURLOPT_POSTFIELDS => '{"coDepartamento":"' . $codigoDepartamento . '"}',
+      CURLOPT_HTTPHEADER => array(
+        'Content-Type: application/json',
+        'Cookie: SameSite=None'
+      ),
+    ));
+
+    $response = curl_exec($curl);
+    curl_close($curl);
+    $rptJson = json_decode($response);
+    json_output(json_build(200, $rptJson, 'Se obtuvo Provincias'));
+  }
+
   function getDistrito()
   {
     $codigoDepartamento = clean($_POST['department']);
@@ -277,6 +329,33 @@ class ajaxController extends Controller
       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
       CURLOPT_CUSTOMREQUEST => 'POST',
       CURLOPT_POSTFIELDS => '{"filtro":{"codigo":"' . $codigoProvincia  . '","codigoDos":"' . $codigoDepartamento . '"}}',
+      CURLOPT_HTTPHEADER => array(
+        'Content-Type: application/json'
+      ),
+    ));
+
+    $response = curl_exec($curl);
+    curl_close($curl);
+    $rptJson = json_decode($response);
+    json_output(json_build(200, $rptJson, 'Se obtuvo Distritos'));
+  }
+
+  function getDistrito_reniec()
+  {
+    $codigoDepartamento = clean($_POST['department']);
+    $codigoProvincia = clean($_POST['province']);
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => 'https://portaladminusuarios.reniec.gob.pe/duplicado/servicios/getDistritosNacim.do',
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'POST',
+      CURLOPT_POSTFIELDS => '{"coDepartamento":"' . $codigoDepartamento . '","coProvincia":"' . $codigoProvincia  . '"}',
       CURLOPT_HTTPHEADER => array(
         'Content-Type: application/json'
       ),

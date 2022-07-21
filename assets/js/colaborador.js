@@ -87,7 +87,7 @@ $.ajax({
                                 action = 'get';
                             // AJAX
                             $.ajax({
-                                url: 'ajax/getDepartamentos',
+                                url: 'ajax/getDepartamentos_reniec',
                                 type: 'POST',
                                 dataType: 'json',
                                 cache: false,
@@ -102,9 +102,9 @@ $.ajax({
                                 if (res.status === 200) {
                                     toastr.success(res.msg, 'Bien!');
                                     var combodepartamentos = "<option value=''>Seleccionar</option>";
-                                    departamentos = res.data.data;
+                                    departamentos = res.data.listDepartamento;
                                     departamentos.forEach(element => {
-                                        combodepartamentos += '<option value="' + element['descripcion'] + '" data-codigo="' + element['codigo'] + '">' + element['descripcion'] + '</option>';
+                                        combodepartamentos += '<option value="' + element['departamento'] + '" data-codigo="' + element['coDepartamento'] + '">' + element['departamento'] + '</option>';
                                     });
                                     $("#insertSlt-departmentBirth-collaborator").html(combodepartamentos);
                                     $("#insertSlt-departmentBirth-collaborator").trigger('change');
@@ -122,7 +122,7 @@ $.ajax({
                                             action = 'get';
                                         // AJAX
                                         $.ajax({
-                                            url: 'ajax/getProvincias',
+                                            url: 'ajax/getProvincias_reniec',
                                             type: 'POST',
                                             dataType: 'json',
                                             cache: false,
@@ -137,9 +137,9 @@ $.ajax({
                                         }).done(function (res) {
                                             if (res.status === 200) {
                                                 var comboprovincias = "<option value=''>Seleccionar</option>";
-                                                provincias = res.data.data;
+                                                provincias = res.data.listProvincia;
                                                 provincias.forEach(element => {
-                                                    comboprovincias += '<option value="' + element['descripcion'] + '" data-codigo="' + element['codigo'] + '" data-codigodepartamento="' + element['codigoDepartamento'] + '">' + element['descripcion'] + '</option>';
+                                                    comboprovincias += '<option value="' + element['provincia'] + '" data-codigo="' + element['coProvincia'] + '" data-codigodepartamento="' + element['coDepartamento'] + '">' + element['provincia'] + '</option>';
                                                 });
                                                 $("#insertSlt-provinceBirth-collaborator").html(comboprovincias);
                                                 $("#insertSlt-provinceBirth-collaborator").trigger('change');
@@ -155,7 +155,7 @@ $.ajax({
                                                         hook = 'bee_hook';
                                                     // AJAX
                                                     $.ajax({
-                                                        url: 'ajax/getDistrito',
+                                                        url: 'ajax/getDistrito_reniec',
                                                         type: 'POST',
                                                         dataType: 'json',
                                                         cache: false,
@@ -172,9 +172,9 @@ $.ajax({
                                                         if (res.status === 200) {
                                                             toastr.success(res.msg, 'Bien!');
                                                             var combodistritos = "<option value=''>Seleccionar</option>";
-                                                            distritos = res.data.data;
+                                                            distritos = res.data.listDistrito;
                                                             distritos.forEach(element => {
-                                                                combodistritos += '<option value="' + element['descripcion'] + '" data-codigodepartamento="' + element['codigoDepartamento'] + '" data-codigoprovincia="' + element['codigoProvincia'] + '" data-codigo="' + element['codigo'] + '">' + element['descripcion'] + '</option>';
+                                                                combodistritos += '<option value="' + element['distrito'] + '" data-codigodepartamento="' + element['coDepartamento'] + '" data-codigoprovincia="' + element['coProvincia'] + '" data-codigo="' + element['coDistrito'] + '">' + element['distrito'] + '</option>';
                                                             });
                                                             $("#insertSlt-districtBirth-collaborator").html(combodistritos);
                                                             $("#insertSlt-districtBirth-collaborator").trigger('change');
