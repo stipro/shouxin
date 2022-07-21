@@ -237,7 +237,7 @@ class ajaxController extends Controller
 
   function getProvincias()
   {
-    $codigoDepartamento = clean($_POST['state']);
+    $codigoDepartamento = clean($_POST['department']);
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
@@ -263,11 +263,12 @@ class ajaxController extends Controller
 
   function getDistrito()
   {
-    $codigoDistrito = clean($_POST['district']);
+    $codigoDepartamento = clean($_POST['department']);
+    $codigoProvincia = clean($_POST['province']);
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-      CURLOPT_URL => 'http://ms.digemid.minsa.gob.pe:8480/msopmcovid/parametro/provincias',
+      CURLOPT_URL => 'http://ms.digemid.minsa.gob.pe:8480/msopmcovid/parametro/distritos',
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => '',
       CURLOPT_MAXREDIRS => 10,
@@ -275,7 +276,7 @@ class ajaxController extends Controller
       CURLOPT_FOLLOWLOCATION => true,
       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
       CURLOPT_CUSTOMREQUEST => 'POST',
-      CURLOPT_POSTFIELDS => '{"filtro":{"codigo":"' . $codigoDistrito . '","codigoDos":null}}',
+      CURLOPT_POSTFIELDS => '{"filtro":{"codigo":"' . $codigoProvincia  . '","codigoDos":"' . $codigoDepartamento . '"}}',
       CURLOPT_HTTPHEADER => array(
         'Content-Type: application/json'
       ),
@@ -284,6 +285,6 @@ class ajaxController extends Controller
     $response = curl_exec($curl);
     curl_close($curl);
     $rptJson = json_decode($response);
-    json_output(json_build(200, $rptJson, 'Se obtuvo Provincias'));
+    json_output(json_build(200, $rptJson, 'Se obtuvo Distritos'));
   }
 }

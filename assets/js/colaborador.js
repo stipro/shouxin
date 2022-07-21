@@ -43,7 +43,7 @@ var settings = {
         }
     }),
 };
-
+var wrapper = $('.countryBirth-wrapper');
 $.ajax({
     url: 'https://www.universal-tutorial.com/api/getaccesstoken',
     method: 'GET',
@@ -52,9 +52,13 @@ $.ajax({
         "api-token": "JVje1_gYPsR2QjAnk-KKNUdBVbtGkypTK-GcMYJnD_3CCzdFaMCDnCLm_-9isfGUi_w",
         "user-email": "stipro150197@gmail.com"
     },
+    beforeSend: function () {
+        wrapper.waitMe();
+    },
     success: function (data) {
         if (data.auth_token) {
             var auth_token = data.auth_token;
+
             $.ajax({
                 url: 'https://www.universal-tutorial.com/api/countries/',
                 method: 'GET',
@@ -62,6 +66,7 @@ $.ajax({
                     "Authorization": "Bearer " + auth_token,
                     "Accept": "application/json"
                 },
+
                 success: function (data) {
                     var countries = data;
                     var comboCountries = "<option value=''>Seleccionar</option>";
@@ -77,10 +82,9 @@ $.ajax({
                         var country = $(this).find(":selected").val();
                         //var country = (country == 'Peru' ? false : $(this).find(":selected").val());
                         if (country == 'Peru') {
-                            console.log('Selecciono Peru');
-                            var button = $(this),
-                                action = 'get',
-                                hook = 'bee_hook';
+                            var wrapper = $('.departmentBirth-wrapper'),
+                                hook = 'bee_hook',
+                                action = 'get';
                             // AJAX
                             $.ajax({
                                 url: 'ajax/getDepartamentos',
@@ -92,11 +96,10 @@ $.ajax({
                                     action,
                                 },
                                 beforeSend: function () {
-                                    toastr.warning('Obteniendo departamentos');
+                                    wrapper.waitMe();
                                 }
                             }).done(function (res) {
                                 if (res.status === 200) {
-                                    console.log(res);
                                     toastr.success(res.msg, 'Bien!');
                                     var combodepartamentos = "<option value=''>Seleccionar</option>";
                                     departamentos = res.data.data;
@@ -112,11 +115,11 @@ $.ajax({
                                     $("#insertSlt-departmentBirth-collaborator").select2({
                                         theme: 'bootstrap-5'
                                     }).on("change", function () {
-                                        var stateCode = $(this).find(":selected").data("codigo");
-                                        var button = $(this),
-                                            state = stateCode,
-                                            action = 'get',
-                                            hook = 'bee_hook';
+                                        var departmentCode = $(this).find(":selected").data("codigo");
+                                        var wrapper = $('.provinceBirth-wrapper'),
+                                            department = departmentCode,
+                                            hook = 'bee_hook',
+                                            action = 'get';
                                         // AJAX
                                         $.ajax({
                                             url: 'ajax/getProvincias',
@@ -124,32 +127,75 @@ $.ajax({
                                             dataType: 'json',
                                             cache: false,
                                             data: {
-                                                state,
+                                                department,
                                                 hook,
                                                 action,
                                             },
                                             beforeSend: function () {
-                                                toastr.warning('Obteniendo departamentos');
+                                                wrapper.waitMe();
                                             }
                                         }).done(function (res) {
                                             if (res.status === 200) {
-                                                console.log(res);
-                                                toastr.success(res.msg, 'Bien!');
                                                 var comboprovincias = "<option value=''>Seleccionar</option>";
                                                 provincias = res.data.data;
                                                 provincias.forEach(element => {
-                                                    comboprovincias += '<option value="' + element['descripcion'] + '" data-codigo="' + element['codigo'] + '">' + element['descripcion'] + '</option>';
+                                                    comboprovincias += '<option value="' + element['descripcion'] + '" data-codigo="' + element['codigo'] + '" data-codigodepartamento="' + element['codigoDepartamento'] + '">' + element['descripcion'] + '</option>';
                                                 });
                                                 $("#insertSlt-provinceBirth-collaborator").html(comboprovincias);
                                                 $("#insertSlt-provinceBirth-collaborator").trigger('change');
+                                                $("#insertSlt-provinceBirth-collaborator").select2({
+                                                    theme: 'bootstrap-5'
+                                                }).on("change", function () {
+                                                    var departmentCode = $(this).find(":selected").data("codigodepartamento");
+                                                    var provinceCode = $(this).find(":selected").data("codigo");
+                                                    var wrapper = $('.districtBirth-wrapper'),
+                                                        department = departmentCode,
+                                                        province = provinceCode,
+                                                        action = 'get',
+                                                        hook = 'bee_hook';
+                                                    // AJAX
+                                                    $.ajax({
+                                                        url: 'ajax/getDistrito',
+                                                        type: 'POST',
+                                                        dataType: 'json',
+                                                        cache: false,
+                                                        data: {
+                                                            department,
+                                                            province,
+                                                            hook,
+                                                            action,
+                                                        },
+                                                        beforeSend: function () {
+                                                            wrapper.waitMe();
+                                                        }
+                                                    }).done(function (res) {
+                                                        if (res.status === 200) {
+                                                            toastr.success(res.msg, 'Bien!');
+                                                            var combodistritos = "<option value=''>Seleccionar</option>";
+                                                            distritos = res.data.data;
+                                                            distritos.forEach(element => {
+                                                                combodistritos += '<option value="' + element['descripcion'] + '" data-codigodepartamento="' + element['codigoDepartamento'] + '" data-codigoprovincia="' + element['codigoProvincia'] + '" data-codigo="' + element['codigo'] + '">' + element['descripcion'] + '</option>';
+                                                            });
+                                                            $("#insertSlt-districtBirth-collaborator").html(combodistritos);
+                                                            $("#insertSlt-districtBirth-collaborator").trigger('change');
+
+                                                        } else {
+                                                            toastr.error(res.msg, '¡Upss!');
+                                                        }
+                                                    }).fail(function (err) {
+                                                        toastr.error('Hubo un error en la petición', '¡Upss!');
+                                                    }).always(function () {
+                                                        wrapper.waitMe('hide');
+                                                    });
+                                                });
                                             } else {
                                                 toastr.error(res.msg, '¡Upss!');
                                             }
                                         }).fail(function (err) {
                                             toastr.error('Hubo un error en la petición', '¡Upss!');
                                         }).always(function () {
-
-                                        })
+                                            wrapper.waitMe('hide');
+                                        });
                                     })
                                 } else {
                                     toastr.error(res.msg, '¡Upss!');
@@ -157,7 +203,7 @@ $.ajax({
                             }).fail(function (err) {
                                 toastr.error('Hubo un error en la petición', '¡Upss!');
                             }).always(function () {
-
+                                wrapper.waitMe('hide');
                             })
                         }
                         else {
@@ -220,11 +266,15 @@ $.ajax({
                 },
                 error: function (e) {
                     console.log("Error al obtener countries: " + e);
-                }
+                },
+                
             });
         }
     },
-    error: function (e) {
-        console.log("Error al obtener countries: " + e);
-    }
+    error: function (rpt) {
+        console.log("Error al obtener countries: " + rpt);
+    },
+    complete: function () {
+        wrapper.waitMe('hide');
+    },
 });

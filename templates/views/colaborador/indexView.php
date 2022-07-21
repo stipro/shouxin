@@ -149,7 +149,7 @@
             <h5>Lugar de nacimiento</h5>
           </div>
           <div class="col-12 col-sm-12 mb-3">
-            <div class="form-group">
+            <div class="form-group countryBirth-wrapper">
               <label for="insertSlt-countryBirth-collaborator" class="control-label form-control-sm">Pais<span class="text-danger">*</span></label>
               <div class="input-group input-group-sm">
                 <select id="insertSlt-countryBirth-collaborator" class="form-select form-select-sm" data-placeholder="Seleccióne Pais">
@@ -166,7 +166,7 @@
             </div>
           </div>
           <div class="col-12 col-sm-4 mb-3">
-            <div class="form-group">
+            <div class="form-group departmentBirth-wrapper">
               <label for="insertSlt-departmentBirth-collaborator" class="control-label form-control-sm">Departamento<span class="text-danger">*</span></label>
               <div class="input-group input-group-sm">
                 <select id="insertSlt-departmentBirth-collaborator" class="form-select form-select-sm" data-placeholder="Seleccióne Pais">
@@ -176,7 +176,7 @@
             </div>
           </div>
           <div class="col-12 col-sm-4 mb-3">
-            <div class="form-group">
+            <div class="form-group provinceBirth-wrapper">
               <label for="insertSlt-provinceBirth-collaborator" class="control-label form-control-sm">Provincia<span class="text-danger">*</span></label>
               <div class="input-group input-group-sm">
                 <select id="insertSlt-provinceBirth-collaborator" class="form-select form-select-sm" data-placeholder="Seleccióne Departamento">
@@ -186,10 +186,10 @@
             </div>
           </div>
           <div class="col-12 col-sm-4 mb-3">
-            <div class="form-group">
+            <div class="form-group districtBirth-wrapper">
               <label for="insertSlt-districtBirth-collaborator" class="control-label form-control-sm">Distrito<span class="text-danger">*</span></label>
               <div class="input-group input-group-sm">
-                <select id="insertSlt-districtBirth-collaborator" class="form-select form-select-sm" data-placeholder="Seleccióne Distrito">
+                <select id="insertSlt-districtBirth-collaborator" class="form-select form-select-sm" data-placeholder="Seleccióne Provincia">
                   <<option value=""></option>
                 </select>
               </div>
