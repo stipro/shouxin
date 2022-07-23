@@ -153,7 +153,7 @@
               <label for="insertSlt-countryBirth-collaborator" class="control-label form-control-sm">Pais<span class="text-danger">*</span></label>
               <div class="input-group input-group-sm">
                 <select id="insertSlt-countryBirth-collaborator" class="form-select form-select-sm" data-placeholder="Seleccióne Pais">
-                <option value=""></option>
+                  <option value=""></option>
                   <?php if (empty(get_all_paises())) : ?>
                     <option value="--0--">--No se obtuvo informacion--</option>
                   <?php else : ?>
@@ -190,7 +190,8 @@
               <label for="insertSlt-districtBirth-collaborator" class="control-label form-control-sm">Distrito<span class="text-danger">*</span></label>
               <div class="input-group input-group-sm">
                 <select id="insertSlt-districtBirth-collaborator" class="form-select form-select-sm" data-placeholder="Seleccióne Provincia">
-                  <<option value=""></option>
+                  <<option value="">
+                    </option>
                 </select>
               </div>
             </div>
@@ -368,25 +369,26 @@
 
         <div class="row border m-2">
           <div class="text-primary mt-2 mb-2">
-            <h5>Éstudios Rrealizádos</h5>
+            <h5>Éstudios Realizádos</h5>
           </div>
           <!-- Section: Timeline -->
           <section class="">
             <ul class="timeline">
               <li class="timeline-item mb-5">
-                <h5 class="fw-bold">[Nivel de estudio]</h5>
-                <p class="text-muted mb-2 fw-bold">[Centro educativo]</p>
-                <p class="text-muted mb-2 fw-bold">[F. Inicio - F. Conclusión]</p>
+                <div class="row">
+                  <div class="col-6">
+                    <h5 class="fw-bold">[Nivel de estudio]</h5>
+                    <p class="text-muted mb-2 fw-bold">[Centro educativo]</p>
+                    <p class="text-muted mb-2 fw-bold">[F. Inicio - F. Conclusión]</p>
+                  </div>
+                  <div class="col-6 d-flex justify-content-end">
+                    <a href="#" class="text-decoration-none"><i class="fa fa-pencil"></i></a>
+                  </div>
+                </div>
               </li>
 
               <li class="timeline-item mb-5">
-                <h5 class="fw-bold">First customer</h5>
-                <p class="text-muted mb-2 fw-bold">19 March 2020</p>
-                <p class="text-muted">
-                  Quisque ornare dui nibh, sagittis egestas nisi luctus nec. Sed
-                  aliquet laoreet sapien, eget pulvinar lectus maximus vel.
-                  Phasellus suscipit porta mattis.
-                </p>
+                <a href="#" class="text-decoration-none" id="aAdd-experienceWork"><i class="fa fa-plus"></i> Añadir</a>
               </li>
             </ul>
           </section>
@@ -401,19 +403,19 @@
           <section class="">
             <ul class="timeline">
               <li class="timeline-item mb-5">
-                <h5 class="fw-bold">[Cargo]</h5>
-                <p class="text-muted mb-2 fw-bold">[Empresa]</p>
-                <p class="text-muted mb-2 fw-bold">[F. Inicio - F. Conclusión]</p>
+                <div class="row">
+                  <div class="col-6">
+                    <h5 class="fw-bold">[Cargo]</h5>
+                    <p class="text-muted mb-2 fw-bold">[Empresa]</p>
+                    <p class="text-muted mb-2 fw-bold">[F. Inicio - F. Conclusión]</p>
+                  </div>
+                  <div class="col-6 d-flex justify-content-end">
+                    <a href="#" class="text-decoration-none"><i class="fa fa-pencil"></i></a>
+                  </div>
+                </div>
               </li>
-
               <li class="timeline-item mb-5">
-                <h5 class="fw-bold">First customer</h5>
-                <p class="text-muted mb-2 fw-bold">19 March 2020</p>
-                <p class="text-muted">
-                  Quisque ornare dui nibh, sagittis egestas nisi luctus nec. Sed
-                  aliquet laoreet sapien, eget pulvinar lectus maximus vel.
-                  Phasellus suscipit porta mattis.
-                </p>
+                <a href="#" class="text-decoration-none" id="aAdd-studiesApplied"><i class="fa fa-plus"></i> Añadir</a>
               </li>
             </ul>
           </section>
@@ -428,19 +430,20 @@
           <section class="">
             <ul class="timeline">
               <li class="timeline-item mb-5">
-                <h5 class="fw-bold">[Curso o Evento]</h5>
-                <p class="text-muted mb-2 fw-bold">[institución o organizad@]</p>
-                <p class="text-muted mb-2 fw-bold">[F. Curso o Evento]</p>
-              </li>
+                <div class="row">
+                  <div class="col-6">
+                    <h5 class="fw-bold">[Curso o Evento]</h5>
+                    <p class="text-muted mb-2 fw-bold">[institución o organizad@]</p>
+                    <p class="text-muted mb-2 fw-bold">[F. Curso o Evento]</p>
+                  </div>
+                  <div class="col-6 d-flex justify-content-end">
+                    <a href="#" class="text-decoration-none"><i class="fa fa-pencil"></i></a>
+                  </div>
+                </div>
 
+              </li>
               <li class="timeline-item mb-5">
-                <h5 class="fw-bold">First customer</h5>
-                <p class="text-muted mb-2 fw-bold">19 March 2020</p>
-                <p class="text-muted">
-                  Quisque ornare dui nibh, sagittis egestas nisi luctus nec. Sed
-                  aliquet laoreet sapien, eget pulvinar lectus maximus vel.
-                  Phasellus suscipit porta mattis.
-                </p>
+                <a href="#" class="text-decoration-none" id="aAdd-trainings"><i class="fa fa-plus"></i> Añadir</a>
               </li>
             </ul>
           </section>
@@ -463,3 +466,6 @@
 </div>
 
 <?php require_once INCLUDES . 'inc_footer.php'; ?>
+<?php require_once VIEWS . 'colaborador/modals/create_experienceWork.php'; ?>
+<?php require_once VIEWS . 'colaborador/modals/create_studiesApplied.php'; ?>
+<?php require_once VIEWS . 'colaborador/modals/create_trainings.php'; ?>

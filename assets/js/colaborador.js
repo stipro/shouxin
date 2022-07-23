@@ -54,6 +54,22 @@ var settings = {
         }
     }),
 };
+
+$(document).on('click', '#aAdd-experienceWork', function (e) {
+    e.preventDefault();
+    $('#mdAdd-experienceWork').modal('show');
+});
+
+$(document).on('click', '#aAdd-studiesApplied', function (e) {
+    e.preventDefault();
+    $('#mdAdd-studiesApplied').modal('show');
+});
+
+$(document).on('click', '#aAdd-trainings', function (e) {
+    e.preventDefault();
+    $('#mdAdd-trainings').modal('show');
+});
+
 getData_Birth();
 function getData_Birth() {
     let wrapper = $('.countryBirth-wrapper');

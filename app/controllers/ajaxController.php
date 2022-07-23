@@ -182,17 +182,19 @@ class ajaxController extends Controller
         ];
 
       $correo = $_POST['email'];
+      $rptValidador_value = "";
       $partCorreo = explode("@", $correo);
-      echo $correo . ' - ';
-      if (!$colaborador = colaboradoresModel::colaborador_permitido($correo)) {
+      /*  if (!$colaborador = colaboradoresModel::colaborador_permitido($correo)) {
         throw new PDOException('Correo no permitido.');
-      } elseif (!$partCorreo[1] == 'shouxin.com.pe') {
-        throw new PDOException('Dominio no permitido.');
-      } else {
-        // Loggear al usuario
-        Auth::login($user['id'], $user);
-        json_output(json_build(200, $colaborador, 'Correo Valido, Bienvenido, Espereme un momento le redireccionaremos, Gracias'));
+      }  */
+      if (!$partCorreo[1] == 'shouxin.com.pe') {
+        if (!$rptValidador_value = colaboradoresModel::colaborador_permitido($correo)) {
+          throw new PDOException('Correo no permitido.');
+        }
       }
+      // Loggear al usuario
+      Auth::login($user['id'], $user);
+      json_output(json_build(200, $rptValidador_value, 'Correo Valido, Bienvenido, Espereme un momento le redireccionaremos, Gracias'));
     } catch (Exception $e) {
       json_output(json_build(400, null, $e->getMessage()));
     } catch (PDOException $e) {
