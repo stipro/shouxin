@@ -96,9 +96,9 @@ function loginFireBase_hotmail(e) {
             if (res.status === 200) {
                 console.log(res);
                 toastr.success(res.msg, 'Bien!');
-                setTimeout(() => {
+                /* setTimeout(() => {
                     window.location.href = "./home/flash";
-                }, 2000)
+                }, 2000) */
             } else {
                 toastr.error(res.msg, '¡Upss!');
             }

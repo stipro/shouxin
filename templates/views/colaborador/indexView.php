@@ -256,31 +256,31 @@
             </div>
           </div>
           <div class="col-12 col-sm-4 mb-3">
-            <div class="form-group">
-              <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Departamento<span class="text-danger">*</span></label>
+            <div class="form-group departmentHome-wrapper">
+              <label for="insertSlt-departmentHome-collaborator" class="control-label form-control-sm">Departamento<span class="text-danger">*</span></label>
               <div class="input-group input-group-sm">
-                <select id="insertIpt-product-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
-                  <option value="-">-</option>
+                <select id="insertSlt-departmentHome-collaborator" class="form-select form-select-sm" data-placeholder="Seleccióne Departamento">
+                  <option value=""></option>
                 </select>
               </div>
             </div>
           </div>
           <div class="col-12 col-sm-4 mb-3">
-            <div class="form-group">
-              <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Provincia<span class="text-danger">*</span></label>
+            <div class="form-group provinceHome-wrapper">
+              <label for="insertSlt-provinceHome-collaborator" class="control-label form-control-sm">Provincia<span class="text-danger">*</span></label>
               <div class="input-group input-group-sm">
-                <select id="insertIpt-product-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
-                  <option value="-">-</option>
+                <select id="insertSlt-provinceHome-collaborator" class="form-select form-select-sm" data-placeholder="Seleccióne Provincia">
+                  <option value=""></option>
                 </select>
               </div>
             </div>
           </div>
           <div class="col-12 col-sm-4 mb-3">
-            <div class="form-group">
-              <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Distrito<span class="text-danger">*</span></label>
+            <div class="form-group districtHome-wrapper">
+              <label for="insertSlt-districtHome-collaborator" class="control-label form-control-sm">Distrito<span class="text-danger">*</span></label>
               <div class="input-group input-group-sm">
-                <select id="insertIpt-product-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
-                  <option value="-">-</option>
+                <select id="insertSlt-districtHome-collaborator" class="form-select form-select-sm" data-placeholder="Seleccióne Distrito">
+                  <option value=""></option>
                 </select>
               </div>
             </div>

@@ -181,13 +181,18 @@ class ajaxController extends Controller
           'password' => '$2y$10$R18ASm3k90ln7SkPPa7kLObcRCYl7SvIPCPtnKMawDhOT6wPXVxTS'
         ];
 
-      $correo = clean($_POST['email']);
+      $correo = $_POST['email'];
+      $partCorreo = explode("@", $correo);
+      echo $correo . ' - ';
       if (!$colaborador = colaboradoresModel::colaborador_permitido($correo)) {
         throw new PDOException('Correo no permitido.');
+      } elseif (!$partCorreo[1] == 'shouxin.com.pe') {
+        throw new PDOException('Dominio no permitido.');
+      } else {
+        // Loggear al usuario
+        Auth::login($user['id'], $user);
+        json_output(json_build(200, $colaborador, 'Correo Valido, Bienvenido, Espereme un momento le redireccionaremos, Gracias'));
       }
-      // Loggear al usuario
-      Auth::login($user['id'], $user);
-      json_output(json_build(200, $colaborador, 'Correo Valido, Bienvenido, Espereme un momento le redireccionaremos, Gracias'));
     } catch (Exception $e) {
       json_output(json_build(400, null, $e->getMessage()));
     } catch (PDOException $e) {
