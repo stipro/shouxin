@@ -1,4 +1,83 @@
 const ipt_colaborador_dni_api = document.getElementById('insert-ipt-colaboradorDni');
+const form = document.getElementById('form-collaborator');
+const lastNameFather_collaborator = document.getElementById('insertIpt-lastNameFather-collaborator');
+const lastNameMother_collaborator = document.getElementById('insertIpt-lastNameMother-collaborator');
+const name_collaborator = document.getElementById('insertIpt-name-collaborator');
+const nationality_collaborator = document.getElementById('insertIpt-nationality-collaborator');
+const statusMarital_collaborator = document.getElementById('insertIpt-statusMarital-collaborator');
+const birthdate_collaborator = document.getElementById('insertIpt-birthdate-collaborator');
+
+form.addEventListener('submit', e => {
+    e.preventDefault();
+    checkInputs();
+});
+function checkInputs() {
+    const lastNameFather_value = lastNameFather_collaborator.value.trim();
+    const lastNameMother_value = lastNameMother_collaborator.value.trim();
+    const name_value = name_collaborator.value.trim();
+    const nationality_value = $('#insertIpt-nationality-collaborator').find(":selected").val();
+    const statusMarital_value = $('#insertIpt-statusMarital-collaborator').find(":selected").val();
+    const birthdate_value = birthdate_collaborator.value.trim();
+
+    if (lastNameFather_value === '') {
+        setErrorFor(lastNameFather_collaborator, 'No puede dejar el Apellido Paterno en blanco');
+    } else {
+        setSuccessFor(lastNameFather_collaborator);
+    }
+
+    if (lastNameMother_value === '') {
+        setErrorFor(lastNameMother_collaborator, 'No puede dejar el Apellido Materna en blanco');
+    } else {
+        setSuccessFor(lastNameMother_collaborator);
+    }
+
+    if (name_value === '') {
+        setErrorFor(name_collaborator, 'No puede dejar el Nombre en blanco');
+    } else {
+        setSuccessFor(name_collaborator);
+    }
+
+    if (nationality_value === '') {
+        setErrorFor(nationality_collaborator, 'No puede dejar Nacionalidad sin selecciónar');
+    } else {
+        setSuccessFor(nationality_collaborator);
+    }
+
+    if (statusMarital_value === '') {
+        setErrorFor(statusMarital_collaborator, 'No puede dejar Estado Civil sin selecciónar');
+    } else {
+        setSuccessFor(statusMarital_collaborator);
+    }
+
+    if (birthdate_value === '') {
+        setErrorFor(birthdate_collaborator, 'No puede dejar F. Nacimiento en blanco');
+    } else {
+        setSuccessFor(birthdate_collaborator);
+    }
+}
+
+function setErrorFor(input, message) {
+    input.classList.remove('is-valid');
+    input.classList.add('is-invalid');
+    const formControl = input.parentElement;
+    const div = formControl.querySelector('div');
+    div.className = 'invalid-feedback';
+    div.innerText = message;
+}
+
+function setSuccessFor(input) {
+    input.classList.remove('is-invalid');
+    input.classList.add('is-valid');
+    const formControl = input.parentElement;
+    const div = formControl.querySelector('div');
+    div.className = 'valid-feedback';
+    div.innerText = '';
+}
+
+function isEmail(email) {
+	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+}
+
 $('#insertIpt-nationality-collaborator').select2({
     theme: 'bootstrap-5'
 });
