@@ -9,6 +9,11 @@ const birthdate_collaborator = document.getElementById('insertIpt-birthdate-coll
 //const documentIdentity_collaborator = document.getElementById('insertSlt-documentIdentity-collaborator');
 const documentNumber_collaborator = document.getElementById('insertIpt-documentNumber-collaborator');
 
+const cont_timeLine = document.getElementById('cont-timeLine');
+const template_studiesApplied = document.getElementById('template-studiesApplied').content
+const fragment = document.createDocumentFragment()
+
+
 form.addEventListener('submit', e => {
     e.preventDefault();
     checkInputs();
@@ -164,6 +169,44 @@ $(document).on('click', '#aAdd-studiesApplied', function (e) {
 $(document).on('click', '#aAdd-trainings', function (e) {
     e.preventDefault();
     $('#mdAdd-trainings').modal('show');
+});
+
+var switchStatus = false;
+$("#togBtn").on('change', function () {
+    if ($(this).is(':checked')) {
+        switchStatus = $(this).is(':checked');
+        console.log(switchStatus);// To verify
+    }
+    else {
+        switchStatus = $(this).is(':checked');
+        console.log(switchStatus);// To verify
+    }
+});
+
+$(document).on('click', '#mbtnCreate-experienceWork-insert', function (e) {
+    const centerEducational_studiesApplied = document.getElementById('centerEducational-studiesApplied');
+    const levelEducational_studiesApplied = document.getElementById('levelEducational-studiesApplied');
+    const currentlyStudying = document.getElementById('currentlyStudying-studiesApplied');
+    //const levelEducational_studiesApplied = document.getElementById('levelEducational-studiesApplied');
+    const sinceMonth_studiesApplied = document.getElementById('sinceMonth-studiesApplied');
+    const sinceYear_studiesApplied = document.getElementById('sinceYear-studiesApplied');
+    const untilMonth_studiesApplied = document.getElementById('untilMonth-studiesApplied');
+    const untilYear_studiesApplied = document.getElementById('untilYear-studiesApplied');
+
+    let centerEducational_value = centerEducational_studiesApplied.value.trim();
+    let lastNameFather_value = levelEducational_studiesApplied.value.trim();
+
+    if (centerEducational_value === '') {
+    } else {
+        console.log(template_studiesApplied);
+        template_studiesApplied.querySelector('.info h5').textContent = centerEducational_value;
+        template_studiesApplied.querySelector('.info centerEducational').textContent = centerEducational_value;
+        const clone = template_studiesApplied.cloneNode(true);
+        fragment.appendChild(clone);
+        cont_timeLine.appendChild(fragment);
+    }
+
+
 });
 
 getData_Birth();
@@ -536,52 +579,52 @@ function getData_Home() {
 // Agregar una Producto
 $('#add_studiesApplied_form').on('submit', add_studiesApplied_form);
 function add_studiesApplied_form(e) {
-  e.preventDefault();
-  var file_data = $('.file').prop('files')[0];
-  let val_brandId = $('#insertIpt-brands-product').find(':selected').data('id');
-  let val_categoryId = $('#insertIpt-categories-product').find(':selected').data('id');
-  var form = $(this),
-    data = new FormData(form.get(0));
-  data.append("brand_id", JSON.stringify(val_brandId));
-  data.append("category_id", JSON.stringify(val_categoryId));
+    e.preventDefault();
+    var file_data = $('.file').prop('files')[0];
+    let val_brandId = $('#insertIpt-brands-product').find(':selected').data('id');
+    let val_categoryId = $('#insertIpt-categories-product').find(':selected').data('id');
+    var form = $(this),
+        data = new FormData(form.get(0));
+    data.append("brand_id", JSON.stringify(val_brandId));
+    data.append("category_id", JSON.stringify(val_categoryId));
 
-  // Validar selección
-  if (!val_brandId) {
-    toastr.error('Seleccióne Marca', '¡Upss!');
-    return;
-  }
-
-  // Validar selección
-  if (!val_categoryId) {
-    toastr.error('Seleccióne Categoria', '¡Upss!');
-    return;
-  }
-
-  // AJAX
-  $.ajax({
-    url: 'ajax/add_studiesApplied_form',
-    type: 'post',
-    dataType: 'json',
-    contentType: false,
-    processData: false,
-    cache: false,
-    data: data,
-    beforeSend: function () {
-      form.waitMe();
+    // Validar selección
+    if (!val_brandId) {
+        toastr.error('Seleccióne Marca', '¡Upss!');
+        return;
     }
-  }).done(function (res) {
-    if (res.status === 201) {
-      toastr.success(res.msg, '¡Bien!');
-      /* form.trigger('reset'); */
-      /* get_category(); */
-    } else {
-      toastr.error(res.msg, '¡Upss!');
+
+    // Validar selección
+    if (!val_categoryId) {
+        toastr.error('Seleccióne Categoria', '¡Upss!');
+        return;
     }
-  }).fail(function (err) {
-    toastr.error('Hubo un error en la petición', '¡Upss!');
-  }).always(function () {
-    form.waitMe('hide');
-  })
+
+    // AJAX
+    $.ajax({
+        url: 'ajax/add_studiesApplied_form',
+        type: 'post',
+        dataType: 'json',
+        contentType: false,
+        processData: false,
+        cache: false,
+        data: data,
+        beforeSend: function () {
+            form.waitMe();
+        }
+    }).done(function (res) {
+        if (res.status === 201) {
+            toastr.success(res.msg, '¡Bien!');
+            /* form.trigger('reset'); */
+            /* get_category(); */
+        } else {
+            toastr.error(res.msg, '¡Upss!');
+        }
+    }).fail(function (err) {
+        toastr.error('Hubo un error en la petición', '¡Upss!');
+    }).always(function () {
+        form.waitMe('hide');
+    })
 }
 
 

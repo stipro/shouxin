@@ -377,10 +377,10 @@
             </div>
             <!-- Section: Timeline -->
             <section class="">
-              <ul class="timeline">
+              <ul class="timeline" id="cont-timeLine">
                 <li class="timeline-item mb-5">
                   <div class="row">
-                    <div class="col-6">
+                    <div class="col-6" class="info">
                       <h5 class="fw-bold">[Nivel de estudio]</h5>
                       <p class="text-muted mb-2 fw-bold">[Centro educativo]</p>
                       <p class="text-muted mb-2 fw-bold">[F. Inicio - F. Conclusión]</p>
@@ -390,7 +390,20 @@
                     </div>
                   </div>
                 </li>
-
+                <template id="template-studiesApplied">
+                  <li class="timeline-item mb-5">
+                    <div class="row">
+                      <div class="col-6 info">
+                        <h5 class="fw-bold">[Nivel de estudio]</h5>
+                        <p class="text-muted mb-2 fw-bold centerEducational">[Centro educativo]</p>
+                        <p class="text-muted mb-2 fw-bold">[F. Inicio - F. Conclusión]</p>
+                      </div>
+                      <div class="col-6 d-flex justify-content-end">
+                        <a href="#" class="text-decoration-none"><i class="fa fa-pencil"></i></a>
+                      </div>
+                    </div>
+                  </li>
+                </template>
                 <li class="timeline-item mb-5">
                   <a href="#" class="text-decoration-none" id="aAdd-experienceWork"><i class="fa fa-plus"></i> Añadir</a>
                 </li>

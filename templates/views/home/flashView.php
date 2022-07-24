@@ -74,8 +74,8 @@
           </div>
         </div>
         <div class="card-footer clearfix">
-          <a class="btn btn-danger float-start btn-logout-form">No acepto</a>
-          <a href="colaborador" class="btn btn-success float-end">Acepto</a>
+          <a class="btn btn-danger float-start btn-logout-form" id="btn-acceptNot">No acepto</a>
+          <a href="colaborador" class="btn btn-success float-end" id="btn-acceptYes">Acepto</a>
           <!-- <a href="logout" class="btn btn-danger float-end confirmar">Cerrar sesión</a> -->
         </div>
       </div>

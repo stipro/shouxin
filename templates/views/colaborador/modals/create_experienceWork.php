@@ -32,13 +32,11 @@
                         <div class="col-12 col-sm-6 mb-3">
                             <div class="form-group">
                                 <label class="control-label form-control-sm form-label">Cursando actualmente<span class="text-danger">*</span></label>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                    <label class="form-check-label" for="inlineCheckbox1">Si</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                    <label class="form-check-label" for="inlineCheckbox2">No</label>
+                                <div class="ms-4">
+                                    <label class="switch">
+                                        <input type="checkbox" id="currentlyStudying-studiesApplied">
+                                        <div class="slider round"></div>
+                                    </label>
                                 </div>
                             </div>
                         </div>
@@ -130,7 +128,6 @@
                                         <option value="1967">1967</option>
                                     </select>
                                 </div>
-
                                 <div id="lastNameFather-collaborator-Help" class="form-text"></div>
                             </div>
                         </div>
@@ -218,8 +215,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="button" class="btn btn-primary">Guardar</button>
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
+                    <button class="btn btn-primary" id="mbtnCreate-experienceWork-insert" type="button">Guardar</button>
                 </div>
             </div>
         </form>
