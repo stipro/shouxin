@@ -167,23 +167,31 @@ class ajaxController extends Controller
   function get_colaboradorValido()
   {
     try {
-      /* debug(productosModel::all_paginated());
-      die; */
-      $user =
-        [
-          'id'       => 123,
-          'name'     => 'Bee Default',
-          'email'    => 'hellow@joystick.com.mx',
-          'avatar'   => 'myavatar.jpg',
-          'tel'      => '11223344',
-          'color'    => '#112233',
-          'user'     => 'bee',
-          'password' => '$2y$10$R18ASm3k90ln7SkPPa7kLObcRCYl7SvIPCPtnKMawDhOT6wPXVxTS'
-        ];
-
+      $proveedor = $_POST['provider'];
       $correo = $_POST['email'];
+      $apellidos = $_POST['family'];
+      $nombre = $_POST['given'];
+      $imagen = $_POST['picture'];
       $rptValidador_value = "";
       $partCorreo = explode("@", $correo);
+      /* debug(productosModel::all_paginated());
+      die; */
+      $typeLogin = $partCorreo[1];
+      $user =
+        [
+          'typeLogin' =>  $typeLogin,
+          'id'        =>  123,
+          'name'      =>  $nombre,
+          'email'     =>  $correo,
+          'avatar'    =>  $imagen,
+          'tel'       => '11223344',
+          'color'     => '#112233',
+          'user'      => 'bee',
+          'password'  => '$2y$10$R18ASm3k90ln7SkPPa7kLObcRCYl7SvIPCPtnKMawDhOT6wPXVxTS'
+        ];
+
+
+      
       /*  if (!$colaborador = colaboradoresModel::colaborador_permitido($correo)) {
         throw new PDOException('Correo no permitido.');
       }  */
@@ -372,5 +380,44 @@ class ajaxController extends Controller
     curl_close($curl);
     $rptJson = json_decode($response);
     json_output(json_build(200, $rptJson, 'Se obtuvo Distritos'));
+  }
+
+  function add_studiesApplied_form()
+  {
+    try {
+      $nombre = clean($_POST['name_product']);
+      $codigoBarra = clean($_POST['barCode_product']);
+      $codigo = clean($_POST['code_product']);
+      $marca_id = clean($_POST['brand_id']);
+      $categoria_id = clean($_POST['category_id']);
+
+      if (!$nombre) {
+        json_output(json_build(400, null, 'Ingrese Nombre'));
+      }
+      if (!$marca_id) {
+        json_output(json_build(400, null, 'Seleccione una Marca'));
+      }
+      $data =
+        [
+          'centroEducativo_estudioRealizado'              => $nombre,
+          'nivelEstudio_estudioRealizado'                 => $codigoBarra,
+          'cursandoActualmente_estudioRealizado'          => $codigo,
+          'nombreArchivoCertificado_estudiosRealizados'   => $marca_id,
+          'categoria_id'                                  => $categoria_id,
+          'inicio_estudiosrealizados'                     => now(),
+          'final_estudiosrealizados'                      => now()
+        ];
+      if (!$id = estudiosrealizadosModel::add(estudiosrealizadosModel::$t1, $data)) {
+        json_output(json_build(400, null, 'Hubo error al guardar el registro'));
+      }
+
+      // se guardó con éxito
+      $productos = estudiosrealizadosModel::by_id($id);
+      json_output(json_build(201, $productos, 'Estudio Realizado agregado con exito. '));
+    } catch (Exception $e) {
+      json_output(json_build(400, null, $e->getMessage()));
+    } catch (PDOException $e) {
+      json_output(json_build(400, null, $e->getMessage()));
+    }
   }
 }

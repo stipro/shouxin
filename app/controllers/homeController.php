@@ -16,8 +16,10 @@ class homeController extends Controller
     $data =
       [
         'title' => 'Home',
+        'nameModule' => 'home',
         /* 'bg'    => 'dark', */
         'padding' => '0px'
+        
       ];
     View::render('flash', $data);
     /* View::render('bee', $data); */

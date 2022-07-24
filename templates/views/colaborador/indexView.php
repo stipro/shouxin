@@ -47,9 +47,9 @@
             </div>
             <div class="col-5 col-sm-4 mb-3">
               <div class="form-group">
-                <label for="insertIpt-nationality-collaborator" class="control-label form-control-sm">Nacionalidad<span class="text-danger">*</span></label>
+                <label for="insertSlt-nationality-collaborator" class="control-label form-control-sm">Nacionalidad<span class="text-danger">*</span></label>
                 <div class="input-group input-group-sm">
-                  <select id="insertIpt-nationality-collaborator" class="form-select form-select-sm" data-placeholder="Seleccióne Nacionalidad">
+                  <select id="insertSlt-nationality-collaborator" class="form-select form-select-sm" data-placeholder="Seleccióne Nacionalidad">
                     <option value=""></option>
                     <?php if (empty(get_all_nacionalidades())) : ?>
                       <option value="--0--">--No se obtuvo informacion--</option>
@@ -66,9 +66,9 @@
             </div>
             <div class="col-6 col-sm-4 mb-3">
               <div class="form-group">
-                <label for="insertIpt-statusMarital-collaborator" class="control-label form-control-sm">Estado Civil <span class="text-danger">*</span></label>
+                <label for="insertSlt-statusMarital-collaborator" class="control-label form-control-sm">Estado Civil <span class="text-danger">*</span></label>
                 <div class="input-group input-group-sm">
-                  <select id="insertIpt-statusMarital-collaborator" class="form-select form-select-sm" data-placeholder="Seleccióne Estado Civil">
+                  <select id="insertSlt-statusMarital-collaborator" class="form-select form-select-sm" data-placeholder="Seleccióne Estado Civil">
                     <option value=""></option>
                     <option value="CASADO">CASADO</option>
                     <option value="CONVIVIENTE">CONVIVIENTE</option>
@@ -91,38 +91,38 @@
                 </div>
               </div>
             </div>
-
             <div class="col-6 col-sm-4 mb-3">
               <div class="form-group">
-                <label for="insertIpt-documentIdentity-collaborator" class="control-label form-control-sm">Doc. de Indentificación<span class="text-danger">*</span></label>
+                <label for="insertSlt-documentIdentity-collaborator" class="control-label form-control-sm">Doc. de Indentificación<span class="text-danger">*</span></label>
                 <div class="input-group input-group-sm">
-                  <select id="insertIpt-documentIdentity-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                  <select id="insertSlt-documentIdentity-collaborator" class="form-select form-select-sm custom-select" data-placeholder="Seleccióne Doc. de Indentificación">
                     <option value="DOC. NACIONAL DE IDENTIDAD">DOC. NACIONAL DE IDENTIDAD</option>
                     <option value="REG. UNICO DE CONTRIBUYENTES">REG. UNICO DE CONTRIBUYENTES</option>
                     <option value="CARNE DE EXTRANJERIA">CARNE DE EXTRANJERIA</option>
                     <option value="PASAPORTE">PASAPORTE</option>
                     <option value="PARTIDA DE NACIMIENTO">PARTIDA DE NACIMIENTO</option>
                   </select>
-                  <input type="file" class="form-control" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03" aria-label="Upload">
+                  <input type="file" class="input-group-text form-control" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03" aria-label="Upload">
                 </div>
+                <!-- <div class="input-group input-group-sm">
+                  <input type="file" class="form-control" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03" aria-label="Upload">
+                </div> -->
                 <div id="documentIdentity-collaborator-Help" class="form-text">Adjunte su documento</div>
               </div>
             </div>
-
             <div class="col-6 col-sm-4 mb-3">
               <div class="form-group">
                 <label for="insertIpt-documentNumber-collaborator" class="control-label form-control-sm">Numero de Indentificación<span class="text-danger">*</span></label>
                 <div class="input-group input-group-sm">
-                  <input type="text" name="documentNumber-collaborator" id="insertIpt-documentNumber-collaborator" class="form-control form-control-sm disabled" value="">
+                  <input type="text" name="documentNumber-collaborator" id="insertIpt-documentNumber-collaborator" class="form-control form-control-sm" value="">
                 </div>
               </div>
             </div>
-
             <div class="col-12 col-sm-4 mb-3">
               <div class="form-group">
                 <label for="insertIpt-profession-collaborator" class="control-label form-control-sm">Profesión, Arte u Oficio<span class="text-danger">*</span></label>
                 <div class="input-group input-group-sm">
-                  <input type="text" name="profession-collaborator" id="insertIpt-profession-collaborator" class="form-control form-control-sm disabled" value="">
+                  <input type="text" name="profession-collaborator" id="insertIpt-profession-collaborator" class="form-control form-control-sm" value="">
                 </div>
                 <div id="profession-collaborator-Help" class="form-text">N° Colegio Profesional (si aplica)</div>
               </div>
@@ -453,7 +453,91 @@
           </div>
           <div class="row border m-2">
             <div class="text-primary mt-2 mb-2">
-              <h5>INFORMACIÓN PATRIMONIAL</h5>
+              <h5>Información Patrimonial</h5>
+              <p>(R.SBS Nº 789-2018 - art. 17, R.Nº 00006-2021-SMV/01
+                Publicado el 31/03/2021)</p>
+            </div>
+            <div class="mt-2 mb-2">
+              <ol type="1" start="1">
+                <li class="text-primary mb-2">INGRESOS
+                </li>
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Concepto</th>
+                        <th scope="col">Monto</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1</th>
+                        <td>Remuneración bruta mensual (En planilla del Empleador):</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2</th>
+                        <td>Otros Ingresos por ejercicio individual de profesión, oficio u otra actividad:</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>Ingresos mensuales del cónyuge o conviviente:</td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <td></td>
+                        <td>TOTAL</td>
+                        <td>$0.00</td>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </ol>
+            </div>
+
+            <div class="mt-2 mb-2">
+              <ol type="1" start="2">
+                <li class="text-primary">BIENES INMUEBLES DEL DECLARANTE Y SOCIEDAD DE GANANCIALES (Perú)</li>
+              </ol>
+              <!-- Section: Timeline -->
+              <section class="ms-4">
+                <ul class="timeline">
+                  <li class="timeline-item mb-5">
+                    <div class="row">
+                      <div class="col-6">
+                        <h5 class="fw-bold">[N° de Fiche o Partida Registral]</h5>
+                        <p class="text-muted mb-2 fw-bold">[Dirección]</p>
+                        <p class="text-muted mb-2 fw-bold">[Valor]</p>
+                        <p class="text-muted mb-2 fw-bold">[bien propio o conyugal]</p>
+                      </div>
+                      <div class="col-6 d-flex justify-content-end">
+                        <a href="#" class="text-decoration-none"><i class="fa fa-pencil"></i></a>
+                      </div>
+                    </div>
+
+                  </li>
+                  <li class="timeline-item mb-5">
+                    <p class="text-muted mb-2 fw-bold">[Total]</p>
+                    <a href="#" class="text-decoration-none" id=""><i class="fa fa-plus"></i> Añadir</a>
+                  </li>
+                </ul>
+              </section>
+              <!-- Section: Timeline -->
+            </div>
+
+
+            <li class="text-primary">BIENES MUEBLES DEL DECLARANTE Y SOCIEDAD DE GANANCIALES (Perú)</li>
+            <li class="text-primary">AHORROS, DEPÓSITOS, COLOCACIONES, INVERSIONES EN EL SISTEMA FINANCIERO DEL DECLARANTE (incluir sociedad de gananciales)</li>
+
+
+          </div>
+          <div class="row border m-2">
+            <div class="text-primary mt-2">
+              <h5>Acreencias y Obligaciónes</h5>
             </div>
           </div>
         </div>

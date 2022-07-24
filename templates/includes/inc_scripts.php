@@ -6,11 +6,11 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
 
-<!--Aleta-->
-<script src="<?php echo JS . 'sweetalert.min.js'; ?>"></script>
-
 <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"></script> -->
+
+<!--Aleta-->
+<script src="<?php echo JS . 'sweetalert.min.js'; ?>"></script>
 
 <!-- toastr js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
@@ -21,6 +21,9 @@
 
 <!-- waitme js -->
 <script src="<?php echo PLUGINS . 'waitme/waitMe.min.js'; ?>"></script>
+
+<!-- Lightbox js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 
 <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
@@ -33,8 +36,6 @@
     <script src="<?php echo JS . 'colaborador.js'; ?>"></script>
 <?php else : ?>
 <?php endif; ?>
-<!-- Lightbox js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
 
 <!-- Objeto Bee Javascript registrado -->
 <?php echo load_bee_obj(); ?>

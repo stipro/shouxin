@@ -36,6 +36,7 @@ class loginController extends Controller
     // para cargar la información del usuario si es existente
     $user =
       [
+        'typeLogin' => 'loginManual',
         'id'       => 123,
         'name'     => 'Bee Default',
         'email'    => 'hellow@joystick.com.mx',
@@ -62,6 +63,7 @@ class loginController extends Controller
     $correo = clean($_POST['email']);
     $user =
       [
+        'typeLogin' => 'Gmail',
         'id'       => 123,
         'name'     => 'Bee Default',
         'email'    => 'hellow@joystick.com.mx',
@@ -85,14 +87,15 @@ class loginController extends Controller
   {
     $user =
       [
-        'id'       => 123,
-        'name'     => 'Bee Default',
-        'email'    => 'hellow@joystick.com.mx',
-        'avatar'   => 'myavatar.jpg',
-        'tel'      => '11223344',
-        'color'    => '#112233',
-        'user'     => 'bee',
-        'password' => '$2y$10$R18ASm3k90ln7SkPPa7kLObcRCYl7SvIPCPtnKMawDhOT6wPXVxTS'
+        'typeLogin' => 'hotmail',
+        'id'        => 123,
+        'name'      => 'Bee Default',
+        'email'     => 'hellow@joystick.com.mx',
+        'avatar'    => 'myavatar.jpg',
+        'tel'       => '11223344',
+        'color'     => '#112233',
+        'user'      => 'bee',
+        'password'  => '$2y$10$R18ASm3k90ln7SkPPa7kLObcRCYl7SvIPCPtnKMawDhOT6wPXVxTS'
       ];
     // Loggear al usuario
     Auth::login($user['id'], $user);

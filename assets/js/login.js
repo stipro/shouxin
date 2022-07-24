@@ -18,14 +18,23 @@ function loginFireBase_gmail(e) {
     e.preventDefault()
     var provider = new firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider).then(function (result) {
+        console.log(result.additionalUserInfo.profile);
         var user = result.user;
-
+        let provider_id = result.additionalUserInfo.providerId;
+        let email_gmail = result.additionalUserInfo.profile.email;
+        let family_name = result.additionalUserInfo.profile.family_name;
+        let given_name = result.additionalUserInfo.profile.given_name;
+        let picture_user = result.additionalUserInfo.profile.picture;
         /*         console.log(result.user.providerData[0].displayName);
                 console.log(result.user.providerData[0].email);
                 console.log(result.user.providerData[0].photoURL); */
-        let emailGmail = result.user.providerData[0].email;
+
         var button = $(this),
-            email = emailGmail,
+            provider = provider_id,
+            email = email_gmail,
+            family = family_name,
+            given = given_name,
+            picture = picture_user,
             action = 'get',
             hook = 'bee_hook';
 
@@ -37,7 +46,11 @@ function loginFireBase_gmail(e) {
             data: {
                 hook,
                 action,
-                email
+                provider,
+                email,
+                family,
+                given,
+                picture
             },
             beforeSend: function () {
                 toastr.warning('validando colaborador');
@@ -49,7 +62,7 @@ function loginFireBase_gmail(e) {
                 setTimeout(() => {
                     window.location.href = "./home/flash";
                 }, 2000)
-                
+
                 /* setTimeout(() => {
                     window.open('http://localhost/shouxin/home/flash', '_self');
                 }, 2000) */
@@ -96,9 +109,9 @@ function loginFireBase_hotmail(e) {
             if (res.status === 200) {
                 console.log(res);
                 toastr.success(res.msg, 'Bien!');
-                setTimeout(() => {
+                /* setTimeout(() => {
                     window.location.href = "./home/flash";
-                }, 2000)
+                }, 2000) */
             } else {
                 toastr.error(res.msg, '¡Upss!');
             }

@@ -3,21 +3,26 @@ const form = document.getElementById('form-collaborator');
 const lastNameFather_collaborator = document.getElementById('insertIpt-lastNameFather-collaborator');
 const lastNameMother_collaborator = document.getElementById('insertIpt-lastNameMother-collaborator');
 const name_collaborator = document.getElementById('insertIpt-name-collaborator');
-const nationality_collaborator = document.getElementById('insertIpt-nationality-collaborator');
-const statusMarital_collaborator = document.getElementById('insertIpt-statusMarital-collaborator');
+const nationality_collaborator = document.getElementById('insertSlt-nationality-collaborator');
+const statusMarital_collaborator = document.getElementById('insertSlt-statusMarital-collaborator');
 const birthdate_collaborator = document.getElementById('insertIpt-birthdate-collaborator');
+//const documentIdentity_collaborator = document.getElementById('insertSlt-documentIdentity-collaborator');
+const documentNumber_collaborator = document.getElementById('insertIpt-documentNumber-collaborator');
 
 form.addEventListener('submit', e => {
     e.preventDefault();
     checkInputs();
 });
+
 function checkInputs() {
     const lastNameFather_value = lastNameFather_collaborator.value.trim();
     const lastNameMother_value = lastNameMother_collaborator.value.trim();
     const name_value = name_collaborator.value.trim();
-    const nationality_value = $('#insertIpt-nationality-collaborator').find(":selected").val();
-    const statusMarital_value = $('#insertIpt-statusMarital-collaborator').find(":selected").val();
+    const nationality_value = $('#insertSlt-nationality-collaborator').find(":selected").val();
+    const statusMarital_value = $('#insertSlt-statusMarital-collaborator').find(":selected").val();
     const birthdate_value = birthdate_collaborator.value.trim();
+    //const documentIdentity_value = $('#insertIpt-documentIdentity-collaborator').find(":selected").val();
+    const documentNumber_value = documentNumber_collaborator.value.trim();
 
     if (lastNameFather_value === '') {
         setErrorFor(lastNameFather_collaborator, 'No puede dejar el Apellido Paterno en blanco');
@@ -54,6 +59,18 @@ function checkInputs() {
     } else {
         setSuccessFor(birthdate_collaborator);
     }
+
+    /* if (documentIdentity_value === '') {
+        setErrorFor(documentIdentity_collaborator, 'No puede dejar documento de Identificacion sin selecciónar');
+    } else {
+        setSuccessFor(documentIdentity_collaborator);
+    } */
+
+    if (documentNumber_value === '') {
+        setErrorFor(documentNumber_collaborator, 'No puede dejar numero de Identificación en blanco');
+    } else {
+        setSuccessFor(documentNumber_collaborator);
+    }
 }
 
 function setErrorFor(input, message) {
@@ -75,7 +92,7 @@ function setSuccessFor(input) {
 }
 
 function isEmail(email) {
-	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
 }
 
 $('#insertIpt-nationality-collaborator').select2({
@@ -514,6 +531,57 @@ function getData_Home() {
         hook = 'bee_hook',
         action = 'get';
 
+}
+
+// Agregar una Producto
+$('#add_studiesApplied_form').on('submit', add_studiesApplied_form);
+function add_studiesApplied_form(e) {
+  e.preventDefault();
+  var file_data = $('.file').prop('files')[0];
+  let val_brandId = $('#insertIpt-brands-product').find(':selected').data('id');
+  let val_categoryId = $('#insertIpt-categories-product').find(':selected').data('id');
+  var form = $(this),
+    data = new FormData(form.get(0));
+  data.append("brand_id", JSON.stringify(val_brandId));
+  data.append("category_id", JSON.stringify(val_categoryId));
+
+  // Validar selección
+  if (!val_brandId) {
+    toastr.error('Seleccióne Marca', '¡Upss!');
+    return;
+  }
+
+  // Validar selección
+  if (!val_categoryId) {
+    toastr.error('Seleccióne Categoria', '¡Upss!');
+    return;
+  }
+
+  // AJAX
+  $.ajax({
+    url: 'ajax/add_studiesApplied_form',
+    type: 'post',
+    dataType: 'json',
+    contentType: false,
+    processData: false,
+    cache: false,
+    data: data,
+    beforeSend: function () {
+      form.waitMe();
+    }
+  }).done(function (res) {
+    if (res.status === 201) {
+      toastr.success(res.msg, '¡Bien!');
+      /* form.trigger('reset'); */
+      /* get_category(); */
+    } else {
+      toastr.error(res.msg, '¡Upss!');
+    }
+  }).fail(function (err) {
+    toastr.error('Hubo un error en la petición', '¡Upss!');
+  }).always(function () {
+    form.waitMe('hide');
+  })
 }
 
 
