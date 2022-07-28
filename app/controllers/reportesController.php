@@ -4,26 +4,27 @@
  * Plantilla general de controladores
  * Versión 1.0.2
  *
- * Controlador de colaborador
+ * Controlador de reportes
  */
-class colaboradorController extends Controller {
+class reportesController extends Controller {
   function __construct()
   {
     // Validación de sesión de usuario, descomentar si requerida
+    /**
     if (!Auth::validate()) {
       Flasher::new('Debes iniciar sesión primero.', 'danger');
       Redirect::to('login');
     }
-   
+    */
   }
   
   function index()
   {
     $data = 
     [
-      'title' => 'Registro de colaborador',
-      'nameModule' => 'colaborador',
-      'msg'   => 'Bienvenido al controlador de "colaborador", se ha creado con éxito si ves este mensaje.',
+      'title' => 'Reportes',
+      'nameModule' => 'reportes',
+      'msg'   => 'Bienvenido al controlador de "reportes", se ha creado con éxito si ves este mensaje.',
       'padding' => '0px'
     ];
     

@@ -25,10 +25,6 @@ function loginFireBase_gmail(e) {
         let family_name = result.additionalUserInfo.profile.family_name;
         let given_name = result.additionalUserInfo.profile.given_name;
         let picture_user = result.additionalUserInfo.profile.picture;
-        /*         console.log(result.user.providerData[0].displayName);
-                console.log(result.user.providerData[0].email);
-                console.log(result.user.providerData[0].photoURL); */
-
         var button = $(this),
             provider = provider_id,
             email = email_gmail,
@@ -62,7 +58,6 @@ function loginFireBase_gmail(e) {
                 setTimeout(() => {
                     window.location.href = "./home/flash";
                 }, 2000)
-
                 /* setTimeout(() => {
                     window.open('http://localhost/shouxin/home/flash', '_self');
                 }, 2000) */

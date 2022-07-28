@@ -2,14 +2,14 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- Bootstrap necessarios -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
 
 <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js"></script> -->
 
-<!--Aleta-->
+<!-- sweetAlert -->
 <script src="<?php echo JS . 'sweetalert.min.js'; ?>"></script>
 
 <!-- toastr js -->
@@ -28,12 +28,15 @@
 <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+<?php echo $d->nameModule?>
 <?php if ($d->title == 'Login') : ?>
     <script src="<?php echo JS . 'login.js'; ?>"></script>
-<?php elseif ($d->title == 'Flash') : ?>
+<?php elseif ($d->nameModule == 'flash') : ?>
     <script src="<?php echo JS . 'logout.js'; ?>"></script>
-<?php elseif ($d->nameModule == 'colaborador') : ?>
-    <script src="<?php echo JS . 'colaborador.js'; ?>"></script>
+<?php elseif ($d->nameModule == 'colaboradores') : ?>
+    <script src="<?php echo JS . 'colaboradores.js'; ?>"></script>
+<?php elseif ($d->nameModule == 'formLegal-colaborador') : ?>
+    <script src="<?php echo JS . 'formlegal.js'; ?>"></script>
 <?php else : ?>
 <?php endif; ?>
 

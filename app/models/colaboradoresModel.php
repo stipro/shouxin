@@ -35,7 +35,7 @@ class colaboradoresModel extends Model {
   static function colaborador_permitido($correo)
   {
     // Todos los registros
-    $sql = 'SELECT * FROM colaboradores_permitido WHERE correo_colaboradorPermitido = :correo ORDER BY id_colaboradorPermitido DESC';
+    $sql = 'SELECT cl.id_colaborador, cl.tipoColaborador_colaborador, cl.terminos_colaborador, cl.dateCreation_colaborador, cl.dateUpdate_colaborador FROM colaboradores cl WHERE correo_colaborador = :correo ORDER BY id_colaborador DESC';
     return ($rows = parent::query($sql, ['correo' => $correo])) ? $rows[0] : [];
   }
 }

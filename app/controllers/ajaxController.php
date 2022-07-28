@@ -167,39 +167,58 @@ class ajaxController extends Controller
   function get_colaboradorValido()
   {
     try {
+      /* debug(productosModel::all_paginated());
+      die; */
+
       $proveedor = $_POST['provider'];
       $correo = $_POST['email'];
       $apellidos = $_POST['family'];
       $nombre = $_POST['given'];
       $imagen = $_POST['picture'];
-      $rptValidador_value = "";
       $partCorreo = explode("@", $correo);
-      /* debug(productosModel::all_paginated());
-      die; */
+
       $typeLogin = $partCorreo[1];
-      $user =
-        [
-          'typeLogin' =>  $typeLogin,
-          'id'        =>  123,
-          'name'      =>  $nombre,
-          'email'     =>  $correo,
-          'avatar'    =>  $imagen,
-          'tel'       => '11223344',
-          'color'     => '#112233',
-          'user'      => 'bee',
-          'password'  => '$2y$10$R18ASm3k90ln7SkPPa7kLObcRCYl7SvIPCPtnKMawDhOT6wPXVxTS'
-        ];
+      $rptValidador_value = colaboradoresModel::colaborador_permitido($correo);
+      $id_colaborador = $rptValidador_value['id_colaborador'];
+      $tipoColaborador_colaborador = $rptValidador_value['tipoColaborador_colaborador'];
+      $terminos_colaborador = $rptValidador_value['terminos_colaborador'];
+      $dateCreation_colaborador = $rptValidador_value['dateCreation_colaborador'];
+      $dateUpdate_colaborador = $rptValidador_value['dateUpdate_colaborador'];
 
-
-      
-      /*  if (!$colaborador = colaboradoresModel::colaborador_permitido($correo)) {
-        throw new PDOException('Correo no permitido.');
-      }  */
-      if (!$partCorreo[1] == 'shouxin.com.pe') {
-        if (!$rptValidador_value = colaboradoresModel::colaborador_permitido($correo)) {
+      if (!$dateCreation_colaborador == $dateUpdate_colaborador) {
+        json_output(json_build(400, null, 'Ya esta registrado, vas a modificar'));
+      }
+      if (!$typeLogin == 'shouxin.com.pe') {
+        $data =
+          [
+            'correo_colaborador'        => $correo,
+            'dateCreation_colaborador'  => now(),
+            'dateUpdate_colaborador'    => now()
+          ];
+        if (!$id = colaboradoresModel::add(colaboradoresModel::$t1, $data)) {
+          json_output(json_build(400, null, 'Hubo error al guardar el registro'));
+        }
+        if (!$rptValidador_value) {
           throw new PDOException('Correo no permitido.');
         }
       }
+      $user =
+        [
+          'provider'           =>  $proveedor,
+          'typeLogin'          =>  $typeLogin,
+          'id'                 =>  $id_colaborador,
+          'name'               =>  $nombre,
+          'surname'            =>  $apellidos,
+          'email'              =>  $correo,
+          'avatar'             =>  $imagen,
+          'typecollaborator'   =>  $tipoColaborador_colaborador,
+          'terms'              =>  $terminos_colaborador,
+          'tel'                => '11223344',
+          'color'              => '#112233',
+          'user'               => 'bee',
+          'password'           => '$2y$10$R18ASm3k90ln7SkPPa7kLObcRCYl7SvIPCPtnKMawDhOT6wPXVxTS'
+        ];
+
       // Loggear al usuario
       Auth::login($user['id'], $user);
       json_output(json_build(200, $rptValidador_value, 'Correo Valido, Bienvenido, Espereme un momento le redireccionaremos, Gracias'));
@@ -385,35 +404,38 @@ class ajaxController extends Controller
   function add_studiesApplied_form()
   {
     try {
-      $nombre = clean($_POST['name_product']);
-      $codigoBarra = clean($_POST['barCode_product']);
-      $codigo = clean($_POST['code_product']);
-      $marca_id = clean($_POST['brand_id']);
-      $categoria_id = clean($_POST['category_id']);
-
-      if (!$nombre) {
+      $centroEstudio = clean($_POST['centerEducational']);
+      $nivelEstudio = clean($_POST['levelEducational']);
+      $cursandoEstudio = clean($_POST['currentlyStudying']);
+      $certificadoEstudio_name = clean($_POST['certificateEducational_name']);
+      $desdeMes = clean($_POST['sinceMonth']);
+      $desdeAnio = clean($_POST['sinceYear']);
+      $hastaMes = clean($_POST['untilMonth']);
+      $hastaAnio = clean($_POST['untilYear']);
+      move_uploaded_file($_FILES['certificateEducational_data']['tmp_name'], './app/upload/'. $_FILES['certificateEducational_data']['name']);
+      /* if (!$nombre) {
         json_output(json_build(400, null, 'Ingrese Nombre'));
       }
       if (!$marca_id) {
         json_output(json_build(400, null, 'Seleccione una Marca'));
-      }
-      $data =
+      } */
+
+      /* $data =
         [
-          'centroEducativo_estudioRealizado'              => $nombre,
-          'nivelEstudio_estudioRealizado'                 => $codigoBarra,
-          'cursandoActualmente_estudioRealizado'          => $codigo,
-          'nombreArchivoCertificado_estudiosRealizados'   => $marca_id,
-          'categoria_id'                                  => $categoria_id,
+          'centroEducativo_estudioRealizado'              => $centroEstudio,
+          'nivelEstudio_estudioRealizado'                 => $nivelEstudio,
+          'cursandoActualmente_estudioRealizado'          => $cursandoEstudio,
+          'nombreArchivoCertificado_estudiosRealizados'   => $certificadoEstudio,
           'inicio_estudiosrealizados'                     => now(),
           'final_estudiosrealizados'                      => now()
         ];
       if (!$id = estudiosrealizadosModel::add(estudiosrealizadosModel::$t1, $data)) {
         json_output(json_build(400, null, 'Hubo error al guardar el registro'));
-      }
+      } */
 
       // se guardó con éxito
-      $productos = estudiosrealizadosModel::by_id($id);
-      json_output(json_build(201, $productos, 'Estudio Realizado agregado con exito. '));
+      //$productos = estudiosrealizadosModel::by_id($id);
+      //json_output(json_build(201, $productos, 'Estudio Realizado agregado con exito. '));
     } catch (Exception $e) {
       json_output(json_build(400, null, $e->getMessage()));
     } catch (PDOException $e) {

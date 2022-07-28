@@ -12,21 +12,30 @@
                         <div class="col-12 col-sm-6 mb-3">
                             <div class="form-group">
                                 <label class="control-label form-control-sm form-label" for="centerEducational-studiesApplied">Centro educativo<span class="text-danger">*</span></label>
-                                <input class="form-control form-control-sm" id="centerEducational-studiesApplied" name="centerEducational-studiesApplied" type="text" placeholder="Centro educativo" value="">
+                                <div class="input-group input-group-sm">
+                                    <input class="form-control form-control-sm" id="centerEducational-studiesApplied" name="centerEducational-studiesApplied" type="text" placeholder="Centro educativo" value="">
+                                    <div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 mb-3">
                             <div class="form-group">
                                 <label class="control-label form-control-sm form-label">Nivel de estudios<span class="text-danger">*</span></label>
-                                <select class="form-select form-select-sm" id="levelEducational-studiesApplied" data-placeholder="Seleccióne">
-                                    <option value=""></option>
-                                    <option value="Educación Primaria">Educación Primaria</option>
-                                    <option value="Educación Secundaria">Educación Secundaria</option>
-                                    <option value="Técnico">Técnico</option>
-                                    <option value="Universitario">Universitario</option>
-                                    <option value="Maestría">Maestría</option>
-                                    <option value="Doctorado">Doctorado</option>
-                                </select>
+                                <div class="input-group input-group-sm">
+                                    <select class="form-select form-select-sm" id="levelEducational-studiesApplied" data-placeholder="Seleccióne">
+                                        <option value=""></option>
+                                        <option value="Educación Primaria">Educación Primaria</option>
+                                        <option value="Educación Secundaria">Educación Secundaria</option>
+                                        <option value="Técnico">Técnico</option>
+                                        <option value="Universitario">Universitario</option>
+                                        <option value="Maestría">Maestría</option>
+                                        <option value="Doctorado">Doctorado</option>
+                                    </select>
+                                    <div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                         <div class="col-12 col-sm-6 mb-3">
@@ -44,7 +53,9 @@
                             <div class="form-group">
                                 <label class="control-label form-control-sm form-label" for="certificate-studiesApplied">Certificación<span class="text-danger">*</span></label>
                                 <div class="input-group input-group-sm">
-                                    <input class="form-control form-control-sm" id="certificate-studiesApplied" name="certificate" type="file" onchange="uploadFile()"><br>
+                                    <input class="form-control form-control-sm" id="certificate-studiesApplied" type="file"><br>
+                                    <div>
+                                    </div>
                                 </div>
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
@@ -216,7 +227,8 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
-                    <button class="btn btn-primary" id="mbtnCreate-experienceWork-insert" type="button">Guardar</button>
+                    <?php echo insert_inputs(); ?>
+                    <button class="btn btn-primary" id="mbtnCreate-studiesApplied-insert" type="submit">Guardar</button>
                 </div>
             </div>
         </form>

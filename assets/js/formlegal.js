@@ -13,6 +13,16 @@ const cont_timeLine = document.getElementById('cont-timeLine');
 const template_studiesApplied = document.getElementById('template-studiesApplied').content
 const fragment = document.createDocumentFragment()
 
+// Estudios Realizado
+const centerEducational_studiesApplied = document.getElementById('centerEducational-studiesApplied');
+const levelEducational_studiesApplied = document.getElementById('levelEducational-studiesApplied');
+const currentlyStudying_studiesApplied = document.getElementById('currentlyStudying-studiesApplied');
+const certificateEducational_studiesApplied = document.getElementById('certificate-studiesApplied');
+const sinceMonth_studiesApplied = document.getElementById('sinceMonth-studiesApplied');
+const sinceYear_studiesApplied = document.getElementById('sinceYear-studiesApplied');
+const untilMonth_studiesApplied = document.getElementById('untilMonth-studiesApplied');
+const untilYear_studiesApplied = document.getElementById('untilYear-studiesApplied');
+
 
 form.addEventListener('submit', e => {
     e.preventDefault();
@@ -181,32 +191,6 @@ $("#togBtn").on('change', function () {
         switchStatus = $(this).is(':checked');
         console.log(switchStatus);// To verify
     }
-});
-
-$(document).on('click', '#mbtnCreate-experienceWork-insert', function (e) {
-    const centerEducational_studiesApplied = document.getElementById('centerEducational-studiesApplied');
-    const levelEducational_studiesApplied = document.getElementById('levelEducational-studiesApplied');
-    const currentlyStudying = document.getElementById('currentlyStudying-studiesApplied');
-    //const levelEducational_studiesApplied = document.getElementById('levelEducational-studiesApplied');
-    const sinceMonth_studiesApplied = document.getElementById('sinceMonth-studiesApplied');
-    const sinceYear_studiesApplied = document.getElementById('sinceYear-studiesApplied');
-    const untilMonth_studiesApplied = document.getElementById('untilMonth-studiesApplied');
-    const untilYear_studiesApplied = document.getElementById('untilYear-studiesApplied');
-
-    let centerEducational_value = centerEducational_studiesApplied.value.trim();
-    let lastNameFather_value = levelEducational_studiesApplied.value.trim();
-
-    if (centerEducational_value === '') {
-    } else {
-        console.log(template_studiesApplied);
-        template_studiesApplied.querySelector('.info h5').textContent = centerEducational_value;
-        template_studiesApplied.querySelector('.info centerEducational').textContent = centerEducational_value;
-        const clone = template_studiesApplied.cloneNode(true);
-        fragment.appendChild(clone);
-        cont_timeLine.appendChild(fragment);
-    }
-
-
 });
 
 getData_Birth();
@@ -576,71 +560,108 @@ function getData_Home() {
 
 }
 
-// Agregar una Producto
-$('#add_studiesApplied_form').on('submit', add_studiesApplied_form);
+// Agregar una Estudio realizado
+$("#add_studiesApplied_form").on("submit", add_studiesApplied_form);
 function add_studiesApplied_form(e) {
     e.preventDefault();
-    var file_data = $('.file').prop('files')[0];
-    let val_brandId = $('#insertIpt-brands-product').find(':selected').data('id');
-    let val_categoryId = $('#insertIpt-categories-product').find(':selected').data('id');
-    var form = $(this),
-        data = new FormData(form.get(0));
-    data.append("brand_id", JSON.stringify(val_brandId));
-    data.append("category_id", JSON.stringify(val_categoryId));
+    let amountErrors = 0;
+    let centerEducational_value = centerEducational_studiesApplied.value.trim();
+    let levelEducational_value = levelEducational_studiesApplied.value.trim();
 
-    // Validar selección
-    if (!val_brandId) {
-        toastr.error('Seleccióne Marca', '¡Upss!');
-        return;
-    }
+    let certificateEducational_value = certificateEducational_studiesApplied.value;
+    let certificateEducational_name;
+    let certificateEducational_data;
 
-    // Validar selección
-    if (!val_categoryId) {
-        toastr.error('Seleccióne Categoria', '¡Upss!');
-        return;
-    }
+    let sinceMonth_value = sinceMonth_studiesApplied.value;
+    let sinceYear_value = sinceYear_studiesApplied.value;
+    let untilMonth_value = untilMonth_studiesApplied.value;
+    let untilYear_value = untilYear_studiesApplied.value;
 
-    // AJAX
-    $.ajax({
-        url: 'ajax/add_studiesApplied_form',
-        type: 'post',
-        dataType: 'json',
-        contentType: false,
-        processData: false,
-        cache: false,
-        data: data,
-        beforeSend: function () {
-            form.waitMe();
-        }
-    }).done(function (res) {
-        if (res.status === 201) {
-            toastr.success(res.msg, '¡Bien!');
-            /* form.trigger('reset'); */
-            /* get_category(); */
-        } else {
-            toastr.error(res.msg, '¡Upss!');
-        }
-    }).fail(function (err) {
-        toastr.error('Hubo un error en la petición', '¡Upss!');
-    }).always(function () {
-        form.waitMe('hide');
-    })
-}
-
-
-/* .done(function (res) {
-    if (res.status === 200) {
-        toastr.success(res.msg, 'Bien!');
-         var combodepartamentos = "<option value=''>Seleccionar</option>";
-        departamentos = res.data.listDepartamento;
-        departamentos.forEach(element => {
-            combodepartamentos += '<option value="' + element['departamento'] + '" data-codigo="' + element['coDepartamento'] + '">' + element['departamento'] + '</option>';
-        });
+    //var file_data = $('.file').prop('files')[0];
+    // Validando Formulario
+    if (centerEducational_value === '') {
+        setErrorFor(centerEducational_studiesApplied, 'No puede dejar Centro educativo en blanco');
+        amountErrors++;
     } else {
-        toastr.error(res.msg, '¡Upss!');
+        setSuccessFor(centerEducational_studiesApplied);
     }
-}).fail(function (err) {
-    toastr.error('Hubo un error en la petición', '¡Upss!');
-}).always(function () {
-    wrapper.waitMe('hide');
-}) */
+
+    if (levelEducational_value === '') {
+        setErrorFor(levelEducational_studiesApplied, 'Seleccióne Nivel de estudios');
+        amountErrors++;
+    } else {
+        setSuccessFor(levelEducational_studiesApplied);
+    }
+
+    if (!$('#currentlyStudying-studiesApplied').is(':checked')) {
+        currentlyStudying_value = 0;
+        if (certificateEducational_value === '') {
+            setErrorFor(certificateEducational_studiesApplied, 'Adjunte Certificado');
+            amountErrors++;
+        } else {
+            setSuccessFor(certificateEducational_studiesApplied);
+            certificateEducational_name = certificateEducational_studiesApplied.files[0].name;
+            console.log(certificateEducational_studiesApplied);
+            // Obtener extensión del archivo
+            extensionCertificate = certificateEducational_name.substring(certificateEducational_name.lastIndexOf('.'), certificateEducational_name.length);
+            certificateEducational_data = $('#certificate-studiesApplied').prop('files')[0];
+        }
+    }
+    else {
+        currentlyStudying_value = 1;
+    }
+    // Validando Formulario
+    if (amountErrors > 0) {
+        toastr.error('Solucióme los errores', '¡Upss!');
+        return;
+    }
+    else {
+        var form = $(this),
+            data = new FormData(form.get(0));
+        data.append("centerEducational", JSON.stringify(centerEducational_value));
+        data.append("levelEducational", JSON.stringify(levelEducational_value));
+        data.append("currentlyStudying", JSON.stringify(currentlyStudying_value));
+        data.append("certificateEducational_name", JSON.stringify(certificateEducational_name));
+        data.append("certificateEducational_type", JSON.stringify(extensionCertificate));
+        data.append("certificateEducational_data", certificateEducational_data);
+        data.append("sinceMonth", JSON.stringify(sinceMonth_value));
+        data.append("sinceYear", JSON.stringify(sinceYear_value));
+        data.append("untilMonth", JSON.stringify(untilMonth_value));
+        data.append("untilYear", JSON.stringify(untilYear_value));
+        // AJAX
+        $.ajax({
+            url: 'ajax/add_studiesApplied_form',
+            type: 'post',
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            cache: false,
+            data: data,
+            beforeSend: function () {
+                form.waitMe();
+            }
+        }).done(function (res) {
+            if (res.status === 201) {
+                toastr.success(res.msg, '¡Bien!');
+                // get_studiesApplied();
+            } else {
+                toastr.error(res.msg, '¡Upss!');
+            }
+        }).fail(function (err) {
+            toastr.error('Hubo un error en la petición', '¡Upss!');
+        }).always(function () {
+            form.waitMe('hide');
+        })
+    }
+    /* if (centerEducational_value === '') {
+    } else {
+        console.log(template_studiesApplied);
+        template_studiesApplied.querySelector('.info h5').textContent = centerEducational_value;
+        template_studiesApplied.querySelector('.info centerEducational').textContent = centerEducational_value;
+        const clone = template_studiesApplied.cloneNode(true);
+        fragment.appendChild(clone);
+        cont_timeLine.appendChild(fragment);
+    }
+ */
+
+}

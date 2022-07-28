@@ -13,13 +13,15 @@ class homeController extends Controller
 
   function index()
   {
+    /* debug(Auth::validate());
+    die; */
     $data =
       [
         'title' => 'Home',
         'nameModule' => 'home',
         /* 'bg'    => 'dark', */
         'padding' => '0px'
-        
+
       ];
     View::render('flash', $data);
     /* View::render('bee', $data); */
@@ -93,8 +95,7 @@ class homeController extends Controller
       Flasher::new('Debes iniciar sesión primero.', 'danger');
       Redirect::to('login');
     }
-
-    View::render('flash', ['title' => 'Flash', 'user' => User::profile(), 'padding' => '0px']);
+    View::render('flash', ['title' => 'Flash', 'user' => User::profile(), 'nameModule' => 'flash', 'padding' => '0px']);
   }
 
   function gastos()

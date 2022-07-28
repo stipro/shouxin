@@ -75,12 +75,40 @@
         </div>
         <div class="card-footer clearfix">
           <a class="btn btn-danger float-start btn-logout-form" id="btn-acceptNot">No acepto</a>
-          <a href="colaborador" class="btn btn-success float-end" id="btn-acceptYes">Acepto</a>
-          <!-- <a href="logout" class="btn btn-danger float-end confirmar">Cerrar sesión</a> -->
+          <a href="form_legal/colaborador" class="btn btn-success float-end" id="btn-acceptYes">Acepto</a>
+          <button class="btn btn-danger float-end" id="test">sweetalert</button>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 <?php require_once INCLUDES . 'inc_footer.php'; ?>
+<script>
+  // Verifica si es administrador
+  if ('<?php echo ($_SESSION['user_session_shouxin']['user']['typecollaborator']); ?>' == 'Administrador') {
+    test();
+  }
+  function test(e) {
+    swal("Alerta!", "Se verifico que eres Administrador!.\
+    desea ir al panel?", {
+      //title: "Alerta!",
+      //text: "Se verifico que tienes otros previlegios!", 
+      icon: "warning",
+      buttons: {
+        cancel: "No",
+        catch: {
+          text: "ir Administrador!",
+          value: "catch",
+        },
+      },
+      dangerMode: true,
+    }).then((value) => {
+      switch (value) {
+        case "catch":
+          //swal("Gotcha!", 'Pikachu was caught!' + '<?php echo ($_SESSION['user_session_shouxin']['user']['typecollaborator']); ?>', "success");
+          window.location.href = "./colaboradores/";
+          break;
+      }
+    });
+  }
+</script>

@@ -39,3 +39,29 @@ function btn_acceptYes_form(e) {
 
     })
 }
+
+$('body').on('click', '#test', test);
+function test(e) {
+    swal("Alerta!", "Se verifico que eres Administrador!.\
+    desea ir al panel?",
+        {
+            //title: "Alerta!",
+            //text: "Se verifico que tienes otros previlegios!", 
+            icon: "warning",
+            buttons: {
+                cancel: "No",
+                catch: {
+                    text: "ir Administrador!",
+                    value: "catch",
+                },
+            },
+            dangerMode: true,
+        }).then((value) => {
+            switch (value) {
+                case "catch":
+                    window.location.href = "./colaboradores/";
+                    //swal("Gotcha!", "Pikachu was caught!", "success");
+                    break;
+            }
+        });
+}

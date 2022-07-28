@@ -541,12 +541,8 @@
               </section>
               <!-- Section: Timeline -->
             </div>
-
-
             <li class="text-primary">BIENES MUEBLES DEL DECLARANTE Y SOCIEDAD DE GANANCIALES (Perú)</li>
             <li class="text-primary">AHORROS, DEPÓSITOS, COLOCACIONES, INVERSIONES EN EL SISTEMA FINANCIERO DEL DECLARANTE (incluir sociedad de gananciales)</li>
-
-
           </div>
           <div class="row border m-2">
             <div class="text-primary mt-2">
@@ -564,7 +560,7 @@
     </div>
   </form>
 </div>
-<?php require_once VIEWS . 'colaborador/modals/create_experienceWork.php'; ?>
-<?php require_once VIEWS . 'colaborador/modals/create_studiesApplied.php'; ?>
-<?php require_once VIEWS . 'colaborador/modals/create_trainings.php'; ?>
+<?php require_once VIEWS . 'form_legal/modals/create_experienceWork.php'; ?>
+<?php require_once VIEWS . 'form_legal/modals/create_studiesApplied.php'; ?>
+<?php require_once VIEWS . 'form_legal/modals/create_trainings.php'; ?>
 <?php require_once INCLUDES . 'inc_footer.php'; ?>
