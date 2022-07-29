@@ -95,6 +95,11 @@ class homeController extends Controller
       Flasher::new('Debes iniciar sesión primero.', 'danger');
       Redirect::to('login');
     }
+    
+    /* if ($_SESSION['user_session_shouxin']['user']['terms']) {
+      Flasher::new('Aceptaste terminos y condiciones.', 'success');
+      Redirect::to('form_legal/colaborador');
+    } */
     View::render('flash', ['title' => 'Flash', 'user' => User::profile(), 'nameModule' => 'flash', 'padding' => '0px']);
   }
 

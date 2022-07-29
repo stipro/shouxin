@@ -31,6 +31,7 @@ function loginFireBase_gmail(e) {
             family = family_name,
             given = given_name,
             picture = picture_user,
+            logout = 'https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost/shouxin/login';
             action = 'get',
             hook = 'bee_hook';
 
@@ -46,14 +47,14 @@ function loginFireBase_gmail(e) {
                 email,
                 family,
                 given,
-                picture
+                picture,
+                logout
             },
             beforeSend: function () {
                 toastr.warning('validando colaborador');
             }
         }).done(function (res) {
             if (res.status === 200) {
-                console.log(res);
                 toastr.success(res.msg, 'Bien!');
                 setTimeout(() => {
                     window.location.href = "./home/flash";
@@ -61,7 +62,12 @@ function loginFireBase_gmail(e) {
                 /* setTimeout(() => {
                     window.open('http://localhost/shouxin/home/flash', '_self');
                 }, 2000) */
-            } else {
+            }
+            else if(res.status === 401){
+                toastr.error(res.msg, '¡Upss!');
+                window.open(res.data, "Diseño Web", "width=300, height=200");
+            }
+            else {
                 toastr.error(res.msg, '¡Upss!');
             }
         }).fail(function (err) {
@@ -78,12 +84,10 @@ function loginFireBase_hotmail(e) {
     e.preventDefault()
     var provider = new firebase.auth.OAuthProvider('microsoft.com');
     auth.signInWithPopup(provider).then(function (result) {
-        /* console.log(result.additionalUserInfo.profile.displayName);
-        console.log(result.additionalUserInfo.profile.userPrincipalName);
-        console.log(result.additionalUserInfo.profile.photoURL); */
         let emailGmail = result.additionalUserInfo.profile.userPrincipalName;
         var button = $(this),
             email = emailGmail,
+            logout = 'https://login.microsoftonline.com/3b5a69e5-d9fb-443e-b5e7-926401d3a4e0/oauth2/logout?post_logout_redirect_uri=http://localhost/shouxin/login/';
             action = 'get',
             hook = 'bee_hook';
 
@@ -95,7 +99,8 @@ function loginFireBase_hotmail(e) {
             data: {
                 hook,
                 action,
-                email
+                email,
+                logout
             },
             beforeSend: function () {
                 toastr.warning('validando colaborador');
@@ -104,9 +109,9 @@ function loginFireBase_hotmail(e) {
             if (res.status === 200) {
                 console.log(res);
                 toastr.success(res.msg, 'Bien!');
-                /* setTimeout(() => {
+                setTimeout(() => {
                     window.location.href = "./home/flash";
-                }, 2000) */
+                }, 2000)
             } else {
                 toastr.error(res.msg, '¡Upss!');
             }

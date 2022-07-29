@@ -1,13 +1,16 @@
-const ipt_colaborador_dni_api = document.getElementById('insert-ipt-colaboradorDni');
 const form = document.getElementById('form-collaborator');
+const documentIdentity_collaborator = document.getElementById('insertSlt-documentIdentity-collaborator');
+const documentIdentityArchive_collaborator = document.getElementById('documentIdentityArchive-collaborator');
+
+const documentNumber_collaborator = document.getElementById('insertIpt-documentNumber-collaborator');
+const btnSearch_colaboradorDni = document.getElementById('btnSearch-collaboratorDni');
+
 const lastNameFather_collaborator = document.getElementById('insertIpt-lastNameFather-collaborator');
 const lastNameMother_collaborator = document.getElementById('insertIpt-lastNameMother-collaborator');
 const name_collaborator = document.getElementById('insertIpt-name-collaborator');
 const nationality_collaborator = document.getElementById('insertSlt-nationality-collaborator');
 const statusMarital_collaborator = document.getElementById('insertSlt-statusMarital-collaborator');
 const birthdate_collaborator = document.getElementById('insertIpt-birthdate-collaborator');
-//const documentIdentity_collaborator = document.getElementById('insertSlt-documentIdentity-collaborator');
-const documentNumber_collaborator = document.getElementById('insertIpt-documentNumber-collaborator');
 
 const cont_timeLine = document.getElementById('cont-timeLine');
 const template_studiesApplied = document.getElementById('template-studiesApplied').content
@@ -23,6 +26,73 @@ const sinceYear_studiesApplied = document.getElementById('sinceYear-studiesAppli
 const untilMonth_studiesApplied = document.getElementById('untilMonth-studiesApplied');
 const untilYear_studiesApplied = document.getElementById('untilYear-studiesApplied');
 
+/* Se agrega el evento al elemento */
+btnSearch_colaboradorDni.addEventListener("click", searchInfo_colaboradorDni);
+
+function searchInfo_colaboradorDni(e) {
+    let documentNumber_value = documentNumber_collaborator.value;
+    if (documentNumber_value.length == 0) {
+        setErrorFor(documentNumber_collaborator, 'No puede dejar numero de Identificación en blanco');
+        return;
+    } else if (documentNumber_value.length < 8) {
+        setErrorFor(documentNumber_collaborator, 'la cantidad de digitos debe ser mayor a 7');
+        return;
+    }
+    else {
+        setSuccessFor(documentNumber_collaborator);
+    }
+    e.preventDefault();
+    var button = $(this),
+        action = 'get',
+        hook = 'bee_hook',
+        documentNumber = documentNumber_value;
+    // Cargar la información del registro de la lección
+    $.ajax({
+        url: 'ajax/getInfo_colaborador',
+        type: 'POST',
+        dataType: 'json',
+        cache: false,
+        data: {
+            hook, action, documentNumber
+        },
+        beforeSend: function () {
+            $('.view_presentation_form').waitMe();
+            toastr.info('Obteniendo Información!', '¡Bien!');
+        }
+    }).done(function (res) {
+        if (res.status === 200) {
+            toastr.success('Información Obtenido!', '¡Bien!');
+            lastNameFather_collaborator.value = res.data.data.apellido_paterno;
+            lastNameMother_collaborator.value = res.data.data.apellido_materno;
+            name_collaborator.value = res.data.data.nombres;
+
+            if (res.data.data.apellido_paterno === '') {
+                setErrorFor(lastNameFather_collaborator, 'No puede dejar el Apellido Paterno en blanco');
+            } else {
+                setSuccessFor(lastNameFather_collaborator);
+            }
+
+            if (res.data.data.apellido_materno === '') {
+                setErrorFor(lastNameMother_collaborator, 'No puede dejar el Apellido Paterno en blanco');
+            } else {
+                setSuccessFor(lastNameMother_collaborator);
+            }
+
+            if (res.data.data.nombres === '') {
+                setErrorFor(name_collaborator, 'No puede dejar el Nombre en blanco');
+            } else {
+                setSuccessFor(name_collaborator);
+            }
+
+
+        } else {
+            toastr.error(res.msg, '¡Upss!');
+        }
+    }).fail(function (err) {
+        toastr.error('Hubo un error en la petición', '¡Upss!');
+    }).always(function () {
+    })
+}
 
 form.addEventListener('submit', e => {
     e.preventDefault();
@@ -30,12 +100,13 @@ form.addEventListener('submit', e => {
 });
 
 function checkInputs() {
-    const lastNameFather_value = lastNameFather_collaborator.value.trim();
-    const lastNameMother_value = lastNameMother_collaborator.value.trim();
-    const name_value = name_collaborator.value.trim();
-    const nationality_value = $('#insertSlt-nationality-collaborator').find(":selected").val();
-    const statusMarital_value = $('#insertSlt-statusMarital-collaborator').find(":selected").val();
-    const birthdate_value = birthdate_collaborator.value.trim();
+    let lastNameFather_value = lastNameFather_collaborator.value.trim();
+    let lastNameMother_value = lastNameMother_collaborator.value.trim();
+    let name_value = name_collaborator.value.trim();
+    let nationality_value = $('#insertSlt-nationality-collaborator').find(":selected").val();
+    let statusMarital_value = $('#insertSlt-statusMarital-collaborator').find(":selected").val();
+    let birthdate_value = birthdate_collaborator.value.trim();
+    let documentIdentityArchive_value = $('#documentIdentityArchive-collaborator').prop('files')[0];
     //const documentIdentity_value = $('#insertIpt-documentIdentity-collaborator').find(":selected").val();
     const documentNumber_value = documentNumber_collaborator.value.trim();
 
@@ -75,11 +146,11 @@ function checkInputs() {
         setSuccessFor(birthdate_collaborator);
     }
 
-    /* if (documentIdentity_value === '') {
-        setErrorFor(documentIdentity_collaborator, 'No puede dejar documento de Identificacion sin selecciónar');
+    if (!documentIdentityArchive_value) {
+        setErrorFor(documentIdentityArchive_collaborator, 'Adjunte su documento de identificación, por favor');
     } else {
-        setSuccessFor(documentIdentity_collaborator);
-    } */
+        setSuccessFor(documentIdentityArchive_collaborator);
+    }
 
     if (documentNumber_value === '') {
         setErrorFor(documentNumber_collaborator, 'No puede dejar numero de Identificación en blanco');
@@ -150,21 +221,6 @@ $('#insertSlt-districtHome-collaborator').select2({
     placeholder: $(this).data('placeholder'),
 });
 
-var settings = {
-    "url": "http://ms.digemid.minsa.gob.pe:8480/msopmcovid/parametro/departamentos",
-    "Accept": "application/json",
-    "method": "POST",
-    "timeout": 0,
-    "headers": {
-        "Content-Type": "application/json"
-    },
-    "data": JSON.stringify({
-        "filtro": {
-            "codigo": null,
-            "codigoDos": null
-        }
-    }),
-};
 $(document).on('click', '#aAdd-studiesApplied', function (e) {
     e.preventDefault();
     $('#mdAdd-studiesApplied').modal('show');
@@ -174,8 +230,6 @@ $(document).on('click', '#aAdd-experienceWork', function (e) {
     e.preventDefault();
     $('#mdAdd-experienceWork').modal('show');
 });
-
-
 
 $(document).on('click', '#aAdd-trainings', function (e) {
     e.preventDefault();

@@ -164,31 +164,27 @@ class ajaxController extends Controller
     // se guardó con éxito
     json_output(json_build(200, null, 'Opciones actualizadas con éxito'));
   }
+
   function get_colaboradorValido()
   {
     try {
       /* debug(productosModel::all_paginated());
       die; */
-
+      // declaracion de variables y almacenamiento
       $proveedor = $_POST['provider'];
       $correo = $_POST['email'];
       $apellidos = $_POST['family'];
       $nombre = $_POST['given'];
       $imagen = $_POST['picture'];
+      $logout = $_POST['logout'];
       $partCorreo = explode("@", $correo);
-
       $typeLogin = $partCorreo[1];
-      $rptValidador_value = colaboradoresModel::colaborador_permitido($correo);
-      $id_colaborador = $rptValidador_value['id_colaborador'];
-      $tipoColaborador_colaborador = $rptValidador_value['tipoColaborador_colaborador'];
-      $terminos_colaborador = $rptValidador_value['terminos_colaborador'];
-      $dateCreation_colaborador = $rptValidador_value['dateCreation_colaborador'];
-      $dateUpdate_colaborador = $rptValidador_value['dateUpdate_colaborador'];
-
-      if (!$dateCreation_colaborador == $dateUpdate_colaborador) {
-        json_output(json_build(400, null, 'Ya esta registrado, vas a modificar'));
-      }
-      if (!$typeLogin == 'shouxin.com.pe') {
+      // Validamos correos registrados
+      if (!$rptValidador_value = colaboradoresModel::colaborador_permitido($correo)) {
+        // Validamos dominio shouxin
+        if ($typeLogin != 'shouxin.com.pe') {
+          throw new Exception('No esta registrado, y no tiene el dominio permitido.', 401);
+        }
         $data =
           [
             'correo_colaborador'        => $correo,
@@ -196,12 +192,15 @@ class ajaxController extends Controller
             'dateUpdate_colaborador'    => now()
           ];
         if (!$id = colaboradoresModel::add(colaboradoresModel::$t1, $data)) {
-          json_output(json_build(400, null, 'Hubo error al guardar el registro'));
+          throw new PDOException('Hubo error al guardar el registro.');
         }
-        if (!$rptValidador_value) {
-          throw new PDOException('Correo no permitido.');
-        }
+        $rptValidador_value = colaboradoresModel::colaborador_permitido($correo);
       }
+      $id_colaborador = $rptValidador_value['id_colaborador'];
+      $tipoColaborador_colaborador = $rptValidador_value['tipoColaborador_colaborador'];
+      $terminos_colaborador = $rptValidador_value['terminos_colaborador'];
+      $dateCreation_colaborador = $rptValidador_value['dateCreation_colaborador'];
+      $dateUpdate_colaborador = $rptValidador_value['dateUpdate_colaborador'];
       $user =
         [
           'provider'           =>  $proveedor,
@@ -223,7 +222,9 @@ class ajaxController extends Controller
       Auth::login($user['id'], $user);
       json_output(json_build(200, $rptValidador_value, 'Correo Valido, Bienvenido, Espereme un momento le redireccionaremos, Gracias'));
     } catch (Exception $e) {
-      json_output(json_build(400, null, $e->getMessage()));
+      $codeError = $e->getcode() ? $e->getcode() : null;
+      json_output(json_build($codeError, $logout, $e->getMessage()));
+      //json_output(json_build(400, null, $e->getMessage()));
     } catch (PDOException $e) {
       json_output(json_build(400, null, $e->getMessage()));
     }
@@ -455,7 +456,7 @@ class ajaxController extends Controller
       $colaborador_id = $colaborador['id_colaborador'];
 
       //if ($experienciaRealizados = estudiosrealizadosModel::get_experienciaRealizados($colaborador_id)) {
-        /* $data =
+      /* $data =
           [
             'centroEducativo_estudioRealizado'              => $centroEstudio,
             'nivelEstudio_estudioRealizado'                 => $nivelEstudio,
@@ -505,6 +506,37 @@ class ajaxController extends Controller
       json_output(json_build(200, $data));
     } catch (Exception $e) {
       json_output(json_build(400, $e->getMessage()));
+    }
+  }
+  function getInfo_colaborador()
+  {
+    try {
+      $documentoNumero = clean($_POST['documentNumber']);
+      $curl = curl_init();
+
+      curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://www.reniec.softnetpe.com/api/auth/dni',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => '{"num_documento":"' . $documentoNumero . '"}',
+        CURLOPT_HTTPHEADER => array(
+          'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiI5Mzk3N2ZlMi0wMjZhLTRiYWYtYWMxYS1kNDAxZWIzYTYyMDUiLCJqdGkiOiJmYTQ0ZDEzMjE5YzQ1NWE4YjdhMWMyNjNjNzk2MTlmODJjZTAzM2ZiNmE5MDVlODkwMGFhMmNlODhlYzc4NThkNjg2NjljNmFhZTUwZGMwYSIsImlhdCI6MTY1ODQ1NjQ3OS40NDk5NTYsIm5iZiI6MTY1ODQ1NjQ3OS40NDk5NjMsImV4cCI6MTY4OTk5MjQ3OS40NDQ1NjQsInN1YiI6IjM3Iiwic2NvcGVzIjpbXX0.wWDfFSsW8JZtMo024MwbsNqlRZuvRcwM3Pt1kcxSEUJv0RaygW-3QLRQTmCzln3MtSH2SZ5uDc7dci49GH3wOkip3ZQdxkRumT2ccSwDMRSj0hW7BWcVdj9LEvmLIPjqH8um8qkEUTGJZgMVZz9YFbogfx3Z1Pg5j_-1_-2XzaaMJK_zi9rkkqv9oWZZcV_mSb1x7Jw1FGpTlt2CuweYmYK6xT5IlaWWkAOxSuDBF9YFtR5KPx0oava_vEOfrFtQZ51N4e6Hb8riHNhoWtx3OHruXquOG0kiKXTebGUHI2rveA7HdMq7PF2D0SeZB0o8DFG8J9ToyCSPO5SzzJ9_d0zsfFY-75kmOo7OrtURzXCLz7TY1_6bpNocZrwo6eywuqu-H6-_ce26NKVe4Abr2VisDidCrhHN9ltw85I3fey426b45T1Yx1cUEuJ7nhI7bXVvdw8hU-3MjpG7Y3bB5atKSewuGsn-9EZTHDn1oME9-1eSHRXZqf2Q3qdRjPS20msxoe7yJFxQbyP0vmOCvtPZ5ZuAJaoJmXQpr5n1MyFQKbrG7plbpiroo8tRSE2C0CLJ3wk1f5hEuQjx2GHsjrj9IvIT8nbienB2qgSkzPrT1Umu1300LaHL8qPeYDStlAv7yMc5EUmXIKmJY7lafMy-4MrOZlkiXXXfuj7u-YU',
+          'Content-Type: application/json'
+        ),
+      ));
+
+      $response = curl_exec($curl);
+
+      curl_close($curl);
+      $rptJson = json_decode($response);
+      json_output(json_build(200, $rptJson));
+    } catch (PDOException $e) {
+      json_output(json_build(400, null, $e->getMessage()));
     }
   }
 }

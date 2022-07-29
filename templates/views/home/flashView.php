@@ -76,7 +76,6 @@
         <div class="card-footer clearfix">
           <a class="btn btn-danger float-start btn-logout-form" id="btn-acceptNot">No acepto</a>
           <a href="form_legal/colaborador" class="btn btn-success float-end" id="btn-acceptYes">Acepto</a>
-          <button class="btn btn-danger float-end" id="test">sweetalert</button>
         </div>
       </div>
     </div>

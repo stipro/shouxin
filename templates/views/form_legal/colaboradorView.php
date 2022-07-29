@@ -2,6 +2,7 @@
 <div class="container">
   <form id="form-collaborator">
     <div class="card mt-4">
+      <?php echo Flasher::flash(); ?>
       <div class="card-header d-flex justify-content-between">
         <h3 class="card-title">Colaborador</h3>
       </div>
@@ -14,6 +15,35 @@
           <div class="row border m-2">
             <div class="text-primary mt-2">
               <h5>Datos Personales</h5>
+            </div>
+            <div class="col-6 col-sm-4 mb-3">
+              <div class="form-group">
+                <label for="insertSlt-documentIdentity-collaborator" class="control-label form-control-sm">Doc. de Indentificación<span class="text-danger">*</span></label>
+                <div class="input-group input-group-sm">
+                  <select id="insertSlt-documentIdentity-collaborator" class="form-select form-select-sm custom-select" data-placeholder="Seleccióne Doc. de Indentificación">
+                    <option value="DOC. NACIONAL DE IDENTIDAD">DOC. NACIONAL DE IDENTIDAD</option>
+                    <option value="REG. UNICO DE CONTRIBUYENTES">REG. UNICO DE CONTRIBUYENTES</option>
+                    <option value="CARNE DE EXTRANJERIA">CARNE DE EXTRANJERIA</option>
+                    <option value="PASAPORTE">PASAPORTE</option>
+                    <option value="PARTIDA DE NACIMIENTO">PARTIDA DE NACIMIENTO</option>
+                  </select>
+                  <input type="file" class="input-group-text form-control" id="documentIdentityArchive-collaborator" aria-describedby="documentIdentityArchive" aria-label="Upload">
+                  <div>
+                  </div>
+                </div>
+                <div id="documentIdentity-collaborator-Help" class="form-text">Adjunte su Indentificación</div>
+              </div>
+            </div>
+            <div class="col-6 col-sm-4 mb-3">
+              <div class="form-group">
+                <label for="insertIpt-documentNumber-collaborator" class="control-label form-control-sm">Numero de Indentificación<span class="text-danger">*</span></label>
+                <div class="input-group input-group-sm">
+                  <button class="btn btn-primary" type="button" id="btnSearch-collaboratorDni"><i class="fa fa-search"></i></button>
+                  <input type="text" name="documentNumber-collaborator" id="insertIpt-documentNumber-collaborator" class="form-control form-control-sm" value="">
+                  <div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="col-12 col-sm-4 mb-3">
               <div class="form-group">
@@ -45,7 +75,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-5 col-sm-4 mb-3">
+            <div class="col-6 col-sm-4 mb-3">
               <div class="form-group">
                 <label for="insertSlt-nationality-collaborator" class="control-label form-control-sm">Nacionalidad<span class="text-danger">*</span></label>
                 <div class="input-group input-group-sm">
@@ -81,7 +111,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-6 col-sm-4 mb-3">
+            <div class="col-12 col-sm-4 mb-3">
               <div class="form-group">
                 <label for="insertIpt-birthdate-collaborator" class="control-label form-control-sm">Fecha de Nacimiento<span class="text-danger">*</span></label>
                 <div class="input-group input-group-sm">
@@ -91,33 +121,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-6 col-sm-4 mb-3">
-              <div class="form-group">
-                <label for="insertSlt-documentIdentity-collaborator" class="control-label form-control-sm">Doc. de Indentificación<span class="text-danger">*</span></label>
-                <div class="input-group input-group-sm">
-                  <select id="insertSlt-documentIdentity-collaborator" class="form-select form-select-sm custom-select" data-placeholder="Seleccióne Doc. de Indentificación">
-                    <option value="DOC. NACIONAL DE IDENTIDAD">DOC. NACIONAL DE IDENTIDAD</option>
-                    <option value="REG. UNICO DE CONTRIBUYENTES">REG. UNICO DE CONTRIBUYENTES</option>
-                    <option value="CARNE DE EXTRANJERIA">CARNE DE EXTRANJERIA</option>
-                    <option value="PASAPORTE">PASAPORTE</option>
-                    <option value="PARTIDA DE NACIMIENTO">PARTIDA DE NACIMIENTO</option>
-                  </select>
-                  <input type="file" class="input-group-text form-control" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03" aria-label="Upload">
-                </div>
-                <!-- <div class="input-group input-group-sm">
-                  <input type="file" class="form-control" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03" aria-label="Upload">
-                </div> -->
-                <div id="documentIdentity-collaborator-Help" class="form-text">Adjunte su documento</div>
-              </div>
-            </div>
-            <div class="col-6 col-sm-4 mb-3">
-              <div class="form-group">
-                <label for="insertIpt-documentNumber-collaborator" class="control-label form-control-sm">Numero de Indentificación<span class="text-danger">*</span></label>
-                <div class="input-group input-group-sm">
-                  <input type="text" name="documentNumber-collaborator" id="insertIpt-documentNumber-collaborator" class="form-control form-control-sm" value="">
-                </div>
-              </div>
-            </div>
+
             <div class="col-12 col-sm-4 mb-3">
               <div class="form-group">
                 <label for="insertIpt-profession-collaborator" class="control-label form-control-sm">Profesión, Arte u Oficio<span class="text-danger">*</span></label>
