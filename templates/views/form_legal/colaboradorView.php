@@ -376,7 +376,7 @@
               <h5>Éstudios Realizádos</h5>
             </div>
             <!-- Section: Timeline -->
-            <section class="">
+            <section class="wrapper_studiesApplied">
               <ul class="timeline" id="cont-timeLine">
                 <li class="timeline-item mb-5">
                   <div class="row">
@@ -405,7 +405,7 @@
                   </li>
                 </template>
                 <li class="timeline-item mb-5">
-                  <a href="#" class="text-decoration-none" id="aAdd-experienceWork"><i class="fa fa-plus"></i> Añadir</a>
+                  <a href="#" class="text-decoration-none" id="aAdd-studiesApplied"><i class="fa fa-plus"></i> Añadir</a>
                 </li>
               </ul>
             </section>
@@ -416,7 +416,7 @@
               <h5>Experiencia laboral</h5>
             </div>
             <!-- Section: Timeline -->
-            <section class="">
+            <section class="wrapper_experienceWork">
               <ul class="timeline">
                 <li class="timeline-item mb-5">
                   <div class="row">
@@ -431,7 +431,7 @@
                   </div>
                 </li>
                 <li class="timeline-item mb-5">
-                  <a href="#" class="text-decoration-none" id="aAdd-studiesApplied"><i class="fa fa-plus"></i> Añadir</a>
+                  <a href="#" class="text-decoration-none" id="aAdd-experienceWork"><i class="fa fa-plus"></i> Añadir</a>
                 </li>
               </ul>
             </section>
@@ -442,7 +442,7 @@
               <h5>CAPACITACIÓN</h5>
             </div>
             <!-- Section: Timeline -->
-            <section class="">
+            <section class="wrapper_trainings">
               <ul class="timeline">
                 <li class="timeline-item mb-5">
                   <div class="row">
@@ -517,7 +517,7 @@
                 <li class="text-primary">BIENES INMUEBLES DEL DECLARANTE Y SOCIEDAD DE GANANCIALES (Perú)</li>
               </ol>
               <!-- Section: Timeline -->
-              <section class="ms-4">
+              <section class="ms-4 wrapper_realProperty_earningsCompany_declarant">
                 <ul class="timeline">
                   <li class="timeline-item mb-5">
                     <div class="row">

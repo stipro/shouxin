@@ -28,7 +28,9 @@
 <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
-<?php echo $d->nameModule?>
+<!-- PDF -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.es.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
 <?php if ($d->title == 'Login') : ?>
     <script src="<?php echo JS . 'login.js'; ?>"></script>
 <?php elseif ($d->nameModule == 'flash') : ?>

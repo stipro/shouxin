@@ -404,42 +404,107 @@ class ajaxController extends Controller
   function add_studiesApplied_form()
   {
     try {
+      // declaramos variables y almacenamos valores
       $centroEstudio = clean($_POST['centerEducational']);
       $nivelEstudio = clean($_POST['levelEducational']);
       $cursandoEstudio = clean($_POST['currentlyStudying']);
       $certificadoEstudio_name = clean($_POST['certificateEducational_name']);
-      $desdeMes = clean($_POST['sinceMonth']);
-      $desdeAnio = clean($_POST['sinceYear']);
-      $hastaMes = clean($_POST['untilMonth']);
-      $hastaAnio = clean($_POST['untilYear']);
-      move_uploaded_file($_FILES['certificateEducational_data']['tmp_name'], './app/upload/'. $_FILES['certificateEducational_data']['name']);
-      /* if (!$nombre) {
-        json_output(json_build(400, null, 'Ingrese Nombre'));
-      }
-      if (!$marca_id) {
-        json_output(json_build(400, null, 'Seleccione una Marca'));
-      } */
+      $desdeMes = $_POST['sinceMonth'];
+      $desdeAnio = $_POST['sinceYear'];
+      $hastaMes = $_POST['untilMonth'];
+      $hastaAnio = $_POST['untilYear'];
 
-      /* $data =
+      $desdeFecha = $desdeAnio . '-' . $desdeMes . '-01';
+      $hastaFecha = $hastaAnio . '-' . $hastaMes . '-01';
+      $desdeFecha_limpio = date("Y-m-d H:i:s", strtotime($desdeFecha));
+      $hastaFecha_limpio = date("Y-m-d H:i:s", strtotime($hastaFecha));
+
+      // Validar fechas
+      if ($desdeFecha_limpio > $hastaFecha_limpio) {
+        json_output(json_build(400, null, 'la fecha desde no puede ser mayor hasta'));
+      }
+
+      // Obtenemos nombre
+      $nombreArchivo = $_FILES["certificateEducational_data"]["name"];
+      // Obtenemos extension
+      $extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
+      // Obtenemos fecha actual
+      $fechaActual = date('d_m_Y');
+      // Obtenemos correo
+      $correoColaborador = $_SESSION['user_session_shouxin']['user']['email'];
+      // Convertimos correo en texto amigable
+      $correoLimpiado = preg_replace('/[\@\.\" "]+/', '_', $correoColaborador);
+      // Renombrar archivo
+      $nuevoNombre = sprintf("%s-%s-%s-certificado", $fechaActual, $nivelEstudio, $correoLimpiado);
+      // Agrego extension
+      $archivoOrginal = $nuevoNombre . '.' . $extension;
+      // Mover del temporal al directorio actual
+      move_uploaded_file($_FILES['certificateEducational_data']['tmp_name'], './assets/uploads/' . $archivoOrginal);
+      // validamos extension
+      if ($extension != 'pdf') {
+        require('./assets/plugins/fpdf/fpdf.php');
+        $pdf = new FPDF();
+        $pdf->AddPage();
+        $pdf->Image('./assets/uploads/' . $archivoOrginal, 0, 0, 200, 300, $extension);
+        $pdf->Output('./assets/uploads/' . $nuevoNombre . '.pdf', 'F');
+      }
+
+      if (!$colaborador = colaboradoresModel::colaborador_permitido($correoColaborador)) {
+        json_output(json_build(400, null, 'No se encontro usuario, consulte al soporte'));
+      }
+      $colaborador_id = $colaborador['id_colaborador'];
+
+      //if ($experienciaRealizados = estudiosrealizadosModel::get_experienciaRealizados($colaborador_id)) {
+        /* $data =
+          [
+            'centroEducativo_estudioRealizado'              => $centroEstudio,
+            'nivelEstudio_estudioRealizado'                 => $nivelEstudio,
+            'cursandoActualmente_estudioRealizado'          => $cursandoEstudio,
+            'nombreArchivoCertificado_estudiosRealizados'   => $nuevoNombre,
+            'inicio_estudiosrealizados'                     => $desdeFecha_limpio,
+            'final_estudiosrealizados'                      => $hastaFecha_limpio
+          ];
+        if (!$id = estudiosrealizadosModel::update(estudiosrealizadosModel::$t1, ['colaborador_id' => $colaborador_id], $data)) {
+          json_output(json_build(400, null, 'Hubo un error al actualizar el temario.'));
+        }
+        // se guardó con éxito
+        $estudiosRealizados = estudiosrealizadosModel::by_id($id);
+        json_output(json_build(201, $estudiosRealizados, 'Estudio Realizado actualizado con éxito.')); */
+
+      $data =
         [
+          'colaborador_id'                                => $colaborador_id,
           'centroEducativo_estudioRealizado'              => $centroEstudio,
           'nivelEstudio_estudioRealizado'                 => $nivelEstudio,
           'cursandoActualmente_estudioRealizado'          => $cursandoEstudio,
-          'nombreArchivoCertificado_estudiosRealizados'   => $certificadoEstudio,
-          'inicio_estudiosrealizados'                     => now(),
-          'final_estudiosrealizados'                      => now()
+          'nombreArchivoCertificado_estudiosRealizados'   => $nuevoNombre,
+          'inicio_estudiosrealizados'                     => $desdeFecha_limpio,
+          'final_estudiosrealizados'                      => $hastaFecha_limpio
         ];
       if (!$id = estudiosrealizadosModel::add(estudiosrealizadosModel::$t1, $data)) {
         json_output(json_build(400, null, 'Hubo error al guardar el registro'));
-      } */
-
+      }
+      $estudiosRealizados = estudiosrealizadosModel::by_id($id);
       // se guardó con éxito
-      //$productos = estudiosrealizadosModel::by_id($id);
-      //json_output(json_build(201, $productos, 'Estudio Realizado agregado con exito. '));
+      json_output(json_build(201, $estudiosRealizados, 'Estudio Realizado agregado con exito. '));
     } catch (Exception $e) {
       json_output(json_build(400, null, $e->getMessage()));
     } catch (PDOException $e) {
       json_output(json_build(400, null, $e->getMessage()));
+    }
+  }
+
+  function get_studiesApplied()
+  {
+    try {
+
+      $id   = clean($_SESSION['user_session_shouxin']['user']['id']);
+
+      //$estudiosRealizados = estudiosrealizadosModel::by_id($id);
+      $data = get_module('lista_studiesApplied', estudiosrealizadosModel::all_paginated($id));
+      json_output(json_build(200, $data));
+    } catch (Exception $e) {
+      json_output(json_build(400, $e->getMessage()));
     }
   }
 }

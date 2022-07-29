@@ -1,10 +1,10 @@
 <!-- Modal -->
-<div class="modal fade" id="mdAdd-experienceWork" tabindex="-1" aria-labelledby="mdAdd-experienceWorkLabel" aria-hidden="true">
+<div class="modal fade" id="mdAdd-studiesApplied" tabindex="-1" aria-labelledby="mdAdd-studiesAppliedLabel" aria-hidden="true">
     <div class="modal-dialog">
         <form id="add_studiesApplied_form">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="mdAdd-experienceWorkLabel">Añadir formación</h5>
+                    <h5 class="modal-title" id="mdAdd-studiesAppliedLabel">Añadir formación</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -67,18 +67,18 @@
                                 <label class="control-label form-control-sm form-label">Desde<span class="text-danger">*</span></label>
                                 <div class="input-group input-group-sm">
                                     <select id="sinceMonth-studiesApplied" class="form-select form-select-sm" data-placeholder="Seleccióne">
-                                        <option value="Enero">Enero</option>
-                                        <option value="Febrero">Febrero</option>
-                                        <option value="Marzo">Marzo</option>
-                                        <option value="Abril">Abril</option>
-                                        <option value="Mayo">Mayo</option>
-                                        <option value="Junio">Junio</option>
-                                        <option value="Julio">Julio</option>
-                                        <option value="Agosto">Agosto</option>
-                                        <option value="Septiembre">Septiembre</option>
-                                        <option value="Octubre">Octubre</option>
-                                        <option value="HNoviembre">HNoviembre</option>
-                                        <option value="Diciembre">Diciembre</option>
+                                        <option value="Enero" data-format="1">Enero</option>
+                                        <option value="Febrero" data-format="2">Febrero</option>
+                                        <option value="Marzo" data-format="3">Marzo</option>
+                                        <option value="Abril" data-format="4">Abril</option>
+                                        <option value="Mayo" data-format="5">Mayo</option>
+                                        <option value="Junio" data-format="6">Junio</option>
+                                        <option value="Julio" data-format="7">Julio</option>
+                                        <option value="Agosto" data-format="8">Agosto</option>
+                                        <option value="Septiembre" data-format="9">Septiembre</option>
+                                        <option value="Octubre" data-format="10">Octubre</option>
+                                        <option value="Noviembre" data-format="11">Noviembre</option>
+                                        <option value="Diciembre" data-format="12">Diciembre</option>
                                     </select>
                                     <select id="sinceYear-studiesApplied" class="col-6 form-select form-select-sm" data-placeholder="Seleccióne">
                                         <option value="2022">2022</option>
@@ -147,18 +147,18 @@
                                 <label class="control-label form-control-sm form-label">Hasta<span class="text-danger">*</span></label>
                                 <div class="input-group input-group-sm">
                                     <select id="untilMonth-studiesApplied" class="form-select form-select-sm" data-placeholder="Seleccióne">
-                                        <option value="Enero">Enero</option>
-                                        <option value="Febrero">Febrero</option>
-                                        <option value="Marzo">Marzo</option>
-                                        <option value="Abril">Abril</option>
-                                        <option value="Mayo">Mayo</option>
-                                        <option value="Junio">Junio</option>
-                                        <option value="Julio">Julio</option>
-                                        <option value="Agosto">Agosto</option>
-                                        <option value="Septiembre">Septiembre</option>
-                                        <option value="Octubre">Octubre</option>
-                                        <option value="HNoviembre">HNoviembre</option>
-                                        <option value="Diciembre">Diciembre</option>
+                                        <option value="Enero" data-format="1">Enero</option>
+                                        <option value="Febrero" data-format="2">Febrero</option>
+                                        <option value="Marzo" data-format="3">Marzo</option>
+                                        <option value="Abril" data-format="4">Abril</option>
+                                        <option value="Mayo" data-format="5">Mayo</option>
+                                        <option value="Junio" data-format="6">Junio</option>
+                                        <option value="Julio" data-format="7">Julio</option>
+                                        <option value="Agosto" data-format="8">Agosto</option>
+                                        <option value="Septiembre" data-format="9">Septiembre</option>
+                                        <option value="Octubre" data-format="10">Octubre</option>
+                                        <option value="Noviembre" data-format="11">Noviembre</option>
+                                        <option value="Diciembre" data-format="12">Diciembre</option>
                                     </select>
                                     <select id="untilYear-studiesApplied" class="col-6 form-select form-select-sm" data-placeholder="Seleccióne">
                                         <option value="2022">2022</option>

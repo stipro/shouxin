@@ -11,12 +11,11 @@ class form_legalController extends Controller
   function __construct()
   {
     // Validación de sesión de usuario, descomentar si requerida
-    /**
+
     if (!Auth::validate()) {
       Flasher::new('Debes iniciar sesión primero.', 'danger');
       Redirect::to('login');
     }
-     */
   }
 
   function index()
@@ -66,6 +65,10 @@ class form_legalController extends Controller
 
   function colaborador()
   {
+    /* $id   = clean($_SESSION['user_session_shouxin']['user']['id']);
+    //debug(estudiosrealizadosModel::by_id($id));
+    debug(estudiosrealizadosModel::all_paginated($id));
+    die; */
     if (!Auth::validate()) {
       Flasher::new('Debes iniciar sesión primero.', 'danger');
       Redirect::to('login');

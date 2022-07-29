@@ -165,16 +165,17 @@ var settings = {
         }
     }),
 };
+$(document).on('click', '#aAdd-studiesApplied', function (e) {
+    e.preventDefault();
+    $('#mdAdd-studiesApplied').modal('show');
+});
 
 $(document).on('click', '#aAdd-experienceWork', function (e) {
     e.preventDefault();
     $('#mdAdd-experienceWork').modal('show');
 });
 
-$(document).on('click', '#aAdd-studiesApplied', function (e) {
-    e.preventDefault();
-    $('#mdAdd-studiesApplied').modal('show');
-});
+
 
 $(document).on('click', '#aAdd-trainings', function (e) {
     e.preventDefault();
@@ -571,13 +572,11 @@ function add_studiesApplied_form(e) {
     let certificateEducational_value = certificateEducational_studiesApplied.value;
     let certificateEducational_name;
     let certificateEducational_data;
-
-    let sinceMonth_value = sinceMonth_studiesApplied.value;
+    let sinceMonth_value = sinceMonth_studiesApplied.selectedOptions[0].dataset.format;
     let sinceYear_value = sinceYear_studiesApplied.value;
-    let untilMonth_value = untilMonth_studiesApplied.value;
+    let untilMonth_value = untilMonth_studiesApplied.selectedOptions[0].dataset.format;
     let untilYear_value = untilYear_studiesApplied.value;
 
-    //var file_data = $('.file').prop('files')[0];
     // Validando Formulario
     if (centerEducational_value === '') {
         setErrorFor(centerEducational_studiesApplied, 'No puede dejar Centro educativo en blanco');
@@ -601,7 +600,6 @@ function add_studiesApplied_form(e) {
         } else {
             setSuccessFor(certificateEducational_studiesApplied);
             certificateEducational_name = certificateEducational_studiesApplied.files[0].name;
-            console.log(certificateEducational_studiesApplied);
             // Obtener extensión del archivo
             extensionCertificate = certificateEducational_name.substring(certificateEducational_name.lastIndexOf('.'), certificateEducational_name.length);
             certificateEducational_data = $('#certificate-studiesApplied').prop('files')[0];
@@ -618,16 +616,16 @@ function add_studiesApplied_form(e) {
     else {
         var form = $(this),
             data = new FormData(form.get(0));
-        data.append("centerEducational", JSON.stringify(centerEducational_value));
-        data.append("levelEducational", JSON.stringify(levelEducational_value));
-        data.append("currentlyStudying", JSON.stringify(currentlyStudying_value));
+        data.append("centerEducational", centerEducational_value);
+        data.append("levelEducational", levelEducational_value);
+        data.append("currentlyStudying", currentlyStudying_value);
         data.append("certificateEducational_name", JSON.stringify(certificateEducational_name));
         data.append("certificateEducational_type", JSON.stringify(extensionCertificate));
         data.append("certificateEducational_data", certificateEducational_data);
-        data.append("sinceMonth", JSON.stringify(sinceMonth_value));
-        data.append("sinceYear", JSON.stringify(sinceYear_value));
-        data.append("untilMonth", JSON.stringify(untilMonth_value));
-        data.append("untilYear", JSON.stringify(untilYear_value));
+        data.append("sinceMonth", sinceMonth_value);
+        data.append('sinceYear', sinceYear_value);
+        data.append("untilMonth", untilMonth_value);
+        data.append("untilYear", untilYear_value);
         // AJAX
         $.ajax({
             url: 'ajax/add_studiesApplied_form',
@@ -643,7 +641,7 @@ function add_studiesApplied_form(e) {
         }).done(function (res) {
             if (res.status === 201) {
                 toastr.success(res.msg, '¡Bien!');
-                // get_studiesApplied();
+                get_studiesApplied();
             } else {
                 toastr.error(res.msg, '¡Upss!');
             }
@@ -653,6 +651,44 @@ function add_studiesApplied_form(e) {
             form.waitMe('hide');
         })
     }
+}
+
+get_studiesApplied();
+function get_studiesApplied(e) {
+    var wrapper = $('.wrapper_studiesApplied'),
+        hook = 'bee_hook',
+        action = 'get';
+
+    if (wrapper.length === 0) {
+        console.log('Holami rey');
+        return;
+    }
+
+    $.ajax({
+        url: 'ajax/get_studiesApplied',
+        type: 'POST',
+        dataType: 'json',
+        cache: false,
+        data: {
+            hook, action
+        },
+        beforeSend: function () {
+            wrapper.waitMe();
+        }
+    }).done(function (res) {
+        if (res.status === 200) {
+            wrapper.html(res.data);
+
+        } else {
+            toastr.error(res.msg, '¡Upss!');
+            wrapper.html(res.msg);
+        }
+    }).fail(function (err) {
+        toastr.error('Hubo un error en la petición', '¡Upss!');
+        wrapper.html('Hubo un error al cargar las lecciones, intenta más tarde.');
+    }).always(function () {
+        wrapper.waitMe('hide');
+    })
     /* if (centerEducational_value === '') {
     } else {
         console.log(template_studiesApplied);
@@ -661,7 +697,5 @@ function add_studiesApplied_form(e) {
         const clone = template_studiesApplied.cloneNode(true);
         fragment.appendChild(clone);
         cont_timeLine.appendChild(fragment);
-    }
- */
-
-}
+    } */
+};
