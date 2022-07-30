@@ -19,7 +19,6 @@ function loginFireBase_gmail(e) {
     var provider = new firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider).then(function (result) {
         console.log(result.additionalUserInfo.profile);
-        var user = result.user;
         let provider_id = result.additionalUserInfo.providerId;
         let email_gmail = result.additionalUserInfo.profile.email;
         let family_name = result.additionalUserInfo.profile.family_name;
@@ -32,7 +31,7 @@ function loginFireBase_gmail(e) {
             given = given_name,
             picture = picture_user,
             logout = 'https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost/shouxin/login';
-            action = 'get',
+        action = 'get',
             hook = 'bee_hook';
 
         $.ajax({
@@ -63,7 +62,7 @@ function loginFireBase_gmail(e) {
                     window.open('http://localhost/shouxin/home/flash', '_self');
                 }, 2000) */
             }
-            else if(res.status === 401){
+            else if (res.status === 401) {
                 toastr.error(res.msg, '¡Upss!');
                 window.open(res.data, "Diseño Web", "width=300, height=200");
             }
@@ -84,11 +83,23 @@ function loginFireBase_hotmail(e) {
     e.preventDefault()
     var provider = new firebase.auth.OAuthProvider('microsoft.com');
     auth.signInWithPopup(provider).then(function (result) {
-        let emailGmail = result.additionalUserInfo.profile.userPrincipalName;
+        console.log(result);
+
+        let provider_id = result.additionalUserInfo.providerId;
+        let email_gmail = result.additionalUserInfo.profile.email;
+        let family_name = result.additionalUserInfo.profile.family_name;
+        let given_name = result.additionalUserInfo.profile.given_name;
+        let picture_user = result.additionalUserInfo.profile.picture;
+
+        let emailHotmail = result.additionalUserInfo.profile.userPrincipalName;
         var button = $(this),
-            email = emailGmail,
+            provider = provider_id,
+            email = emailHotmail,
+            family = family_name,
+            given = given_name,
+            picture = picture_user,
             logout = 'https://login.microsoftonline.com/3b5a69e5-d9fb-443e-b5e7-926401d3a4e0/oauth2/logout?post_logout_redirect_uri=http://localhost/shouxin/login/';
-            action = 'get',
+        action = 'get',
             hook = 'bee_hook';
 
         $.ajax({
@@ -99,7 +110,11 @@ function loginFireBase_hotmail(e) {
             data: {
                 hook,
                 action,
+                provider,
                 email,
+                family,
+                given,
+                picture,
                 logout
             },
             beforeSend: function () {
@@ -112,7 +127,11 @@ function loginFireBase_hotmail(e) {
                 setTimeout(() => {
                     window.location.href = "./home/flash";
                 }, 2000)
-            } else {
+            } else if (res.status === 401) {
+                toastr.error(res.msg, '¡Upss!');
+                window.open(res.data, "Diseño Web", "width=300, height=200");
+            }
+            else {
                 toastr.error(res.msg, '¡Upss!');
             }
         }).fail(function (err) {

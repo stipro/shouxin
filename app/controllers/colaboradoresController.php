@@ -16,6 +16,10 @@ class colaboradoresController extends Controller
       Flasher::new('Debes iniciar sesión primero.', 'danger');
       Redirect::to('login');
     }
+    if ($_SESSION['user_session_shouxin']['user']['typecollaborator'] != 'Administrador') {
+      Flasher::new('No tienes permitido este modulo.', 'danger');
+      Redirect::to('home/flash');
+    }
   }
 
   function index()

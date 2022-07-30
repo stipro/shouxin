@@ -9,7 +9,8 @@
                         <p class="text-muted mb-2 fw-bold"><?php echo $t->inicio_estudiosrealizados . ' - ' . $t->final_estudiosrealizados; ?></p>
                     </div>
                     <div class="col-6 d-flex justify-content-end">
-                        <a href="#" class="text-decoration-none"><i class="fa fa-pencil"></i></a>
+                        <a href="#" class="text-decoration-none m-2 btnRemove-studiesApplied"><i class="fa fa-trash-o"></i></a>
+                        <a href="#" class="text-decoration-none m-2 btnEdit-studiesApplied"><i class="fa fa-pencil"></i></a>
                     </div>
                 </div>
             </li>

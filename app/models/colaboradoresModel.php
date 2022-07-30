@@ -6,9 +6,10 @@
  *
  * Modelo de colaborador
  */
-class colaboradoresModel extends Model {
+class colaboradoresModel extends Model
+{
   public static $t1   = 'colaboradores'; // Nombre de la tabla en la base de datos;
-  
+
   // Nombre de tabla 2 que talvez tenga conexión con registros
   //public static $t2 = '__tabla 2___'; 
   //public static $t3 = '__tabla 3___'; 
@@ -17,12 +18,19 @@ class colaboradoresModel extends Model {
   {
     // Constructor general
   }
-  
+
   static function all()
   {
     // Todos los registros
     $sql = 'SELECT * FROM colaboradores ORDER BY id DESC';
     return ($rows = parent::query($sql)) ? $rows : [];
+  }
+
+  static function all_paginated()
+  {
+    // Todos los registros
+    $sql = 'SELECT * FROM colaboradores ORDER BY id_colaborador ASC';
+    return PaginationHandler::paginate($sql);
   }
 
   static function by_id($id)
@@ -39,4 +47,3 @@ class colaboradoresModel extends Model {
     return ($rows = parent::query($sql, ['correo' => $correo])) ? $rows[0] : [];
   }
 }
-

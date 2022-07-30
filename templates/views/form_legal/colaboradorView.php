@@ -77,6 +77,20 @@
             </div>
             <div class="col-6 col-sm-4 mb-3">
               <div class="form-group">
+                <label for="insertSlt-gender-collaborator" class="control-label form-control-sm">Género<span class="text-danger">*</span></label>
+                <div class="input-group input-group-sm">
+                  <select id="insertSlt-gender-collaborator" class="form-select form-select-sm" data-placeholder="Seleccióne Nacionalidad">
+                    <option value=""></option>
+                    <option value="Masculino" data-id="M">Masculino</option>
+                    <option value="Femenino" data-id="F">Femenino</option>
+                  </select>
+                  <div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-sm-4 mb-3">
+              <div class="form-group">
                 <label for="insertSlt-nationality-collaborator" class="control-label form-control-sm">Nacionalidad<span class="text-danger">*</span></label>
                 <div class="input-group input-group-sm">
                   <select id="insertSlt-nationality-collaborator" class="form-select form-select-sm" data-placeholder="Seleccióne Nacionalidad">
@@ -94,7 +108,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-6 col-sm-4 mb-3">
+            <div class="col-12 col-sm-4 mb-3">
               <div class="form-group">
                 <label for="insertSlt-statusMarital-collaborator" class="control-label form-control-sm">Estado Civil <span class="text-danger">*</span></label>
                 <div class="input-group input-group-sm">
@@ -127,6 +141,8 @@
                 <label for="insertIpt-profession-collaborator" class="control-label form-control-sm">Profesión, Arte u Oficio<span class="text-danger">*</span></label>
                 <div class="input-group input-group-sm">
                   <input type="text" name="profession-collaborator" id="insertIpt-profession-collaborator" class="form-control form-control-sm" value="">
+                  <div>
+                  </div>
                 </div>
                 <div id="profession-collaborator-Help" class="form-text">N° Colegio Profesional (si aplica)</div>
               </div>
@@ -136,7 +152,8 @@
               <div class="form-group">
                 <label for="insertIpt-conditionProperty-collaborator" class="control-label form-control-sm">Cond. del inmueble en el que vive<span class="text-danger">*</span></label>
                 <div class="input-group input-group-sm">
-                  <select id="insertIpt-conditionProperty-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                  <select id="insertIpt-conditionProperty-collaborator" class="form-select form-select-sm" data-placeholder="Seleccióne opción">
+                    <option value=""></option>
                     <option value="Casa Propia">Casa Propia</option>
                     <option value="De los Padres">De los Padres</option>
                     <option value="De la sociedad conyugal">De la sociedad conyugal</option>
@@ -145,14 +162,38 @@
                     <option value="Cedida en uso">Cedida en uso</option>
                     <option value="Otro">Otro</option>
                   </select>
+                  <div>
+                  </div>
                 </div>
               </div>
             </div>
             <div class="col-12 col-sm-4 mb-3">
               <div class="form-group">
-                <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Ocupación/ Cargo en la Empresa<span class="text-danger">*</span></label>
+                <label for="insertIpt-position-collaborator" class="control-label form-control-sm">Ocupación/ Cargo en la Empresa<span class="text-danger">*</span></label>
                 <div class="input-group input-group-sm">
-                  <input type="text" name="number-collaborator" id="insertIpt-number-collaborator" class="form-control form-control-sm disabled" value="">
+                  <input type="text" name="position-collaborator" id="insertIpt-position-collaborator" class="form-control form-control-sm" value="">
+                  <div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-4 mb-3">
+              <div class="form-group">
+                <label for="insertIpt-phone-collaborator" class="control-label form-control-sm">Numero de Celular<span class="text-danger">*</span></label>
+                <div class="input-group input-group-sm">
+                  <input type="text" name="phone-collaborator" id="insertIpt-phone-collaborator" class="form-control form-control-sm" value="">
+                  <div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-4 mb-3">
+              <div class="form-group">
+                <label for="insertIpt-email-collaborator" class="control-label form-control-sm">Correo Electronico<span class="text-danger">*</span></label>
+                <div class="input-group input-group-sm">
+                  <input type="text" name="email-collaborator" id="insertIpt-email-collaborator" class="form-control form-control-sm" value="<?php echo $_SESSION['user_session_shouxin']['user']['email'] ?>">
+                  <div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -306,9 +347,10 @@
             </div>
             <div class="col-12 col-sm-6 mb-3">
               <div class="form-group">
-                <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Doc. de Indentificación<span class="text-danger">*</span></label>
+                <label for="insertIpt-documentIdentity-spouseorpartner" class="control-label form-control-sm">Doc. de Indentificación<span class="text-danger">*</span></label>
                 <div class="input-group input-group-sm">
-                  <select id="insertIpt-product-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                  <select id="insertIpt-documentIdentity-spouseorpartner" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                    <option value=""></option>
                     <option value="DOC. NACIONAL DE IDENTIDAD">DOC. NACIONAL DE IDENTIDAD</option>
                     <option value="REG. UNICO DE CONTRIBUYENTES">REG. UNICO DE CONTRIBUYENTES</option>
                     <option value="CARNE DE EXTRANJERIA">CARNE DE EXTRANJERIA</option>
@@ -318,12 +360,12 @@
                 </div>
               </div>
             </div>
-
             <div class="col-12 col-sm-6 mb-3">
               <div class="form-group">
-                <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Numero de Indentificación<span class="text-danger">*</span></label>
+                <label for="insertIpt-documentNumber-spouseorpartner" class="control-label form-control-sm">Numero de Indentificación<span class="text-danger">*</span></label>
                 <div class="input-group input-group-sm">
-                  <input type="text" name="number-collaborator" id="insertIpt-number-collaborator" class="form-control form-control-sm disabled" value="">
+                  <input type="text" name="documentNumber-spouseorpartner" id="insertIpt-documentNumber-spouseorpartner" class="form-control form-control-sm" value="">
+                  <div></div>
                 </div>
               </div>
             </div>
@@ -332,10 +374,26 @@
             <div class="text-primary mt-2">
               <h5>Dependientes</h5>
             </div>
-            <div class="col-12 col-sm-3 mb-3">
+            <div class="col-12 col-sm-6 mb-3">
               <div class="form-group">
+                <label for="insertSlt-kindofdependents-collaborator" class="control-label form-control-sm">Dependientes<span class="text-danger">*</span></label>
                 <div class="input-group input-group-sm">
-                  <input type="number" name="number-collaborator" id="insertIpt-number-collaborator" class="form-control form-control-sm disabled" value="">
+                  <select id="insertSlt-kindofdependents-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                    <option value=""></option>
+                    <option value="Hijos">Hijos</option>
+                    <option value="Padres">Padres</option>
+                    <option value="Otros">Otros</option>
+                  </select>
+                  <div></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6 mb-3">
+              <div class="form-group">
+                <label for="insertIpt-kindofdependentsAmount-collaborator" class="control-label form-control-sm">Cantidad<span class="text-danger">*</span></label>
+                <div class="input-group input-group-sm">
+                  <input type="number" name="kindofdependentsAmount-collaborator" id="insertIpt-kindofdependentsAmount-collaborator" class="form-control form-control-sm" value="">
+                  <div></div>
                 </div>
               </div>
             </div>
@@ -346,9 +404,10 @@
             </div>
             <div class="col-12 col-sm-6 mb-3">
               <div class="form-group">
-                <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Tipo de registro<span class="text-danger">*</span></label>
+                <label for="insertIpt-contributorType-collaborator" class="control-label form-control-sm">Tipo de registro<span class="text-danger">*</span></label>
                 <div class="input-group input-group-sm">
-                  <select id="insertIpt-product-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                  <select id="insertIpt-contributorType-collaborator" class="form-select form-select-sm" data-placeholder="Escribe para buscar...">
+                    <option value=""></option>
                     <option value="R.U.C.">R.U.C.</option>
                     <option value="R.U.S.">R.U.S.</option>
                   </select>
@@ -358,18 +417,18 @@
 
             <div class="col-12 col-sm-6 mb-3">
               <div class="form-group">
-                <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Numero de registro<span class="text-danger">*</span></label>
+                <label for="insertIpt-contributorNumber-collaborator" class="control-label form-control-sm">Numero de registro<span class="text-danger">*</span></label>
                 <div class="input-group input-group-sm">
-                  <input type="text" name="number-collaborator" id="insertIpt-number-collaborator" class="form-control form-control-sm" value="">
+                  <input type="text" name="contributorNumber-collaborator" id="insertIpt-contributorNumber-collaborator" class="form-control form-control-sm" value="">
                 </div>
               </div>
             </div>
 
             <div class="col-12 col-sm-6 mb-3">
               <div class="form-group">
-                <label for="insertIpt-number-collaborator" class="control-label form-control-sm">Información complementaria<span class="text-danger">*</span></label>
+                <label for="insertIpt-complementaryInformation-collaborator" class="control-label form-control-sm">Información complementaria<span class="text-danger">*</span></label>
                 <div class="input-group input-group-sm">
-                  <textarea class="form-control form-control-sm" rows="4" cols="50" name="comment" form="usrform">Enter text here...    
+                  <textarea id="insertIpt-complementaryInformation-collaborator" class="form-control form-control-sm" rows="4" cols="50" name="comment" form="usrform">Introducir texto aquí...    
                       </textarea>
                 </div>
               </div>
@@ -390,7 +449,8 @@
                       <p class="text-muted mb-2 fw-bold">[F. Inicio - F. Conclusión]</p>
                     </div>
                     <div class="col-6 d-flex justify-content-end">
-                      <a href="#" class="text-decoration-none"><i class="fa fa-pencil"></i></a>
+                      <a href="#" class="text-decoration-none m-2 btnRemove-studiesApplied"><i class="fa fa-trash-o"></i></a>
+                      <a href="#" class="text-decoration-none m-2 btnEdit-studiesApplied"><i class="fa fa-pencil"></i></a>
                     </div>
                   </div>
                 </li>
@@ -430,12 +490,14 @@
                       <p class="text-muted mb-2 fw-bold">[F. Inicio - F. Conclusión]</p>
                     </div>
                     <div class="col-6 d-flex justify-content-end">
-                      <a href="#" class="text-decoration-none"><i class="fa fa-pencil"></i></a>
+                      <a href="#" class="text-decoration-none m-2 btnRemove-experienceWork"><i class="fa fa-trash-o"></i></a>
+                      <a href="#" class="text-decoration-none m-2 btnEdit-experienceWork"><i class="fa fa-pencil"></i></a>
                     </div>
                   </div>
                 </li>
                 <li class="timeline-item mb-5">
                   <a href="#" class="text-decoration-none" id="aAdd-experienceWork"><i class="fa fa-plus"></i> Añadir</a>
+                  <div id="trainings-collaborator-Help" class="form-text">* Complete los datos de su experiencia laboral, de la más reciente a la más antigua. Adicione más filas si lo requiere..</div>
                 </li>
               </ul>
             </section>
@@ -456,15 +518,19 @@
                       <p class="text-muted mb-2 fw-bold">[F. Curso o Evento]</p>
                     </div>
                     <div class="col-6 d-flex justify-content-end">
-                      <a href="#" class="text-decoration-none"><i class="fa fa-pencil"></i></a>
+                      <a href="#" class="text-decoration-none m-2 btnRemove-trainings"><i class="fa fa-trash-o"></i></a>
+                      <a href="#" class="text-decoration-none m-2 btnEdit-trainings"><i class="fa fa-pencil"></i></a>
                     </div>
                   </div>
 
                 </li>
                 <li class="timeline-item mb-5">
                   <a href="#" class="text-decoration-none" id="aAdd-trainings"><i class="fa fa-plus"></i> Añadir</a>
+                  <div id="trainings-collaborator-Help" class="form-text">* Complete los datos de las capacitaciones recibidas, de la más reciente a la más antigua.</div>
                 </li>
+
               </ul>
+
             </section>
             <!-- Section: Timeline -->
           </div>
@@ -491,17 +557,17 @@
                       <tr>
                         <th scope="row">1</th>
                         <td>Remuneración bruta mensual (En planilla del Empleador):</td>
-                        <td></td>
+                        <td><input type="text" class="input-group-text form-control"></td>
                       </tr>
                       <tr>
                         <th scope="row">2</th>
                         <td>Otros Ingresos por ejercicio individual de profesión, oficio u otra actividad:</td>
-                        <td></td>
+                        <td><input type="text" class="input-group-text form-control"></td>
                       </tr>
                       <tr>
                         <th scope="row">3</th>
                         <td>Ingresos mensuales del cónyuge o conviviente:</td>
-                        <td></td>
+                        <td><input type="text" class="input-group-text form-control"></td>
                       </tr>
                     </tbody>
                     <tfoot>
@@ -519,6 +585,37 @@
             <div class="mt-2 mb-2">
               <ol type="1" start="2">
                 <li class="text-primary">BIENES INMUEBLES DEL DECLARANTE Y SOCIEDAD DE GANANCIALES (Perú)</li>
+              </ol>
+              <!-- Section: Timeline -->
+              <section class="ms-4 wrapper_realProperty">
+                <ul class="timeline">
+                  <li class="timeline-item mb-5">
+                    <div class="row">
+                      <div class="col-6">
+                        <h5 class="fw-bold">[N° de Fiche o Partida Registral]</h5>
+                        <p class="text-muted mb-2 fw-bold">[Dirección]</p>
+                        <p class="text-muted mb-2 fw-bold">[Valor]</p>
+                        <p class="text-muted mb-2 fw-bold">[bien propio o conyugal]</p>
+                      </div>
+                      <div class="col-6 d-flex justify-content-end">
+                        <a href="#" class="text-decoration-none"><i class="fa fa-pencil"></i></a>
+                      </div>
+                    </div>
+
+                  </li>
+                  <li class="timeline-item mb-5">
+                    <p class="text-muted mb-2 fw-bold">[Total]</p>
+                    <a href="#" class="text-decoration-none" id="aAdd-propertyReal"><i class="fa fa-plus"></i> Añadir</a>
+                    <div id="propertyReal-collaborator-Help" class="form-text">* Adicione más si lo requiere.</div>
+                  </li>
+                </ul>
+              </section>
+              <!-- Section: Timeline -->
+            </div>
+
+            <div class="mt-2 mb-2">
+              <ol type="1" start="3">
+                <li class="text-primary">BIENES MUEBLES DEL DECLARANTE Y SOCIEDAD DE GANANCIALES (Perú)</li>
               </ol>
               <!-- Section: Timeline -->
               <section class="ms-4 wrapper_realProperty_earningsCompany_declarant">
@@ -539,14 +636,44 @@
                   </li>
                   <li class="timeline-item mb-5">
                     <p class="text-muted mb-2 fw-bold">[Total]</p>
-                    <a href="#" class="text-decoration-none" id=""><i class="fa fa-plus"></i> Añadir</a>
+                    <a href="#" class="text-decoration-none" id="aAdd-propertyMovable"><i class="fa fa-plus"></i> Añadir</a>
+                    <div id="propertyMovable-collaborator-Help" class="form-text">* Adicione más si lo requiere.</div>
                   </li>
                 </ul>
               </section>
               <!-- Section: Timeline -->
             </div>
-            <li class="text-primary">BIENES MUEBLES DEL DECLARANTE Y SOCIEDAD DE GANANCIALES (Perú)</li>
-            <li class="text-primary">AHORROS, DEPÓSITOS, COLOCACIONES, INVERSIONES EN EL SISTEMA FINANCIERO DEL DECLARANTE (incluir sociedad de gananciales)</li>
+
+            <div class="mt-2 mb-2">
+              <ol type="1" start="4">
+                <li class="text-primary">AHORROS, DEPÓSITOS, COLOCACIONES, INVERSIONES EN EL SISTEMA FINANCIERO DEL DECLARANTE (incluir sociedad de gananciales)</li>
+              </ol>
+              <!-- Section: Timeline -->
+              <section class="ms-4 wrapper_realProperty_earningsCompany_declarant">
+                <ul class="timeline">
+                  <li class="timeline-item mb-5">
+                    <div class="row">
+                      <div class="col-6">
+                        <h5 class="fw-bold">[N° de Fiche o Partida Registral]</h5>
+                        <p class="text-muted mb-2 fw-bold">[Dirección]</p>
+                        <p class="text-muted mb-2 fw-bold">[Valor]</p>
+                        <p class="text-muted mb-2 fw-bold">[bien propio o conyugal]</p>
+                      </div>
+                      <div class="col-6 d-flex justify-content-end">
+                        <a href="#" class="text-decoration-none"><i class="fa fa-pencil"></i></a>
+                      </div>
+                    </div>
+
+                  </li>
+                  <li class="timeline-item mb-5">
+                    <p class="text-muted mb-2 fw-bold">[Total]</p>
+                    <a href="#" class="text-decoration-none" id="aAdd-stateFinancial"><i class="fa fa-plus"></i> Añadir</a>
+                    <div id="stateFinancial-collaborator-Help" class="form-text">* Adicione más si lo requiere.</div>
+                  </li>
+                </ul>
+              </section>
+              <!-- Section: Timeline -->
+            </div>
           </div>
           <div class="row border m-2">
             <div class="text-primary mt-2">
@@ -567,4 +694,8 @@
 <?php require_once VIEWS . 'form_legal/modals/create_experienceWork.php'; ?>
 <?php require_once VIEWS . 'form_legal/modals/create_studiesApplied.php'; ?>
 <?php require_once VIEWS . 'form_legal/modals/create_trainings.php'; ?>
+<?php require_once VIEWS . 'form_legal/modals/add_propertyReal.php'; ?>
+<?php require_once VIEWS . 'form_legal/modals/add_propertyMovable.php'; ?>
+<?php require_once VIEWS . 'form_legal/modals/add_stateFinancial.php'; ?>
+<?php require_once VIEWS . 'form_legal/modals/add_stateReal.php'; ?>
 <?php require_once INCLUDES . 'inc_footer.php'; ?>

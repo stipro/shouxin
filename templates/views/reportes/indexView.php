@@ -9,9 +9,27 @@
       </div>
     </div>
     <div class="card-body">
-      <div class="wrapper_compras table-responsive">
-
+      <div class="row">
+        <div class="col-6 align-self-center d-flex justify-content-center">
+          <button type="button" class="btn btn-primary">Generar Reporte</button>
+        </div>
+        <div class="col-12 col-sm-6 mb-3">
+          <div class="form-group">
+            <label for="insertSlt-documentIdentity-collaborator" class="control-label form-control-sm">Formato<span class="text-danger">*</span></label>
+            <div class="input-group input-group-sm">
+              <select id="insertSlt-documentIdentity-collaborator" class="form-select form-select-sm custom-select" data-placeholder="Seleccióne Doc. de Indentificación">
+                <option value=""></option>
+                <option value="PDF">PDF</option>
+                <option value="Excel">Excel</option>
+                <option value="CSV">CSV</option>
+              </select>
+              <div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
     </div>
   </div>
 </div>

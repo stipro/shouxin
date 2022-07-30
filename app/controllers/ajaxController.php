@@ -171,12 +171,12 @@ class ajaxController extends Controller
       /* debug(productosModel::all_paginated());
       die; */
       // declaracion de variables y almacenamiento
-      $proveedor = $_POST['provider'];
-      $correo = $_POST['email'];
-      $apellidos = $_POST['family'];
-      $nombre = $_POST['given'];
-      $imagen = $_POST['picture'];
-      $logout = $_POST['logout'];
+      $proveedor = array_key_exists('provider', $_POST) ? $_POST['provider'] : null;
+      $correo = array_key_exists('email', $_POST) ? $_POST['email'] : null;
+      $apellidos = array_key_exists('family', $_POST) ? $_POST['family'] : null;
+      $nombre = array_key_exists('given', $_POST) ? $_POST['given'] : null;
+      $imagen = array_key_exists('picture', $_POST) ? $_POST['picture'] : null;
+      $logout = array_key_exists('logout', $_POST) ? $_POST['logout'] : null;
       $partCorreo = explode("@", $correo);
       $typeLogin = $partCorreo[1];
       // Validamos correos registrados
@@ -537,6 +537,21 @@ class ajaxController extends Controller
       json_output(json_build(200, $rptJson));
     } catch (PDOException $e) {
       json_output(json_build(400, null, $e->getMessage()));
+    }
+  }
+
+  /**
+   * colaboradores
+   */
+  function get_collaborators()
+  {
+    try {
+      /* debug(colaboradoresModel::all_paginated());
+      die; */
+      $data = get_module('lista_colaboradores', colaboradoresModel::all_paginated());
+      json_output(json_build(200, $data));
+    } catch (Exception $e) {
+      json_output(json_build(400, $e->getMessage()));
     }
   }
 }

@@ -8,9 +8,25 @@ const btnSearch_colaboradorDni = document.getElementById('btnSearch-collaborator
 const lastNameFather_collaborator = document.getElementById('insertIpt-lastNameFather-collaborator');
 const lastNameMother_collaborator = document.getElementById('insertIpt-lastNameMother-collaborator');
 const name_collaborator = document.getElementById('insertIpt-name-collaborator');
+const gender_collaborator = document.getElementById('insertSlt-gender-collaborator');
 const nationality_collaborator = document.getElementById('insertSlt-nationality-collaborator');
 const statusMarital_collaborator = document.getElementById('insertSlt-statusMarital-collaborator');
 const birthdate_collaborator = document.getElementById('insertIpt-birthdate-collaborator');
+const profession_collaborator = document.getElementById('insertIpt-profession-collaborator');
+const conditionProperty_collaborator = document.getElementById('insertIpt-conditionProperty-collaborator');
+const position_collaborator = document.getElementById('insertIpt-position-collaborator');
+const phone_collaborator = document.getElementById('insertIpt-phone-collaborator');
+const email_collaborator = document.getElementById('insertIpt-email-collaborator');
+
+const documentIdentity_spouseorpartner = document.getElementById('insertIpt-documentIdentity-spouseorpartner');
+const documentNumber_spouseorpartner = document.getElementById('insertIpt-documentNumber-spouseorpartner');
+
+const kindofdependents_collaborator = document.getElementById('insertSlt-kindofdependents-collaborator');
+const kindofdependentsAmount_collaborator = document.getElementById('insertIpt-kindofdependentsAmount-collaborator');
+
+const contributorType_collaborator = document.getElementById('insertIpt-contributorType-collaborator');
+const contributorNumber_collaborator = document.getElementById('insertIpt-contributorNumber-collaborator');
+const complementaryInformation_collaborator = document.getElementById('insertIpt-complementaryInformation-collaborator');
 
 const cont_timeLine = document.getElementById('cont-timeLine');
 const template_studiesApplied = document.getElementById('template-studiesApplied').content
@@ -100,15 +116,38 @@ form.addEventListener('submit', e => {
 });
 
 function checkInputs() {
+    let documentIdentityArchive_value = $('#documentIdentityArchive-collaborator').prop('files')[0];
+    let documentNumber_value = documentNumber_collaborator.value.trim();
     let lastNameFather_value = lastNameFather_collaborator.value.trim();
     let lastNameMother_value = lastNameMother_collaborator.value.trim();
     let name_value = name_collaborator.value.trim();
+    let gender_value = gender_collaborator.selectedOptions[0].dataset.id;
     let nationality_value = $('#insertSlt-nationality-collaborator').find(":selected").val();
     let statusMarital_value = $('#insertSlt-statusMarital-collaborator').find(":selected").val();
     let birthdate_value = birthdate_collaborator.value.trim();
-    let documentIdentityArchive_value = $('#documentIdentityArchive-collaborator').prop('files')[0];
+    let profession_value = profession_collaborator.value.trim();
+    let conditionProperty_value = conditionProperty_collaborator.value;
+    let position_value = position_collaborator.value;
+    let phone_value = phone_collaborator.value;
+    let email_value = email_collaborator.value;
+
+    let documentIdentity_spouseorpartner_value = documentIdentity_spouseorpartner.value;
+    let documentNumber_spouseorpartner_value = documentNumber_spouseorpartner.value;
+    let kindofdependents_value = kindofdependents_collaborator.value;
+    let kindofdependentsAmount_value = kindofdependentsAmount_collaborator.value;
+
+    let contributorType_value = contributorType_collaborator.value;
+    let contributorNumber_value = contributorNumber_collaborator.value;
+    let complementaryInformation_value = complementaryInformation_collaborator.value;
+
     //const documentIdentity_value = $('#insertIpt-documentIdentity-collaborator').find(":selected").val();
-    const documentNumber_value = documentNumber_collaborator.value.trim();
+
+
+    if (documentNumber_value === '') {
+        setErrorFor(documentNumber_collaborator, 'No puede dejar numero de Identificación en blanco');
+    } else {
+        setSuccessFor(documentNumber_collaborator);
+    }
 
     if (lastNameFather_value === '') {
         setErrorFor(lastNameFather_collaborator, 'No puede dejar el Apellido Paterno en blanco');
@@ -128,14 +167,20 @@ function checkInputs() {
         setSuccessFor(name_collaborator);
     }
 
+    if (!gender_value) {
+        setErrorFor(gender_collaborator, 'Seleccióne Género');
+    } else {
+        setSuccessFor(gender_collaborator);
+    }
+
     if (nationality_value === '') {
-        setErrorFor(nationality_collaborator, 'No puede dejar Nacionalidad sin selecciónar');
+        setErrorFor(nationality_collaborator, 'Seleccióne Nacionalidad');
     } else {
         setSuccessFor(nationality_collaborator);
     }
 
     if (statusMarital_value === '') {
-        setErrorFor(statusMarital_collaborator, 'No puede dejar Estado Civil sin selecciónar');
+        setErrorFor(statusMarital_collaborator, 'Seleccióne Estado Civil');
     } else {
         setSuccessFor(statusMarital_collaborator);
     }
@@ -146,17 +191,62 @@ function checkInputs() {
         setSuccessFor(birthdate_collaborator);
     }
 
-    if (!documentIdentityArchive_value) {
-        setErrorFor(documentIdentityArchive_collaborator, 'Adjunte su documento de identificación, por favor');
+    if (profession_value === '') {
+        setErrorFor(profession_collaborator, 'No puede dejar Profesión en blanco');
     } else {
-        setSuccessFor(documentIdentityArchive_collaborator);
+        setSuccessFor(profession_collaborator);
     }
 
-    if (documentNumber_value === '') {
-        setErrorFor(documentNumber_collaborator, 'No puede dejar numero de Identificación en blanco');
+    if (conditionProperty_value === '') {
+        setErrorFor(conditionProperty_collaborator, 'Seleccióne Condición del inmueble en que vive');
     } else {
-        setSuccessFor(documentNumber_collaborator);
+        setSuccessFor(conditionProperty_collaborator);
     }
+
+    if (position_value === '') {
+        setErrorFor(position_collaborator, 'No puede dejar ocupación Y/O Cargo en blanco');
+    } else {
+        setSuccessFor(position_collaborator);
+    }
+
+    if (phone_value === '') {
+        setErrorFor(phone_collaborator, 'No puede dejar n° Celular en blanco');
+    } else {
+        setSuccessFor(phone_collaborator);
+    }
+
+    if (email_value === '') {
+        setErrorFor(email_collaborator, 'No puede dejar Correo Electronico en blanco');
+    } else {
+        setSuccessFor(email_collaborator);
+    }
+
+    // Conyugente o conviviente
+    if (documentIdentity_spouseorpartner_value) {
+        if (documentNumber_spouseorpartner_value === '') {
+            setErrorFor(documentNumber_spouseorpartner, 'No puede dejar Numero de identificación en blanco');
+        } else {
+            setSuccessFor(documentNumber_spouseorpartner);
+        }
+    }
+    // Dependientes
+    if (kindofdependents_value) {
+        if (kindofdependentsAmount_value === '') {
+            setErrorFor(kindofdependentsAmount_collaborator, 'No puede dejar Cantidad en blanco');
+        } else {
+            setSuccessFor(kindofdependentsAmount_collaborator);
+        }
+    }
+
+    // Registro Sunat
+    if (contributorType_value) {
+        if (contributorNumber_value === '') {
+            setErrorFor(contributorNumber_collaborator, 'No puede dejar Numero de registro en blanco');
+        } else {
+            setSuccessFor(contributorNumber_collaborator);
+        }
+    }
+
 }
 
 function setErrorFor(input, message) {
@@ -234,6 +324,21 @@ $(document).on('click', '#aAdd-experienceWork', function (e) {
 $(document).on('click', '#aAdd-trainings', function (e) {
     e.preventDefault();
     $('#mdAdd-trainings').modal('show');
+});
+
+$(document).on('click', '#aAdd-propertyReal', function (e) {
+    e.preventDefault();
+    $('#mdAdd-propertyReal').modal('show');
+});
+
+$(document).on('click', '#aAdd-propertyMovable', function (e) {
+    e.preventDefault();
+    $('#mdAdd-propertyMovable').modal('show');
+});
+
+$(document).on('click', '#aAdd-stateFinancial', function (e) {
+    e.preventDefault();
+    $('#mdAdd-stateFinancial').modal('show');
 });
 
 var switchStatus = false;
@@ -743,13 +848,4 @@ function get_studiesApplied(e) {
     }).always(function () {
         wrapper.waitMe('hide');
     })
-    /* if (centerEducational_value === '') {
-    } else {
-        console.log(template_studiesApplied);
-        template_studiesApplied.querySelector('.info h5').textContent = centerEducational_value;
-        template_studiesApplied.querySelector('.info centerEducational').textContent = centerEducational_value;
-        const clone = template_studiesApplied.cloneNode(true);
-        fragment.appendChild(clone);
-        cont_timeLine.appendChild(fragment);
-    } */
 };

@@ -22,7 +22,6 @@
         <div class="card-body">
           <div class="overflow-scroll" style="height: 25rem;">
             <code class="text-secondary">
-              <?php debug($_SESSION); ?>
               <h2 style="text-align: center;"><strong>Términos y Condiciones de Uso</strong></h2>
               <h5 style="text-align: center;"><strong>CAPITULO IV CONOCIMIENTO DE DIRECTORES, TRABAJADORES</strong></h5>
               <p><strong>Artículo 17.- Conocimiento de directores y trabajadores</strong></p>

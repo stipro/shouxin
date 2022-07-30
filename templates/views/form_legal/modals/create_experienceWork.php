@@ -11,8 +11,15 @@
                     <div class="row">
                         <div class="col-12 col-sm-6 mb-3">
                             <div class="form-group">
-                                <label class="control-label form-control-sm">Cargo<span class="text-danger">*</span></label>
-                                <input type="text" name="lastNameFather-collaborator" class="form-control form-control-sm disabled" placeholder="Cargo" value="">
+                                <label class="control-label form-control-sm">Nombre de la empresa<span class="text-danger">*</span></label>
+                                <input type="text" name="lastNameFather-collaborator" class="form-control form-control-sm" placeholder="Nombre de la empresa" value="">
+                                <div id="lastNameFather-collaborator-Help" class="form-text"></div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 mb-3">
+                            <div class="form-group">
+                                <label class="control-label form-control-sm">Cargo desempeñado<span class="text-danger">*</span></label>
+                                <input type="text" name="lastNameFather-collaborator" class="form-control form-control-sm" placeholder="Cargo desempeñado" value="">
                                 <div id="lastNameFather-collaborator-Help" class="form-text"></div>
                             </div>
                         </div>
@@ -49,14 +56,7 @@
                         </div>
                         <div class="col-12 col-sm-6 mb-3">
                             <div class="form-group">
-                                <label class="control-label form-control-sm">Nombre de la empresa<span class="text-danger">*</span></label>
-                                <input type="text" name="lastNameFather-collaborator" class="form-control form-control-sm disabled" placeholder="Nombre de la empresa" value="">
-                                <div id="lastNameFather-collaborator-Help" class="form-text"></div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 mb-3">
-                            <div class="form-group">
-                                <label class="control-label form-control-sm">Desde<span class="text-danger">*</span></label>
+                                <label class="control-label form-control-sm">Fecha de Inicio<span class="text-danger">*</span></label>
                                 <div class="input-group input-group-sm">
                                     <select id="" class="col-6 form-select form-select-sm" data-placeholder="Seleccióne">
                                         <option value="Enero">Enero</option>
@@ -124,7 +124,7 @@
                         </div>
                         <div class="col-12 col-sm-6 mb-3">
                             <div class="form-group">
-                                <label class="control-label form-control-sm">Hasta<span class="text-danger">*</span></label>
+                                <label class="control-label form-control-sm">Fecha de conclusión<span class="text-danger">*</span></label>
                                 <div class="input-group input-group-sm">
                                     <select id="" class="form-select form-select-sm" data-placeholder="Seleccióne">
                                         <option value="Enero">Enero</option>
